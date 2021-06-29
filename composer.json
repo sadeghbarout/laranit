@@ -1,0 +1,30 @@
+{
+    "name":"colbeh/laranit",
+    "description":"laravel package for initialize laravel",
+    "type":"laravel-package",
+    "keywords":[
+        "laravel",
+        "initialization",
+    ],
+    "license":"MIT",
+    "authors":[
+        {
+            "name":"Colbeh software team",
+            "email":"support@colbeh.ir"
+        }
+    ],
+    "require":{
+    },
+    "autoload":{
+        "psr-4":{
+            "Colbeh\\Laranit\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Colbeh\\Laranit\\ServiceProvider"
+            ]
+        }
+    }
+}

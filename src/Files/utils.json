@@ -1,0 +1,29 @@
+{
+  "yesNo": {
+    "1": "بله",
+    "0": "خیر"
+  },
+  "paymentStatuses": {
+    "Pending": "در انتظار",
+    "Success": "موفق",
+    "Cancel": "انصراف"
+  },
+
+
+
+  "userStatuses": {
+    "pending": "در انتظار تکمیل",
+    "validated": "تایید شده",
+    "wait_for_check": "در انتظار بررسی",
+    "defected": "عدم تایید"
+  },
+
+  "userStatusColor": {
+    "Pending": "primary",
+    "validated": "success",
+    "wait_for_check": "warning",
+    "defected": "danger"
+  }
+
+
+}
