@@ -35,30 +35,30 @@ class PublishCommand extends Command
 	public function handle()
 	{
 
-//		Artisan::call('vendor:publish',
-//			[
-//				'--provider'=>"Colbeh\Laranit\ServiceProvider",
-//			]
-//		);
-//		Artisan::call('vendor:publish',
-//			[
-//				'--provider'=>"Colbeh\Access\ServiceProvider",
-//				'--tag'=>"database",
-//			]
-//		);
-//		$this->copyLoadEnvironmentsCode();
-//
-//		$this->addHelpersToComposerJson();
-//
-//		$this->copyBaseControllerFunctions();
-//
-//		$this->addMiddlewareToKernel();
-//
-//		$this->routesFunctions();
+		Artisan::call('vendor:publish',
+			[
+				'--provider'=>"Colbeh\Laranit\ServiceProvider",
+			]
+		);
+		Artisan::call('vendor:publish',
+			[
+				'--provider'=>"Colbeh\Access\ServiceProvider",
+				'--tag'=>"database",
+			]
+		);
+		$this->copyLoadEnvironmentsCode();
 
-//		$this->modifyLangValidations();
+		$this->addHelpersToComposerJson();
 
-//		$this->modifyPackageJson();
+		$this->copyBaseControllerFunctions();
+
+		$this->addMiddlewareToKernel();
+
+		$this->routesFunctions();
+
+		$this->modifyLangValidations();
+
+		$this->modifyPackageJson();
 
 
 	}
