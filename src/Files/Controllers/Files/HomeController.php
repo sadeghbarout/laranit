@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\App;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Service\CarOrder;
 use App\Models\Service\Consultation;
 use App\Models\User\Customer;
@@ -28,7 +29,8 @@ class HomeController extends Controller{
 	// -----------------------------------------------------------------------------------------------------------------------
 	public function dashboardInfo(){
 
-		$items=[];
+		$items['adminsCount']=Admin::allCount();
+
 
 		return generateResponse(RES_SUCCESS,[RK_ITEMS => $items]);
     }
