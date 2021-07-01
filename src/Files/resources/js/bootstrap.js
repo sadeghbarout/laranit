@@ -42,4 +42,4 @@ try {
 
 
 
-require('config-axios');
+require('./config-axios');

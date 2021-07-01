@@ -205,6 +205,7 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$composerArray=json_decode($composerContent,true);
 
 		$composerArray['devDependencies']['vue']= "^2.5.7";
+		$composerArray['devDependencies']['vue-loader']= "^15.9.7";
 		$composerArray['devDependencies']['vue-router']= "^3.0.1";
 		$composerArray['devDependencies']['vue-template-compiler']= "^2.6.11";
 		$composerArray['devDependencies']['cross-env']= "^7.0";

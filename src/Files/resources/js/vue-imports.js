@@ -46,7 +46,6 @@ Vue.component('pagination', require('./components/pagination.vue'));
 Vue.component('card-component', require('./components/card-component.vue'));
 Vue.component('modal-component', require('./components/modal-component.vue'));
 Vue.component('image-slider-component', require('./components/image-slider-component.vue'));
-Vue.component('check-td', require('./components/check-td.vue'));
 Vue.component('th-sort', require('./components/th-sort.vue'));
 Vue.component('date-picker', VuePersianDatetimePicker);
 

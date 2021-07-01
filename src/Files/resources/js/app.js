@@ -1,10 +1,10 @@
 require('./bootstrap');
 
-require('vue-imports');
+require('./vue-imports');
 
-require('sweetalert-helper');
+require('./sweetalert-helper');
 
-require ('helpers');
+require ('./helpers');
 
 window.utils=require('../files/utils.json');
 

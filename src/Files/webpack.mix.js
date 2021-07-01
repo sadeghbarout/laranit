@@ -15,7 +15,7 @@ const mix = require('laravel-mix');
 mix
 
     // javascript files  ===============================================================================================
-    .js('resources/js/app.js','public/tmp/app.js')
+    .js('resources/js/app.js','public/tmp/app.js').vue()
     // .babel([
     .scripts([
         'public/tmp/app.js',
