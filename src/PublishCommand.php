@@ -38,6 +38,7 @@ class PublishCommand extends Command
 		Artisan::call('vendor:publish',
 			[
 				'--provider'=>"Colbeh\Laranit\ServiceProvider",
+				'--force'=>"1",
 			]
 		);
 		Artisan::call('vendor:publish',
