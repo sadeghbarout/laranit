@@ -34,7 +34,7 @@ class PublishCommand extends Command
 
 	public function handle()
 	{
-
+//
 		Artisan::call('vendor:publish',
 			[
 				'--provider'=>"Colbeh\Laranit\ServiceProvider",
@@ -48,7 +48,7 @@ class PublishCommand extends Command
 		);
 		$this->copyLoadEnvironmentsCode();
 
-		$this->addHelpersToComposerJson();
+//		$this->addHelpersToComposerJson();
 
 		$this->copyBaseControllerFunctions();
 
@@ -60,6 +60,11 @@ class PublishCommand extends Command
 
 		$this->modifyPackageJson();
 
+		$this->modifyConfigAppFile();
+
+		$this->addHelpersServiceProvider();
+
+		Artisan::call('key:generate');
 
 	}
 
@@ -98,7 +103,7 @@ class PublishCommand extends Command
 |
 */
 
-$app->loadEnvironmentFrom(".env." . env2("APP_ENV"));
+$app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 ';
 
 		$filePath = base_path('bootstrap/app.php');
@@ -211,6 +216,40 @@ $app->loadEnvironmentFrom(".env." . env2("APP_ENV"));
 		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);
 		$composerContent=str_replace("\/","/",$composerContent);
 		file_put_contents($filePath, $composerContent);
+	}
+
+
+	public function modifyConfigAppFile() {
+		$str = "
+		
+		
+	'base_url'=>env('BASE_URL'),
+	'jwt_secret'=>env('JWT_SECRET'),
+	
+	
+	";
+
+		$needle='return [';
+		$filePath = config_path('app.php');
+		$appContent = file_get_contents($filePath);
+		$pos = strpos($appContent, $needle);
+		$appContent = substr_replace($appContent, $str, $pos+strlen($needle), 0);
+		file_put_contents($filePath, $appContent);
+
+	}
+
+
+	public function addHelpersServiceProvider() {
+		$str = " App\Providers\HelperServiceProvider::class,
+	";
+
+		$needle='App\Providers\AppServiceProvider::class,';
+		$filePath = config_path('app.php');
+		$appContent = file_get_contents($filePath);
+		$pos = strpos($appContent, $needle);
+		$appContent = substr_replace($appContent, $str, $pos, 0);
+		file_put_contents($filePath, $appContent);
+
 	}
 
 }

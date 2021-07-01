@@ -12,7 +12,7 @@ class ForceHttps {
 	public function handle($request, Closure $next)
 	{
         // redirect all request to https
-		if (!$request->secure() &&( env2('APP_ENV') === 'production' || env2('APP_ENV') === 'twise')) { //&& App::environment() === 'production'
+		if (!$request->secure() &&( config('app.env') === 'production' || config('app.env') === 'twise')) { //&& App::environment() === 'production'
 			return redirect()->secure($request->getRequestUri(),307,$request->headers->all());
 		}
 

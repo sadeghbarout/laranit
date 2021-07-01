@@ -143,7 +143,7 @@ class Tools {
 		);
 		$array = array_merge($payload, $array);
 //		die(json_encode($array));
-		$secret = env2('JWT_SECRET');
+		$secret = config('app.jwt_secret');
 //		die($secret);
 
 		return Jwt::encode($array, new HS256Algorithm($secret));
@@ -151,7 +151,7 @@ class Tools {
 
 //---------------------------------------------------------------------------------------------
 	static function JWTDecode($jwt) {
-		$secret = env2('JWT_SECRET');
+		$secret = config('app.jwt_secret');
 		try {
 			$decodedData = JWT::decode($jwt, ['algorithm' => new HS256Algorithm($secret)]);
 			if($decodedData['iis']!=self::$iis)

@@ -97,29 +97,29 @@ function min3Digit($value){
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 // env2 is used to read contants from .env files in situations where env does not  work
-function env2($key) {
-
-	global $BASE_DIR_LARAVEL;
-	if($key=='APP_ENV'){
-		$input = file_get_contents($BASE_DIR_LARAVEL . '.env');
-	}else{
-		$input = file_get_contents($BASE_DIR_LARAVEL . '.env.'.env2('APP_ENV'));
-	}
-
-
-	$p1 = strpos($input, $key);
-	$p2 = strpos($input, "=", $p1); // pos of start value
-	$p3 = strpos($input, "\n", $p2); // pos of end of line
-	$p3_2 = strpos($input, "#", $p2); // pos of comment
-
-	// ignore comment
-	if ($p3 > $p3_2 && $p3_2 != "") { // if has comment
-		$p3 = $p3_2 - 1;
-	}
-	$text=substr($input, $p2 + 1, $p3 - $p2 - 1);
-	$text=trim(str_replace("\r",'',$text));
-	return $text ;
-}
+//function env2($key) {
+//
+//	global $BASE_DIR_LARAVEL;
+//	if($key=='APP_ENV'){
+//		$input = file_get_contents($BASE_DIR_LARAVEL . '.env');
+//	}else{
+//		$input = file_get_contents($BASE_DIR_LARAVEL . '.env.'.env2('APP_ENV'));
+//	}
+//
+//
+//	$p1 = strpos($input, $key);
+//	$p2 = strpos($input, "=", $p1); // pos of start value
+//	$p3 = strpos($input, "\n", $p2); // pos of end of line
+//	$p3_2 = strpos($input, "#", $p2); // pos of comment
+//
+//	// ignore comment
+//	if ($p3 > $p3_2 && $p3_2 != "") { // if has comment
+//		$p3 = $p3_2 - 1;
+//	}
+//	$text=substr($input, $p2 + 1, $p3 - $p2 - 1);
+//	$text=trim(str_replace("\r",'',$text));
+//	return $text ;
+//}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 // gets the subdomain name : admin, api

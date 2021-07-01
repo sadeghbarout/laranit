@@ -4,9 +4,9 @@
 define('PREFIX_ADMIN','admin');
 define('PREFIX_API','api');
 
-define('SITE_URL',env2('BASE_URL'));
-define('SITE_URL_ADMIN',PREFIX_ADMIN.'.'.env2('BASE_URL'));
-define('SITE_URL_API',PREFIX_API.'.'.env2('BASE_URL'));
+define('SITE_URL',config('app.base_url'));
+define('SITE_URL_ADMIN',PREFIX_ADMIN.'.'.config('app.base_url'));
+define('SITE_URL_API',PREFIX_API.'.'.config('app.base_url'));
 
 define('PATH_IMAGES','images/');
 //define('PATH_APPS', 'files/apps/');
@@ -14,9 +14,12 @@ define('PATH_PROFILE_IMAGES','images/profiles/');
 define('PATH_TMP','files/tmp/');
 
 // PATH_UPLOAD should addressing from public folder
-if( env2('APP_ENV') === 'local'){
+if( config('app.env') === 'local'){
 	define('PATH_UPLOAD', '../public/');
 	define('PREFIX_HTML', 'http://' . SITE_URL_ADMIN . '/');
+}else{
+	define('PATH_UPLOAD','');
+	define('PREFIX_HTML','');
 }
 
 
