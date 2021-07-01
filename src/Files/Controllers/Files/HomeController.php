@@ -1,25 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\App;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 use App\Models\Admin;
-use App\Models\Service\CarOrder;
-use App\Models\Service\Consultation;
-use App\Models\User\Customer;
-use App\Models\Transaction\Exchanger;
-use App\Models\Transaction\ExchangeRate;
-use App\Models\Service\ProductOrder;
-use App\Models\Service\ServiceOrder;
-use App\Models\Transaction\Transaction;
-use App\Models\Service\Translation;
-use Illuminate\Support\Carbon;
 
 class HomeController extends Controller{
 
 
 	public function index(){
 		if(auth()->check()){
-			return view('dashboard.admin.home');
+			return view('dashboard.home');
 		}else{
 			return redirect('login');
 		}

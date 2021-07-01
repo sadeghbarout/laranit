@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\User;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 use App\Extras\Tools;
-use App\Models\User\User;
+use App\Models\User;
 use Auth;
 use Hash;
 use App\Exceptions\ErrorMessageException;

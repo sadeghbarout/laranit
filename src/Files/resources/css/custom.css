@@ -1,0 +1,46 @@
+body{
+    padding-right:0 !important;
+}
+
+table tr th{
+    text-align: right !important;
+    justify-content: center;
+}
+
+.flex-center-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flex-center-right{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.flex-center-left{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+.flex-center-evenly{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.flex-center-between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.pagination-sm .page-item:first-child .page-link {
+    border-top-right-radius:15px;
+    border-bottom-right-radius:15px;
+}
+
+.pagination-sm .page-item:last-child .page-link {
+    border-top-left-radius:15px;
+    border-bottom-left-radius:15px;
+}
+

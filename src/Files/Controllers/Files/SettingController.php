@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Extras\Tools;
 use App\Models\Setting;
 use Auth;
 use Illuminate\Http\Request;
-use App\Exceptions\ErrorMessageException;
 
 class SettingController extends Controller {
 

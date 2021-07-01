@@ -50,6 +50,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			__DIR__ . '/Files/webpack.mix.js' => base_path('webpack.mix.js'),
 			__DIR__ . '/Files/resources/views' => resource_path('views'),
 			__DIR__ . '/Files/resources/js' => resource_path('js'),
+			__DIR__ . '/Files/resources/css' => public_path('css'),
 		], 'config');
 
 	}

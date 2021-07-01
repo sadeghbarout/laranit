@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 use App\Extras\Tools;
 use App\Extras\Validator;
 use App\Models\Admin;
@@ -29,7 +28,7 @@ class AdminController extends Controller
 			return redirect('/');
 		}
 
-		return view('dashboard.admin.login');
+		return view('dashboard.login');
 	}
 
 
@@ -57,12 +56,6 @@ class AdminController extends Controller
 			\Auth::logout();
 		}
 		return redirect(route('login'));
-	}
-
-
-	// ----------------------------------------------------------------------------------------------------------------------------------
-	public function dashboard(){
-		return view('dashboard.admin.dashboard');
 	}
 
 

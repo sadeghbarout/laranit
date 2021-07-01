@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+	Route::get('/',function (){
+	return view('welcome');
+	});
 
     Route::domain(SITE_URL_ADMIN)->middleware('auth')->group(function () {
 

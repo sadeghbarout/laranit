@@ -5,6 +5,7 @@
     <title>@yield('pageTitle')</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{$prefixHtml.mix('css/app.css')}}?v=2">
+    <link rel="stylesheet" href="/css/custom.css">
     @stack('styles')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -28,7 +29,7 @@
 </html>
 
 
-<script src="{{$prefixHtml}}libs/ckeditor_4.9.2/ckeditor.js"></script>
+{{--<script src="{{$prefixHtml}}libs/ckeditor_4.9.2/ckeditor.js"></script>--}}
 @stack('vue')
 <script src="{{$prefixHtml.mix('js/app.js')}}?v=2.98"></script>
 

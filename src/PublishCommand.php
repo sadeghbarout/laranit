@@ -34,38 +34,38 @@ class PublishCommand extends Command
 
 	public function handle()
 	{
+///
+//		Artisan::call('vendor:publish',
+//			[
+//				'--provider'=>"Colbeh\Laranit\ServiceProvider",
+//				'--force'=>"1",
+//			]
+//		);
+//		Artisan::call('vendor:publish',
+//			[
+//				'--provider'=>"Colbeh\Access\ServiceProvider",
+//				'--tag'=>"database",
+//			]
+//		);
+//		$this->copyLoadEnvironmentsCode();
 //
-		Artisan::call('vendor:publish',
-			[
-				'--provider'=>"Colbeh\Laranit\ServiceProvider",
-				'--force'=>"1",
-			]
-		);
-		Artisan::call('vendor:publish',
-			[
-				'--provider'=>"Colbeh\Access\ServiceProvider",
-				'--tag'=>"database",
-			]
-		);
-		$this->copyLoadEnvironmentsCode();
-
-//		$this->addHelpersToComposerJson();
-
-		$this->copyBaseControllerFunctions();
-
-		$this->addMiddlewareToKernel();
+////		$this->addHelpersToComposerJson();
+//
+//		$this->copyBaseControllerFunctions();
+//
+//		$this->addMiddlewareToKernel();
 
 		$this->routesFunctions();
 
-		$this->modifyLangValidations();
-
-		$this->modifyPackageJson();
-
-		$this->modifyConfigAppFile();
-
-		$this->addHelpersServiceProvider();
-
-		Artisan::call('key:generate');
+//		$this->modifyLangValidations();
+//
+//		$this->modifyPackageJson();
+//
+//		$this->modifyConfigAppFile();
+//
+//		$this->addHelpersServiceProvider();
+//
+//		Artisan::call('key:generate');
 
 	}
 
@@ -159,6 +159,7 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$pos = strrpos($appContent, $needle);
 		$appContent=substr_replace($appContent,'$this->basicRoutes();',$pos+strlen($needle),0);
 
+		$appContent=str_replace('// protected $','protected $',$appContent);
 
 		file_put_contents($filePath, $appContent);
 	}

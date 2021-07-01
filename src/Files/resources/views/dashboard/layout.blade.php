@@ -47,7 +47,7 @@
 
 
 
-<script src="{{$prefixHtml}}libs/ckeditor_4.9.2/ckeditor.js"></script>
+{{--<script src="{{$prefixHtml}}libs/ckeditor_4.9.2/ckeditor.js"></script>--}}
 @stack('vue')
 <script src="{{$prefixHtml.mix('js/app.js')}}?v=7"></script>
 @stack('scripts')

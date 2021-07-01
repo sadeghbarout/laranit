@@ -1,4 +1,4 @@
-indow.Vue = require('vue');
+window.Vue = require('vue');
 Vue.config.devtools = true;
 
 
