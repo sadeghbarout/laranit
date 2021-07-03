@@ -6,7 +6,7 @@
                     <span v-text="title"></span>
                 </div>
                 <div :class="['p-0',title != undefined? 'col-md-8': 'col-md-12' ]">
-                    <select  class="form-control" :id="id" :name="name" @input="$emit('input', $event.target.value)" :required="required!=undefined">
+                    <select  class="form-control" :id="id" :name="name" v-model="inputVal" :required="required!=undefined">
                         <option v-if="emptyOption !== undefined" value="">انتخاب کنید</option>
                         <option v-for="opt in options" v-text="opt[0]" :value="opt[1]" :selected="opt[1] == selectedValue" ></option>
                     </select>
@@ -18,19 +18,38 @@
 
 <script>
     export default {
-        props: ['options', 'title', 'val', 'id', 'name', 'selectedValue','required','emptyOption'],
-        model: {
-            prop: 'val',
-            event: 'input'
+        props: {
+            options: Array,
+            modelValue: [String, Number],
+            title: [String,Number],
+            val: [String,Number],
+            id: [String,Number],
+            name: [String,Number],
+            selectedValue: [String,Number],
+            required: [String,Number],
+            emptyOption: [String,Number],
         },
         watch:{
             options(val){
-                if(this.selectedValue===undefined && val.length>0){
-                    this.$emit('input', val[0][1])
+                if(this.inputVal=='' && this.selectedValue===undefined && val.length>0){
+                    this.inputVal= val[0][1]
                 }
 
-
             }
-        }
+        },
+
+        mounted() {
+            this.inputVal=this.val==undefined?'':this.val;
+        },
+        computed: {
+            inputVal: {
+                get() {
+                    return this.modelValue;
+                },
+                set(inputVal) {
+                    this.$emit('update:modelValue', inputVal);
+                }
+            }
+        },
     }
 </script>

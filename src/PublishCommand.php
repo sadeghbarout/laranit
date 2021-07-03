@@ -35,37 +35,37 @@ class PublishCommand extends Command
 	public function handle()
 	{
 ///
-//		Artisan::call('vendor:publish',
-//			[
-//				'--provider'=>"Colbeh\Laranit\ServiceProvider",
-//				'--force'=>"1",
-//			]
-//		);
-//		Artisan::call('vendor:publish',
-//			[
-//				'--provider'=>"Colbeh\Access\ServiceProvider",
-//				'--tag'=>"database",
-//			]
-//		);
-//		$this->copyLoadEnvironmentsCode();
-//
-////		$this->addHelpersToComposerJson();
-//
-//		$this->copyBaseControllerFunctions();
-//
-//		$this->addMiddlewareToKernel();
+		Artisan::call('vendor:publish',
+			[
+				'--provider'=>"Colbeh\Laranit\ServiceProvider",
+				'--force'=>"1",
+			]
+		);
+		Artisan::call('vendor:publish',
+			[
+				'--provider'=>"Colbeh\Access\ServiceProvider",
+				'--tag'=>"database",
+			]
+		);
+		$this->copyLoadEnvironmentsCode();
+
+//		$this->addHelpersToComposerJson();
+
+		$this->copyBaseControllerFunctions();
+
+		$this->addMiddlewareToKernel();
 
 		$this->routesFunctions();
 
-//		$this->modifyLangValidations();
-//
-//		$this->modifyPackageJson();
-//
-//		$this->modifyConfigAppFile();
-//
-//		$this->addHelpersServiceProvider();
-//
-//		Artisan::call('key:generate');
+		$this->modifyLangValidations();
+
+		$this->modifyPackageJson();
+
+		$this->modifyConfigAppFile();
+
+		$this->addHelpersServiceProvider();
+
+		Artisan::call('key:generate');
 
 	}
 
@@ -205,15 +205,15 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$composerContent = file_get_contents($filePath);
 		$composerArray=json_decode($composerContent,true);
 
-		$composerArray['devDependencies']['vue']= "^2.5.7";
-		$composerArray['devDependencies']['vue-loader']= "^15.9.7";
-		$composerArray['devDependencies']['vue-router']= "^3.0.1";
-		$composerArray['devDependencies']['vue-template-compiler']= "^2.6.11";
+		$composerArray['devDependencies']['vue']= "^3.1.4";
+		$composerArray['devDependencies']['vue-loader']= "^16.1.0";
+		$composerArray['devDependencies']['vue-router']= "^4.0.10";
+		$composerArray['devDependencies']['vue-template-compiler']= "^2.6.14";
+		$composerArray['devDependencies']['@vue/compiler-sfc']= "^3.0.5";
 		$composerArray['devDependencies']['cross-env']= "^7.0";
 		$composerArray['devDependencies']['bootstrap']= "^4.0.0";
 		$composerArray['devDependencies']['popper.js']= "^1.12";
 		$composerArray['devDependencies']['sweetalert2']= "^7.33.1";
-		$composerArray['devDependencies']['vue-persian-datetime-picker']= "^2.6.1";
 		$composerArray['devDependencies']['jquery']= "^3.2";
 
 		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);

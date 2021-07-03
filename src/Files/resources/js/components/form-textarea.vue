@@ -7,7 +7,7 @@
                 </div>
                 <div :class="title != undefined? 'col-md-'+textareaColSize: 'col-md-12' ">
                     <!-- <i class="fa fa-times text-danger cursor-pointer" style="position:absolute;left:16px"  @click="clearInput($event)"></i> -->
-                    <textarea class="form-control" rows="7" cols="80" :id="id" :name="name" @input="$emit('input', $event.target.value)" v-html="val" :placeholder="placeholder !== undefined ? placeholder : ''"></textarea>
+                    <textarea class="form-control" rows="7" cols="80" :id="id" :name="name" v-model="inputVal" v-html="val" :placeholder="placeholder !== undefined ? placeholder : ''"></textarea>
                     <div v-if="copy!=undefined && id!=undefined" class="d-inline" style="position:absolute;left:-2px;top:0">
                         <i  class="fa fa-clone text-warning cursor-pointer" @click="copyField()"></i>
                         <input :id="'copyfield'+id" class="d-none">
@@ -20,23 +20,27 @@
 
 <script>
     export default {
-        props: ['title', 'val', 'id', 'name','labelSize','copy','placeholder'],
-        model: {
-            prop: 'val',
-            event: 'input'
+        props: {
+            modelValue: String,
+            title: [String, Number],
+            val: [String, Number],
+            id: [String, Number],
+            name: [String, Number],
+            labelSize: [String, Number],
+            copy: [String, Number],
+            placeholder: [String, Number],
         },
         data(){
             return{
-                inputValue : this.val,
                 labelColSize : 4,
                 textareaColSize : 8,
             }
         },
         methods: {
             clearInput(e){
-                this.inputValue = '';
+                this.inputVal = '';
                 $(e.target).next().val('');
-                this.$emit('input', this.inputValue)
+                this.$emit('input', this.inputVal)
             },
 
 
@@ -57,6 +61,22 @@
             if(this.labelSize !== undefined){
                 this.labelColSize = this.labelSize;
                 this.textareaColSize = 12-this.labelSize;
+            }
+        },
+
+
+        mounted() {
+            this.inputVal=this.val; // todo : not works!
+
+        },
+        computed: {
+            inputVal: {
+                get() {
+                    return this.modelValue;
+                },
+                set(inputVal) {
+                    this.$emit('update:modelValue', inputVal);
+                }
             }
         },
 

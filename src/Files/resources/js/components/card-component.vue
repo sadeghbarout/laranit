@@ -16,6 +16,10 @@
 
 <script>
     export default {
-        props: ['title','customClass','bg'],
+        props: {
+            title:String,
+            customClass:String,
+            bg:String
+        },
     }
 </script>

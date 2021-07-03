@@ -44,10 +44,12 @@
 <script>
 
     vue={
-        data:{
-            username:'',
-            password:'',
-            remember:'',
+        data(){
+            return {
+                username:'',
+                password:'',
+                remember:'',
+            }
         },
         methods:{
             login(){

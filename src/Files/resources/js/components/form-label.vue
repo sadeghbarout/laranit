@@ -14,7 +14,7 @@
                     <span v-html="val" :id="id"></span>
                     <slot></slot>
                 </label>
-                <i v-if="itemId!=undefined && id!=undefined" class="feather icon-edit text-warning cursor-pointer" @click="edit()"></i>
+                <i v-if="itemId!=undefined && id!=undefined" class="fa fa-pencil text-warning cursor-pointer" @click="edit()"></i>
                 <div v-if="copy!=undefined && id!=undefined" class="d-inline">
                     <i  class="fa fa-clone text-warning cursor-pointer" @click="copyField()"></i>
                     <input :id="'copyfield'+id" class="d-none">
@@ -33,7 +33,24 @@
 
 <script>
     export default {
-        props: ['title','val','to','href','classes','id','itemId','options','optionsVal','secondItemId','dateInput','progressBar','target','copy','editUrl','reloadAfterEdit'],
+        props:{
+            title:[String, Number],
+            val:[String, Number],
+            to:[String, Number],
+            href:[String, Number],
+            classes:[String, Number],
+            id:[String, Number],
+            itemId:[String, Number],
+            options:[String, Number],
+            optionsVal:[String, Number],
+            secondItemId:[String, Number],
+            dateInput:[String, Number],
+            progressBar:[String, Number],
+            target:[String, Number],
+            copy:[String, Number],
+            editUrl:[String, Number],
+            reloadAfterEdit:[String, Number]
+        },
         methods:{
             edit(){
                 if(this.options){ // edit with drop down

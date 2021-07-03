@@ -2,8 +2,7 @@
     <div class="form-inputs p-0" style="min-width:150px">
         <div class="col-xl-12 p-0">
             <fieldset class="form-group">
-                <!-- <select  class="form-control" id="rows" @input="$emit('input', $event.target.value)"> -->
-                <select  class="form-control" id="rows" v-model="rowsCount" @change="fD()">
+                <select  class="form-control" id="rows" v-model="inputVal" >
                     <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
@@ -17,20 +16,24 @@
 
 <script>
     export default {
-        props: ['val'],
-        model: {
-            prop: 'val',
-            event: 'input'
+
+        props:{
+            modelValue: [String, Number],
         },
-        data(){
-            return{
-                rowsCount : 10,
+
+        mounted() {
+            this.inputVal=10;
+        },
+        computed: {
+            inputVal: {
+                get() {
+                    return this.modelValue;
+                },
+                set(inputVal) {
+                    this.$emit('update:modelValue', inputVal);
+                }
             }
         },
-        methods: {
-            fD(){
-                this.$emit('input',this.rowsCount)
-            },
-        },
+
     }
 </script>
