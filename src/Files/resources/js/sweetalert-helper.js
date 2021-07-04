@@ -1,3 +1,6 @@
+import swal from 'sweetalert2'
+window.swal = swal
+
 
 Window.prototype.alert2 = function (text, title, type, onConfirm) {
     if (!text) {
@@ -13,7 +16,7 @@ Window.prototype.alert2 = function (text, title, type, onConfirm) {
     //     button: "تایید",
     // });
 
-    swal({
+    new swal({
         title: title,
         html: text,
         type: type,
@@ -36,7 +39,7 @@ Window.prototype.confirm2 = function (message, title, onSuccess, type) {
     if (!type) {
         type = 'warning';
     }
-    swal({
+    new swal({
         title: title,
         text: message,
         type: type,
@@ -59,7 +62,7 @@ Window.prototype.confirm2 = function (message, title, onSuccess, type) {
 // ---------------------------------------------------------------------------------------------------------------
 Window.prototype.prompt2 = function (message, value, onSuccess, dateInput = false) {
 
-    swal({
+    new swal({
         title: message,
         input: 'text',
         inputValue: value,
@@ -89,7 +92,7 @@ Window.prototype.uploadFileDialog = function (title, url, onSuccess, type) {
         type = 'image/*';
     }
 
-    swal({
+    new swal({
         title: title,
         input: 'file',
         inputAttributes: {
@@ -123,7 +126,7 @@ Window.prototype.uploadFileDialog = function (title, url, onSuccess, type) {
 
 //-------------------------------------------------------------------------------------------------------------
 Window.prototype.showLoading = function () {
-    swal({
+    new swal({
         title: 'در حال ارسال ...',
         html: 'لطفا صبر کنید ...',
         onOpen: () => {
@@ -139,7 +142,7 @@ Window.prototype.showLoading = function () {
 
 //-------------------------------------------------------------------------------------------------------------
 Window.prototype.showLoadingUploadFile = function () {
-    swal({
+    new swal({
         title: 'درحال آپلود ...',
         html: '<strong></strong> %',
         onOpen: () => {

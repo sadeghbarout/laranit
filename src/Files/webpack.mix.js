@@ -23,7 +23,6 @@ mix
         'node_modules/sweetalert2/dist/sweetalert2.all.min.js',
         'node_modules/dist/js/bootstrap.min.js',
         'resources/assets/libs/adminlte3/js/adminlte.min.js',
-        'resources/assets/libs/fontawsome5/all.min.js',
         'resources/assets/libs/adminlte3/plugins/chart.js/Chart.min.js',
     ], 'public/js/app.js')
 
@@ -33,7 +32,6 @@ mix
         'node_modules/dist/css/bootstrap.min.css',
         'resources/assets/libs/adminlte3/css/adminlte.css',
         'resources/assets/libs/adminlte3/css/style.css',
-        'resources/assets/libs/fontawsome5/all.min.css',
         'resources/assets/libs/adminlte3/plugins/chart.js/Chart.min.css',
     ], 'public/css/app.css')
 

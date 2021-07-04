@@ -1,24 +1,29 @@
 /<template>
     <div>
-        <div class="row border-bottom pt-1">
-            <div class="col-6 col-lg-4 flex-center-right">
-                <p v-html="title" class="font-weight-bold"></p>
+        <div class="row border-bottom pt-1 " dir="rtl">
+            <div class="col-6 col-lg-4 d-flex align-items-center justify-content-right">
+                <span v-html="title" class="font-weight-bold"></span>
             </div>
-            <div class="col-6 col-lg-8 flex-center-right" >
+            <div class="col-6 col-lg-8 d-flex align-items-center justify-content-right" >
                 <label :class="classes" v-if="to!=undefined" ><router-link v-html="val" :to="to"></router-link></label>
                 <label :class="classes" v-else-if="href!=undefined" ><a :href="href" v-html="val" :target="target" ref="aLink" @click="openModalIfImage($event)"></a></label>
                 <div v-else-if="progressBar!=undefined" class="progress progress-bar-success mt-1 mb-0" dir="ltr" style="height:15px">
                     <div class="progress-bar" role="progressbar" :style="'width:'+val+'%'" :aria-valuenow="val" aria-valuemin="0" aria-valuemax="100" style="height:15px">{{val+'%'}}</div>
                 </div>
-                <label :class="classes" v-else="" >
-                    <span v-html="val" :id="id"></span>
+                <label :class="classes" class="m-0">
+                    <span v-html="val" :id="id" ref="value"></span>
                     <slot></slot>
                 </label>
-                <i v-if="itemId!=undefined && id!=undefined" class="fa fa-pencil text-warning cursor-pointer" @click="edit()"></i>
-                <div v-if="copy!=undefined && id!=undefined" class="d-inline">
-                    <i  class="fa fa-clone text-warning cursor-pointer" @click="copyField()"></i>
-                    <input :id="'copyfield'+id" class="d-none">
+
+
+                <i v-if="itemId!=undefined && id!=undefined" class="fas fa-edit text-warning cursor-pointer" @click="edit()"></i>
+
+
+                <div v-if="copy!=undefined" class="d-inline">
+                    <i  class="fas fa-clone text-warning cursor-pointer" @click="copyField()"></i>
                 </div>
+
+
             </div>
         </div>
 
@@ -44,7 +49,6 @@
             options:[String, Number],
             optionsVal:[String, Number],
             secondItemId:[String, Number],
-            dateInput:[String, Number],
             progressBar:[String, Number],
             target:[String, Number],
             copy:[String, Number],
@@ -59,7 +63,7 @@
                     this.options.forEach((item)=>{
                         items[item[1]]=item[0];
                     });
-                    swal({
+                    new swal({
                         title: 'انتخاب '+ this.title,
                         input: 'select',
                         inputValue: this.optionsVal,
@@ -129,7 +133,7 @@
 
 
             copyField(){
-                var text = document.getElementById(this.id).innerHTML;
+                var text = this.$refs.value.innerHTML;
                 var textarea = document.createElement("textarea");
                 textarea.textContent = text;
                 textarea.style.position = "fixed"; // Prevent scrolling to bottom of page in MS Edge.

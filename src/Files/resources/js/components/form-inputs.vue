@@ -1,9 +1,9 @@
 <template>
-    <div class="form-group row">
-        <div class="col-sm-4" v-if="title">
+    <div :class="['form-group row', wrapperClasses]">
+        <div class="col-md-4" v-if="title">
             <label v-html="title"></label>
         </div>
-        <div :class="[title === undefined ? 'col-12' : 'col-sm-8']">
+        <div :class="['p-0',title === undefined ? 'col-12' : 'col-md-8']">
             <input dir="auto" :type="type == undefined? 'text' : type "  v-model="inputVal"  :id="id" :ref="ref" :placeholder="placeholder !== undefined ? placeholder : '' "  :class="['form-control',classes]" :autocomplete="autocomplete" :maxlength="maxLength" :readonly="readOnly == true" :min="min" :max="max" >
         </div>
     </div>
@@ -12,13 +12,11 @@
 
     export default {
         props: {
-            ssssss: [String, Number],
             val: [String, Number],
             modelValue: [String, Number],
             title: String,
             type: String,
             placeholder: String,
-            noBorder: String,
             id: String,
             classes: String,
             wrapperClasses: String,

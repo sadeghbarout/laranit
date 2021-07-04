@@ -213,7 +213,7 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$composerArray['devDependencies']['cross-env']= "^7.0";
 		$composerArray['devDependencies']['bootstrap']= "^4.0.0";
 		$composerArray['devDependencies']['popper.js']= "^1.12";
-		$composerArray['devDependencies']['sweetalert2']= "^7.33.1";
+		$composerArray['devDependencies']['sweetalert2']= "^11.0.18";
 		$composerArray['devDependencies']['jquery']= "^3.2";
 
 		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);

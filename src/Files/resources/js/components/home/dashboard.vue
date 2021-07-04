@@ -2,8 +2,7 @@
     <div class="container-fluid">
         <div class="row" id="app" >
 
-
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-3 " id="xx">
                 <div class="small-box bg-primary">
                     <div class="inner">
                         <h3 style="color: white" v-text="items.adminsCount"></h3>
@@ -30,7 +29,8 @@
         data(){
             return {
                 items:{
-                }
+                },
+                input : '',
             }
         },
         methods: {
@@ -48,5 +48,8 @@
         mounted(){
             this.fetchData()
         },
+        watch:{
+           
+        }
     }
 </script>

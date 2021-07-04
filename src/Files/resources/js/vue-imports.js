@@ -1,7 +1,6 @@
 import {createApp} from 'vue'
 import router from './routes'
 
-
 if (typeof (vue) === 'undefined') {
     window.vue = {};
 }

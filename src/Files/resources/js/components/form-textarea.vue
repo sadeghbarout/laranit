@@ -1,34 +1,28 @@
 <template>
-    <div>
-        <div class="col-12">
-            <fieldset class="form-group row">
-                <div v-if="title != undefined" :class="'col-md-'+labelColSize">
-                    <span v-text="title"></span>
-                </div>
-                <div :class="title != undefined? 'col-md-'+textareaColSize: 'col-md-12' ">
-                    <!-- <i class="fa fa-times text-danger cursor-pointer" style="position:absolute;left:16px"  @click="clearInput($event)"></i> -->
-                    <textarea class="form-control" rows="7" cols="80" :id="id" :name="name" v-model="inputVal" v-html="val" :placeholder="placeholder !== undefined ? placeholder : ''"></textarea>
-                    <div v-if="copy!=undefined && id!=undefined" class="d-inline" style="position:absolute;left:-2px;top:0">
-                        <i  class="fa fa-clone text-warning cursor-pointer" @click="copyField()"></i>
-                        <input :id="'copyfield'+id" class="d-none">
-                    </div>
-                </div>
-            </fieldset>
+    <fieldset class="form-group row">
+        <div v-if="title != undefined" :class="'col-md-'+labelColSize">
+            <span v-text="title"></span>
         </div>
-    </div>
+        <div :class="['p-0',title != undefined? 'col-md-'+textareaColSize: 'col-md-12' ]">
+            <textarea class="form-control" rows="7" ref="textarea" cols="80" :id="id" :name="name" v-model="inputVal" v-html="val" :placeholder="placeholder !== undefined ? placeholder : ''"></textarea>
+            <div v-if="copy!=undefined" class="d-inline" style="position: absolute;left: -15px;top: -4px;">
+                <i  class="fas fa-clone text-warning cursor-pointer" @click="copyField()"></i>
+            </div>
+        </div>
+    </fieldset>
 </template>
 
 <script>
     export default {
         props: {
             modelValue: String,
-            title: [String, Number],
+            title: String,
             val: [String, Number],
             id: [String, Number],
-            name: [String, Number],
+            name: String,
             labelSize: [String, Number],
-            copy: [String, Number],
-            placeholder: [String, Number],
+            copy: String,
+            placeholder: String,
         },
         data(){
             return{
@@ -45,7 +39,7 @@
 
 
             copyField(){
-                var text = document.getElementById(this.id).innerHTML;
+                var text = this.$refs.textarea.innerHTML;
                 var textarea = document.createElement("textarea");
                 textarea.textContent = text;
                 textarea.style.position = "fixed"; // Prevent scrolling to bottom of page in MS Edge.

@@ -8,7 +8,11 @@
 
 <script>
     export default {
-        props: ['name','text','styles'],
+        props:{
+            name : String,
+            text : String,
+            styles : String,
+        },
         model: {
             prop: 'val',
             event: 'input'

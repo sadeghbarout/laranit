@@ -2,9 +2,9 @@ require('./bootstrap');
 
 require('./vue-imports');
 
-require('./sweetalert-helper');
-
 require ('./helpers');
+
+require('./sweetalert-helper');
 
 window.utils=require('../files/utils.json');
 

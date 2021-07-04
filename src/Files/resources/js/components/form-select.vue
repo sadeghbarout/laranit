@@ -1,19 +1,15 @@
 <template>
-    <div class="col-12 p-0">
-        <div class="form-group">
-            <fieldset class="form-group row mb-2 flex-center-center">
-                <div v-if="title != undefined" class="col-md-4">
-                    <span v-text="title"></span>
-                </div>
-                <div :class="['p-0',title != undefined? 'col-md-8': 'col-md-12' ]">
-                    <select  class="form-control" :id="id" :name="name" v-model="inputVal" :required="required!=undefined">
-                        <option v-if="emptyOption !== undefined" value="">انتخاب کنید</option>
-                        <option v-for="opt in options" v-text="opt[0]" :value="opt[1]" :selected="opt[1] == selectedValue" ></option>
-                    </select>
-                </div>
-            </fieldset>
+    <fieldset class="form-group row mb-2 flex-center-center">
+        <div v-if="title != undefined" class="col-md-4">
+            <span v-text="title"></span>
         </div>
-    </div>
+        <div :class="['p-0',title != undefined? 'col-md-8': 'col-md-12' ]">
+            <select  class="form-control" :id="id" :name="name" v-model="inputVal" :required="required!=undefined">
+                <option v-if="emptyOption !== undefined" value="">انتخاب کنید</option>
+                <option v-for="opt in options" v-text="opt[0]" :value="opt[1]" :selected="opt[1] == val" ></option>
+            </select>
+        </div>
+    </fieldset>
 </template>
 
 <script>
@@ -21,13 +17,12 @@
         props: {
             options: Array,
             modelValue: [String, Number],
-            title: [String,Number],
+            title: String,
             val: [String,Number],
             id: [String,Number],
-            name: [String,Number],
-            selectedValue: [String,Number],
-            required: [String,Number],
-            emptyOption: [String,Number],
+            name: String,
+            required: String,
+            emptyOption: String,
         },
         watch:{
             options(val){

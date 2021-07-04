@@ -1,29 +1,41 @@
 <template>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center mt-2">
-            <li :class="['page-item prev', page == 1 ? 'disabled': '' ]"><a class="page-link" @click="pageNumberOperation(-1)"></a></li>
-            <li :class="['page-item', p==page?'active':'' ]" v-for="p in pages" @click="fD(p)" :key="p.id"><a class="page-link" >{{p}}</a></li>
-            <li :class="['page-item next', pages.length == page ? 'disabled': '' ]"><a class="page-link" @click="pageNumberOperation(1)"></a></li>
-        </ul>
-    </nav>
+    <ul class="pagination d-flex align-items-center justify-content-center">
+        <li :class="['page-item prev', localPage == 1 ? 'disabled': '' ]"><a class="page-link btn" @click="pageNumberOperation(-1)">Previous</a></li>
+        <li :class="['page-item ', p==localPage?'active':'' ]" v-for="p in paginatedPages" @click="emitPageNumber(p)" :key="p.id"><a class="page-link btn" >{{p}}</a></li>
+        <li :class="['page-item next', pages <= localPage ? 'disabled': '' ]"><a class="page-link btn" @click="pageNumberOperation(1)">Next</a></li>
+    </ul>
 </template>
 
 <script>
+    import Tools from '../tools'
     export default {
-        props: ['val','pages','page'],
-        model: {
-            prop: 'val',
-            event: 'input'
+        props:{
+            pages : [String,Number],
+            page : [String,Number]
+        },
+        data(){
+            return{
+                localPage : 1,
+            }
         },
         methods:{
-            fD(p){
-                this.$parent.fetchData(p);
+            emitPageNumber(p){
+                this.localPage = p;
+                this.$emit('update:modelValue',p)
             },
 
             pageNumberOperation(op){
-                var newP = parseInt(this.page)+op;
-                this.fD(newP);
+                this.localPage = parseInt(this.localPage)+op
+                this.emitPageNumber(this.localPage);
             },
+        },
+        mounted(){
+            this.emitPageNumber(this.localPage);
+        },
+        computed: {
+            paginatedPages(){
+                return Tools.creatPaginatis(this.pages, this.localPage);
+            } 
         },
     }
 </script>

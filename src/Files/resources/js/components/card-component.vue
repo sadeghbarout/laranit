@@ -1,7 +1,7 @@
 <template>
 
-    <div :class="['card '+customClass]">
-        <div class="card-header bg-dark">
+    <div :class="['card '+customClasses]">
+        <div :class="['card-header ', headerBg ]">
             <div class="card-title  text-right text-warning w-100 flex-center-right" v-if="title != undefined" v-html="title"></div>
             <slot name="header"></slot>
         </div>
@@ -18,8 +18,11 @@
     export default {
         props: {
             title:String,
-            customClass:String,
-            bg:String
+            customClasses:String,
+            headerBg:{
+                default: 'bg-dark',
+                type :String,
+            }
         },
     }
 </script>
