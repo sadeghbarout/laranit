@@ -2,16 +2,20 @@
 
 1- Composer require colbeh/laranit
 
+2- publish
+
+        php artisan laranit:publish
         
-2- Add config file
+3- edit env.local and set database and other params
+
+3- migrate  
+
+        php artisan migrate
+     
+4- seed
+
+        php artisan db:seed
         
-        php artisan vendor:publish --provider="Colbeh\Laranit\ServiceProvider" --force
+5- goto : admin.domain.com/login
 
-3- Refresh composer
-
-        composer dumpautoload
-
-# Upgrade:
-
-        composer require colbeh/laranit:x.x.x
-        
+6- login with admin / 123456789
