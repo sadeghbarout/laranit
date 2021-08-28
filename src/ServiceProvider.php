@@ -51,6 +51,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			__DIR__ . '/Files/resources/views' => resource_path('views'),
 			__DIR__ . '/Files/resources/js' => resource_path('js'),
 			__DIR__ . '/Files/resources/css' => public_path('css'),
+			__DIR__ . '/Files/migrations/2014_10_12_000000_create_admins_table.php' => database_path('migrations/2014_10_12_000000_create_admins_table.php'),
+			__DIR__ . '/Files/migrations/2021_01_01_000000_create_settings_table.php' => database_path('migrations/2021_01_01_000000_create_settings_table.php'),
 		], 'config');
 
 	}
