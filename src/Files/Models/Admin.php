@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Colbeh\Access\Models\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable;
@@ -30,6 +31,19 @@ class Admin extends ModelEnhanced implements AuthenticatableContract,Authorizabl
 		COL_ADMIN_PASSWORD,
     ];
 
+
+	//-----------------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------------    relations    -------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------------------
+	public function roles(){
+		return $this->belongsToMany(Role::class);
+	}
+
+
+
+	//-----------------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------------    scopes    ----------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------------------
 
 
 	/* @param \Illuminate\Database\Eloquent\Builder $query */
