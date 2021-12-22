@@ -21,15 +21,15 @@ mix
         'public/tmp/app.js',
         // 'node_modules/jquery/dist/jquery.min.js',
         'node_modules/sweetalert2/dist/sweetalert2.all.min.js',
-        'node_modules/dist/js/bootstrap.min.js',
+        'node_modules/bootstrap/dist/js/bootstrap.min.js',
         'resources/assets/libs/adminlte3/js/adminlte.min.js',
         'resources/assets/libs/adminlte3/plugins/chart.js/Chart.min.js',
     ], 'public/js/app.js')
 
 
     .styles([
-        'public/tmp/app_temp.css',
-        'node_modules/dist/css/bootstrap.min.css',
+        // 'public/tmp/app_temp.css',
+        'node_modules/bootstrap/dist/css/bootstrap.min.css',
         'resources/assets/libs/adminlte3/css/adminlte.css',
         'resources/assets/libs/adminlte3/css/style.css',
         'resources/assets/libs/adminlte3/plugins/chart.js/Chart.min.css',
