@@ -1,22 +1,23 @@
 /<template>
     <div>
-        <div class="row border-bottom pt-1 " dir="rtl">
+        <div class="row border-bottom pt-2 pb-2 " dir="rtl">
             <div class="col-6 col-lg-4 d-flex align-items-center justify-content-right">
                 <span v-html="title" class="font-weight-bold"></span>
             </div>
-            <div class="col-6 col-lg-8 d-flex align-items-center justify-content-right" >
-                <label :class="classes" v-if="to!=undefined" ><router-link v-html="val" :to="to"></router-link></label>
-                <label :class="classes" v-else-if="href!=undefined" ><a :href="href" v-html="val" :target="target" ref="aLink" @click="openModalIfImage($event)"></a></label>
-                <div v-else-if="progressBar!=undefined" class="progress progress-bar-success mt-1 mb-0" dir="ltr" style="height:15px">
-                    <div class="progress-bar" role="progressbar" :style="'width:'+val+'%'" :aria-valuenow="val" aria-valuemin="0" aria-valuemax="100" style="height:15px">{{val+'%'}}</div>
+            <div class="col-6 col-lg-8 d-flex align-items-center justify-content-right" style="word-break: break-word;">
+                <label :class="classes" v-if="to!==undefined" ><router-link  :to="to">{{valLocal}}</router-link></label>
+                <!-- <label :class="classes" v-else-if="href!=undefined" ><a :href="href" v-html="val" :target="target" ref="aLink" @click="openModalIfImage($event)"></a></label> -->
+                <label :class="classes" v-else-if="href!==undefined" ><a :href="href" v-html="valLocal" :target="target" ref="aLink"></a></label>
+                <div v-else-if="progressBar!==undefined" class="progress progress-bar-success mt-1 mb-0" dir="ltr" style="height:15px">
+                    <div class="progress-bar" role="progressbar" :style="'width:'+valLocal+'%'" :aria-valuenow="valLocal" aria-valuemin="0" aria-valuemax="100" style="height:15px">{{valLocal+'%'}}</div>
                 </div>
-                <label :class="classes" class="m-0">
-                    <span v-html="val" :id="id" ref="value"></span>
+                <label v-else :class="classes" class="m-0">
+                    <span v-html="valLocal" :id="id" ref="value"></span>
                     <slot></slot>
                 </label>
 
 
-                <i v-if="itemId!=undefined && id!=undefined" class="fas fa-edit text-warning cursor-pointer" @click="edit()"></i>
+                <i v-if="itemId!=undefined && id!=undefined" class="fas fa-edit text-warning cursor-pointer ml-2" @click="edit()"></i>
 
 
                 <div v-if="copy!=undefined" class="d-inline">
@@ -55,6 +56,12 @@
             editUrl:[String, Number],
             reloadAfterEdit:[String, Number]
         },
+        data(){
+            return{
+                valLocal : '',
+                optionsValLocal : '',
+            }
+        },
         methods:{
             edit(){
                 if(this.options){ // edit with drop down
@@ -66,7 +73,7 @@
                     new swal({
                         title: 'انتخاب '+ this.title,
                         input: 'select',
-                        inputValue: this.optionsVal,
+                        inputValue: this.optionsValLocal,
                         inputOptions:items,
                         inputValidator: (value) => {
                             return new Promise((resolve) => {
@@ -98,8 +105,8 @@
                                 })
                                 .then((response) => {
                                     checkResponse(response.data,()=>{
-                                        this.val=items[newValue];
-                                        this.optionsVal=newValue;
+                                        this.valLocal=items[newValue];
+                                        this.optionsValLocal=newValue;
 
                                         if(this.reloadAfterEdit)
                                             window.location.reload();
@@ -108,7 +115,7 @@
                         }
                     })
                 }else{ // edit with input box
-                    prompt2(this.title+" :",this.val,(value)=>{
+                    prompt2(this.title+" :",this.valLocal,(value)=>{
                         showLoading();
                         let path=this.$route.path.split('/');
                         var editPath = this.editUrl === undefined ? path[1] : this.editUrl;
@@ -120,7 +127,7 @@
                             })
                             .then((response) => {
                                 checkResponse(response.data,()=>{
-                                    this.val=value;
+                                    this.valLocal=value;
                                     if(this.reloadAfterEdit)
                                         window.location.reload();
                                 });
@@ -162,6 +169,18 @@
         },
 
         mounted(){
+            this.valLocal = this.val
+        },
+
+        watch:{
+            val:function(){
+                if(this.val !== undefined)
+                    this.valLocal = this.val
+            },
+            optionsVal:function(){
+                if(this.optionsVal !== undefined)
+                    this.optionsValLocal = this.optionsVal
+            },
         }
     }
 </script>

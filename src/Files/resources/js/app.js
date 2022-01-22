@@ -8,5 +8,6 @@ require('./sweetalert-helper');
 
 window.utils=require('../files/utils.json');
 
-// Window.prototype.preferences = new SecureLS();
+import Tools from './tools';
 
+window.Tools = Tools

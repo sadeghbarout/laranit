@@ -215,6 +215,7 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$composerArray['devDependencies']['popper.js']= "^1.12";
 		$composerArray['devDependencies']['sweetalert2']= "^11.0.18";
 		$composerArray['devDependencies']['jquery']= "^3.2";
+		$composerArray['devDependencies']['secure-ls']= "^1.2.6";
 
 		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);
 		$composerContent=str_replace("\/","/",$composerContent);

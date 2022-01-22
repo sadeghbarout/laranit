@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Colbeh\Access\Models\Role;
+use Colbeh\Access\HasRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable;
@@ -24,20 +24,13 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  */
 class Admin extends ModelEnhanced implements AuthenticatableContract,AuthorizableContract,CanResetPasswordContract {
 	use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
-
+	use HasRoles;
 	use HasFactory, Notifiable;
 
 	protected $hidden = [
 		COL_ADMIN_PASSWORD,
     ];
 
-
-	//-----------------------------------------------------------------------------------------------------------------------------
-	//-----------------------------------------------    relations    -------------------------------------------------------------
-	//-----------------------------------------------------------------------------------------------------------------------------
-	public function roles(){
-		return $this->belongsToMany(Role::class);
-	}
 
 
 

@@ -1,6 +1,8 @@
 import {createApp} from 'vue'
 import router from './routes'
+import SecureLs from 'secure-ls'
 
+Window.prototype.preferences = new SecureLs()
 if (typeof (vue) === 'undefined') {
     window.vue = {};
 }
