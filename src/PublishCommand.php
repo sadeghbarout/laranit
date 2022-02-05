@@ -216,6 +216,7 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$composerArray['devDependencies']['sweetalert2']= "^11.0.18";
 		$composerArray['devDependencies']['jquery']= "^3.2";
 		$composerArray['devDependencies']['secure-ls']= "^1.2.6";
+		$composerArray['devDependencies']['vue3-persian-datetime-picker']= "^1.0.0";
 
 		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);
 		$composerContent=str_replace("\/","/",$composerContent);
@@ -225,12 +226,12 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 
 	public function modifyConfigAppFile() {
 		$str = "
-		
-		
+
+
 	'base_url'=>env('BASE_URL'),
 	'jwt_secret'=>env('JWT_SECRET'),
-	
-	
+
+
 	";
 
 		$needle='return [';

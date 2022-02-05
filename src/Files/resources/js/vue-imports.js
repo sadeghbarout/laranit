@@ -18,8 +18,25 @@ app.use(router)
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
+ import Vue3PersianDatetimePicker from 'vue3-persian-datetime-picker'
+ app.use(Vue3PersianDatetimePicker, {
+     name: 'date-picker',
+     props: {
+         format: 'YYYY-MM-DD HH:mm:ss',
+         inputFormat: 'YYYY-MM-DD HH:mm:ss',
+         displayFormat: 'jYYYY/jMM/jDD HH:mm:ss',
+         altFormat: 'YYYY-MM-DD HH:mm:ss',
+
+         editable: false,
+         inputClass: 'form-control my-custom-class-name',
+         placeholder: 'انتخاب تاریخ',
+         color: '#00acc1',
+         autoSubmit: false,
+     }
+ })
 
 
+import adminLogin from './components/adminLogin.vue';
 import formInputs from './components/form-inputs.vue';
 import formDate from './components/form-date.vue';
 import formLabel from './components/form-label.vue';
@@ -33,6 +50,7 @@ import modelComponent from './components/modal-component.vue';
 import imageSliderComponent from './components/image-slider-component.vue';
 import thSort from './components/th-sort.vue';
 
+app.component('admin-login', adminLogin)
 app.component('form-inputs', formInputs)
 app.component('form-date', formDate)
 app.component('form-label', formLabel)
@@ -53,6 +71,25 @@ app.component('th-sort', thSort)
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+ app.mixin({
+    data() {
+        return {
+            PERM_ROOT : 'root',
+        }
+    },
+    methods: {
+        adminHasPermission: function (requiredPermission) {
+            var adminPermissionsArrayObj =  preferences.get('admin_permissions')
+            var adminPermissionsArray = Object.keys(adminPermissionsArrayObj).map((key) => adminPermissionsArrayObj[key] );
+
+            if (adminPermissionsArray.indexOf('root') != -1)
+                return true;
+
+            return adminPermissionsArrayObj.indexOf(requiredPermission) != -1
+        }
+    }
+});
 
 
 
