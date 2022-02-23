@@ -27,3 +27,13 @@ window.axios.interceptors.request.use(function (config) {
 }, function (error) {
     return Promise.reject(error);
 });
+
+
+axios.interceptors.response.use(response => {
+    return response;
+}, error => {
+    if(error.response)
+        checkResponse(error.response.data);
+
+    return Promise.reject(error);
+});
