@@ -118,6 +118,7 @@ class AdminController extends Controller
 	// admin details
 	public function show($id)
 	{
+		Validator::idValidation($id);
 		$admin = Admin:: findOrError($id);
 
 		return generateResponse(RES_SUCCESS,["item"=>$admin]);

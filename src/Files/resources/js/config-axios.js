@@ -15,25 +15,46 @@ if (token) {
 }
 
 
-// interceptors
-window.axios.interceptors.request.use(function (config) {
-    if (config.url.includes('?')) {
-        config.url += '&ajax=true';
+axios.interceptors.request.use(request => {
+
+    var extras={
+        reqTime:(new Date()).getTime(),
+        ajax:'true',
+    };
+
+
+    if(request.params!==undefined){
+        request.params = {... request.params, ...extras};
+    }else if(request.data!==undefined ){
+        if(request.data instanceof FormData){ // is a formData
+            for (const property in extras) {
+                request.data.append(property,extras[property])
+            }
+        }else{ // is an object
+            request.data = {... request.data, ...extras};
+        }
+    }else{
+        if(request.method === 'get' ||  request.method === 'delete'){
+            request.params = { ...extras};
+        }else{
+            request.data = {...extras};
+        }
     }
-    else {
-        config.url += '?ajax=true';
-    }
-    return config;
-}, function (error) {
+
+    return request;
+}, error => {
     return Promise.reject(error);
 });
 
 
 axios.interceptors.response.use(response => {
+    swal.close();
     return response;
 }, error => {
     if(error.response)
         checkResponse(error.response.data);
+
+    swal.close();
 
     return Promise.reject(error);
 });

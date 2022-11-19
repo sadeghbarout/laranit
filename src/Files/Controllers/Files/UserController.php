@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Extras\Tools;
+use App\Extras\Validator;
 use App\Models\User;
 use Auth;
 use Hash;
@@ -38,7 +39,8 @@ class UserController extends Controller
 
     // ----------------------------------------------------------------------------------------------------------------------------------------------------
     public function show($id){
-        $user = User::findOrError($id);
+		Validator::idValidation($id);
+		$user = User::findOrError($id);
 
         if($user[COL_USER_IS_SEEN] == 0)
             User::id($id) -> update([COL_USER_IS_SEEN => 1]);
@@ -50,7 +52,8 @@ class UserController extends Controller
     // ------------------------------------------------------------------------------------------------------
     // editing specific columns
     public function editing($id){
-        $user = User::findOrError($id);
+		Validator::idValidation($id);
+		$user = User::findOrError($id);
 
 		$cases=[
 			'status'=>function($model,$value){

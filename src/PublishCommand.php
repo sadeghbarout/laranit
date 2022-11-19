@@ -75,20 +75,31 @@ class PublishCommand extends Command
 
 
 	public function addMiddlewareToKernel() {
+		$str1 ='"rateLimiter" => \App\Http\Middleware\RateLimiter::class,
+		';
+
+		$needle1='protected $routeMiddleware = [';
+
+		$filePath = app_path('Http/Kernel.php');
+		$kernelContent = file_get_contents($filePath);
+		$pos = strpos($kernelContent, $needle1);
+		$kernelContent = substr_replace($kernelContent, $str1, $pos+strlen($needle1), 0);
+
+
 		$str = '
 		\App\Http\Middleware\LogAfterRequest::class,
 		\App\Http\Middleware\CleanStrings::class,
         \App\Http\Middleware\CheckPermission::class,
+        \App\Http\Middleware\SecurityHeaders::class,
 //      \App\Http\Middleware\ForceHttps::class,
 ';
 
 		$needle='protected $middleware = [';
 
-		$filePath = app_path('Http/Kernel.php');
-		$kernelContent = file_get_contents($filePath);
 		$pos = strpos($kernelContent, $needle);
 		$kernelContent = substr_replace($kernelContent, $str, $pos+strlen($needle), 0);
 		file_put_contents($filePath, $kernelContent);
+
 	}
 
 	public function test() {
@@ -159,7 +170,7 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$pos = strrpos($appContent, $needle);
 		$appContent=substr_replace($appContent,'$this->basicRoutes();',$pos+strlen($needle),0);
 
-		$appContent=str_replace('// protected $','protected $',$appContent);
+//		$appContent=str_replace('// protected $','protected $',$appContent);
 
 		file_put_contents($filePath, $appContent);
 	}

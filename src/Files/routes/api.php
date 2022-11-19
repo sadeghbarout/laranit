@@ -16,11 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("app/start","AppApiController@appStart");
-Route::get("app/main","AppApiController@mainPage");
+Route::middleware('rateLimiter:15,1')->group(function () {
+	Route::get("app/start","AppApiController@appStart");
+	Route::get("app/main","AppApiController@mainPage");
+});
 
 
+Route::middleware('rateLimiter:7,1')->group(function () {
 
+
+	// place APIs here ...
+
+
+});
 
 
 
