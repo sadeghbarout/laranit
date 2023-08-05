@@ -41,6 +41,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			__DIR__ . '/Files/routes/site.php' => base_path('routes/site.php'),
 			__DIR__ . '/Files/providers/AppServiceProvider.php' => app_path('Providers/AppServiceProvider.php'),
 			__DIR__ . '/Files/providers/HelperServiceProvider.php' => app_path('Providers/HelperServiceProvider.php'),
+			__DIR__ . '/Files/Console/Kernel.php' => app_path('Console/Kernel.php'),
 			__DIR__ . '/Files/utils.json' => resource_path('files/utils.json'),
 			__DIR__ . '/Files/seeders' => database_path('seeders'),
 			__DIR__ . '/Files/config/auth.php' => base_path('config/auth.php'),
