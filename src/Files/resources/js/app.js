@@ -1,12 +1,17 @@
-require('./bootstrap');
+import '/resources/css/app.css';
 
-require('./vue-imports');
+import './bootstrap';
 
-require ('./helpers');
+import './config-axios';
 
-require('./sweetalert-helper');
+import './vue-imports';
 
-window.utils=require('../files/utils.json');
+import './helpers';
+
+import './sweetalert-helper';
+
+import utils from '../files/utils.json';
+window.utils=utils;
 
 import Tools from './tools';
 

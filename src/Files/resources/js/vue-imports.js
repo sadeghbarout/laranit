@@ -1,14 +1,22 @@
 import {createApp} from 'vue'
 import router from './routes'
 import SecureLs from 'secure-ls'
+import appPage from './components/app.vue'
+import userStore from './stores/user';
 
 Window.prototype.preferences = new SecureLs()
-if (typeof (vue) === 'undefined') {
-    window.vue = {};
-}
 
-const app = createApp(vue);
+const app = createApp(appPage);
 app.use(router)
+
+// stores
+app.config.globalProperties.$user = userStore
+
+
+/** install dateTime plugin **/
+import dateTime from './plagins/datetime/main'
+app.use(dateTime)
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -36,7 +44,6 @@ app.use(router)
  })
 
 
-import adminLogin from './components/adminLogin.vue';
 import formInputs from './components/form-inputs.vue';
 import formDate from './components/form-date.vue';
 import formLabel from './components/form-label.vue';
@@ -50,7 +57,10 @@ import modelComponent from './components/modal-component.vue';
 import imageSliderComponent from './components/image-slider-component.vue';
 import thSort from './components/th-sort.vue';
 
-app.component('admin-login', adminLogin)
+import appFooter from './components/layout/appFooter.vue';
+import appHeader from './components/layout/appHeader.vue';
+import appSidebar from './components/layout/appSidebar.vue';
+
 app.component('form-inputs', formInputs)
 app.component('form-date', formDate)
 app.component('form-label', formLabel)
@@ -64,6 +74,10 @@ app.component('modal-component', modelComponent)
 app.component('image-slider-component', imageSliderComponent)
 app.component('th-sort', thSort)
 // app.component('date-picker', VuePersianDatetimePicker);
+
+app.component('app-footer', appFooter)
+app.component('app-header', appHeader)
+app.component('app-sidebar', appSidebar)
 
 
 /**

@@ -96,3 +96,6 @@ table tr th{
     flex-direction: column;
     align-items: center;
 }
+.max-content{
+    max-width: 800px;
+}

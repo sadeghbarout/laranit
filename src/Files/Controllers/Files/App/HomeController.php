@@ -1,24 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\Admin;
+namespace App\Http\Controllers\App;
+use App\Http\Controllers\Controller;
+use App\Models\User\Admin;
 
 class HomeController extends Controller{
 
 
 	public function index(){
-		if(auth()->check()){
-			return view('dashboard.home');
-		}else{
-			return redirect('login');
-		}
+		return view('dashboard.home');
 	}
 
 
 	// -----------------------------------------------------------------------------------------------------------------------
 	public function dashboardInfo(){
 
-		$items['adminsCount']=Admin::allCount();
+		$items['adminsCount']=Admin::count();
 
 
 		return generateResponse(RES_SUCCESS,[RK_ITEMS => $items]);

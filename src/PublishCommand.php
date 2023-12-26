@@ -34,7 +34,9 @@ class PublishCommand extends Command
 
 	public function handle()
 	{
-///
+
+		Artisan::call("lang:publish");
+
 		Artisan::call('vendor:publish',
 			[
 				'--provider'=>"Colbeh\Laranit\ServiceProvider",
@@ -78,7 +80,7 @@ class PublishCommand extends Command
 		$str1 ='"rateLimiter" => \App\Http\Middleware\RateLimiter::class,
 		';
 
-		$needle1='protected $routeMiddleware = [';
+		$needle1='protected $middlewareAliases = [';
 
 		$filePath = app_path('Http/Kernel.php');
 		$kernelContent = file_get_contents($filePath);
@@ -166,9 +168,9 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$appContent=str_replace('Route::prefix(\'api\')',$str,$appContent);
 
 
-		$needle='$this->configureRateLimiting();';
+		$needle='RateLimiter::';
 		$pos = strrpos($appContent, $needle);
-		$appContent=substr_replace($appContent,'$this->basicRoutes();',$pos+strlen($needle),0);
+		$appContent=substr_replace($appContent,'$this->basicRoutes(); ',$pos,0);
 
 //		$appContent=str_replace('// protected $','protected $',$appContent);
 
@@ -177,7 +179,7 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 
 	public function modifyLangValidations() {
 
-		$filePath = resource_path('lang/en/validation.php');
+		$filePath = base_path('lang/en/validation.php');
 		$appContent = file_get_contents($filePath);
 		$appContent=str_replace('The :attribute must be an array.','پارامتر :attribute باید آرایه باشد.',$appContent);
 		$appContent=str_replace('The :attribute must be between :min and :max.','پارامتر :attribute باید بین :min و :max باشد.',$appContent);
@@ -216,7 +218,13 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$composerContent = file_get_contents($filePath);
 		$composerArray=json_decode($composerContent,true);
 
-		$composerArray['devDependencies']['vue']= "^3.1.4";
+		$composerArray['scripts']['webpack']= "mix";
+
+		$composerArray['devDependencies']['vite']= "^4.0.0";
+		$composerArray['devDependencies']['@vitejs/plugin-vue']= "^4.5.1";
+		$composerArray['devDependencies']['laravel-vite-plugin']= "^0.8.0";
+		$composerArray['devDependencies']['laravel-mix']= "^6.0.6";
+		$composerArray['devDependencies']['vue']= "^3.3.10";
 		$composerArray['devDependencies']['vue-loader']= "^16.1.0";
 		$composerArray['devDependencies']['vue-router']= "^4.0.10";
 		$composerArray['devDependencies']['vue-template-compiler']= "^2.6.14";
@@ -224,10 +232,12 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$composerArray['devDependencies']['cross-env']= "^7.0";
 		$composerArray['devDependencies']['bootstrap']= "^4.0.0";
 		$composerArray['devDependencies']['popper.js']= "^1.12";
+		$composerArray['devDependencies']['lodash']= "^4.17.19";
 		$composerArray['devDependencies']['sweetalert2']= "^11.0.18";
 		$composerArray['devDependencies']['jquery']= "^3.2";
 		$composerArray['devDependencies']['secure-ls']= "^1.2.6";
 		$composerArray['devDependencies']['vue3-persian-datetime-picker']= "^1.0.0";
+		$composerArray['devDependencies']['chart.js']= "^3.0.1";
 
 		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);
 		$composerContent=str_replace("\/","/",$composerContent);

@@ -58,3 +58,22 @@ Window.prototype.checkResponse = function (response, onSuccess, noDialog, onFail
 
 
 };
+
+
+
+function convertDataTimeCols(item){
+    const coles = ['created_at', 'updated_at','deleted_at', 'date', 'initiated_time','start_time', 'end_time', 'expire_date', 'last_activity', 'expired_reserve'];
+    coles.forEach((col) => {
+        if(hasKey(item, col)){
+            if(item[col] != null){
+                item[col] = convertTZ(item[col]);
+            }
+        }
+    });
+}
+
+
+function convertTZ(date) {
+    date = date.replace(' ', 'T').replace('.000000Z', '') + 'Z';
+    return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone})).toLocaleString();
+}

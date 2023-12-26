@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
+use App\Models\ModelEnhanced;
 use Colbeh\Access\HasRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
@@ -17,10 +18,10 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 /**
  * App\Admin
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Admin id($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Admin name($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Admin username($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Admin whereInId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin id($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin name($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin username($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin whereInId($value)
  */
 class Admin extends ModelEnhanced implements AuthenticatableContract,AuthorizableContract,CanResetPasswordContract {
 	use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;

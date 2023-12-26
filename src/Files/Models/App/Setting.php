@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\App;
 use App\Models\ModelEnhanced;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * App\Setting
  *
-  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Setting id($value)
-  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Setting name($value)
+  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\App\Setting id($value)
+  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\App\Setting name($value)
 
 		*/
 class Setting extends ModelEnhanced

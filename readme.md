@@ -18,4 +18,4 @@
         
 5- goto : admin.domain.com/login
 
-6- login with admin / 123456789
+6- login with admin / 123456aA*

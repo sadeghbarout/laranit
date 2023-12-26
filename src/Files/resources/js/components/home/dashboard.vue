@@ -2,17 +2,15 @@
     <div class="container-fluid">
         <div class="row" id="app" >
 
-            <div class="col-lg-3 " id="xx">
-                <div class="small-box bg-primary">
-                    <div class="inner">
-                        <h3 style="color: white" v-text="items.adminsCount"></h3>
 
-                        <p>مدیران</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-bars"></i>
-                    </div>
-                    <router-link to="/project" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i>اطلاعات بیشتر ...</router-link>
+            <div class="col-lg-3">
+                <div class="small-box text-white w-100 bg-primary" style="background: rgb(255, 102, 0);">
+                    <div class="w-100 d-flex align-items-center justify-content-between p-2">
+                        <div class="inner">
+                            <h3  v-text="items.adminsCount"></h3>
+                            <p>مدیران</p></div>
+                        <i class="fas fa-users icon" style="font-size: 55px;"></i></div>
+                    <a href="/user" class="small-box-footer"> اطلاعات بیشتر ... <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -38,7 +36,7 @@
                 axios.get('/dashboard/info')
                     .then(response=>{
                         checkResponse(response.data,()=>{
-                            this.items = response.data
+                            this.items = response.data.items
                         },true)
                     })
             },

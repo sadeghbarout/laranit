@@ -40,26 +40,14 @@ use App\Http\Controllers\User\AdminController;
 
     });
 
+	Route::domain(SITE_URL_ADMIN)->middleware('rateLimiter:10,1')->group(function () {
+		Route::post('admin/login', [AdminController::class,'doLogin'])->name("admin.login");
+		Route::get('logout', [AdminController::class,'logout'])->name("admin.logout");
+		Route::get('init-admin', [AdminController::class, 'initAdmin']);
+	});
 
-    Route::domain(SITE_URL_ADMIN)->middleware('rateLimiter:10,1')->group(function () {
-
-		Route::get('login', [AdminController::class,'login'])->name("login");
-
-		Route::middleware('rateLimiter:5,1')->group(function () {
-			Route::post('admin/login', [AdminController::class,'doLogin'])->name("admin.login");
-			Route::get('logout', [AdminController::class,'logout'])->name("admin.logout");
-		});
-    });
 
 
 	Route::domain(SITE_URL_ADMIN)->group(function () {
-		if (request()->ajax()) {
-			Route::any('/{any}',function () {
-				return response()->json(['result' => ERR_ERROR_MESSAGE, 'message' => 'آدرس مورد نظر یافت نشد!'], \App\Extras\StatusCodes::HTTP_NOT_FOUND);
-			})->where('any', '.*');;
-
-		}else{
-
-			Route::get('/{any}', [HomeController::class, 'index'])->where('any', '.*');
-		}
+		Route::get('/{any}', [HomeController::class,'index'])->where('any', '.*');
 	});

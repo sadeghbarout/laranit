@@ -6,6 +6,7 @@ use App\Models\App\Notification;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Contracts\Encryption\EncryptException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Jwt\Algorithm\HS256Algorithm;
@@ -524,6 +525,18 @@ class Tools {
     }
 
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+	public static function langMessage($key, $userLang = null, $data = []) {
+		if ($userLang == null) {
+			$lang = request(P_LANG, 'fa');
+		} else {
+			$lang = $userLang;
+		}
+		App::setLocale($lang);
+
+		return __('index.' . $key, $data);
+	}
 
 }

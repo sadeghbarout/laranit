@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 use App\Extras\Tools;
 use App\Extras\Validator;
-use App\Models\Admin;
+use App\Http\Controllers\Controller;
+use App\Models\User\Admin;
 use Colbeh\Access\Access;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -18,19 +21,20 @@ class AdminController extends Controller
 
 	// check if admin as the root permission
 	public static function isRootUser() {
-		return \Gate::check('permission',PERM_ROOT)?1:0;
+		return Gate::check('permission',PERM_ROOT)?1:0;
 	}
 
 
 	//------------------------------------------------------------------------------------------------------------------------------------
-	public function login() {
-		if (\Auth::check()) {
-			return redirect('/');
+	public function initAdmin() {
+		if(!Auth::check()){
+			return generateResponse(RES_SUCCESS, ['user' => null]);
 		}
 
-		return view('dashboard.login');
-	}
+		$admin = Auth::user()->only([COL_ADMIN_USERNAME, COL_ADMIN_IMAGE]);
 
+		return generateResponse(RES_SUCCESS, ['user' => $admin]);
+	}
 
 	//------------------------------------------------------------------------------------------------------------------------------------
 	public function doLogin() {
@@ -41,7 +45,7 @@ class AdminController extends Controller
 		$password = \request('password');
 		$remember = \request('remember');
 
-		if (\Auth::attempt([COL_ADMIN_USERNAME => $username, COL_ADMIN_PASSWORD => $password], $remember)) {
+		if (Auth::attempt([COL_ADMIN_USERNAME => $username, COL_ADMIN_PASSWORD => $password], $remember)) {
 			return generateResponse(RES_SUCCESS, [RK_MESSAGE=> "وارد شدید",RK_REDIRECT=> '//dashboard']);
 		}
 
@@ -52,10 +56,10 @@ class AdminController extends Controller
 	//------------------------------------------------------------------------------------------------------------------------------------
 	public function logout() {
 
-		if (\Auth::check()) {
-			\Auth::logout();
+		if (Auth::check()) {
+			Auth::logout();
 		}
-		return redirect(route('login'));
+		return redirect('/login');
 	}
 
 
@@ -185,7 +189,7 @@ class AdminController extends Controller
 		$oldPassword = request('old_password');
 		$newPassword = request('new_password');
 
-		if (\Hash::check($oldPassword, auth()->user()[COL_ADMIN_PASSWORD])) {
+		if (Hash::check($oldPassword, auth()->user()[COL_ADMIN_PASSWORD])) {
 			auth()->user()[COL_ADMIN_PASSWORD] = bcrypt($newPassword);
 			auth()->user()->save();
 

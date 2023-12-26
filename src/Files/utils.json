@@ -1,15 +1,31 @@
 {
+  "decode unicode site": "https:\/\/dencode.com\/en\/string\/unicode-escape",
   "yesNo": {
-    "1": "بله",
-    "0": "خیر"
+    "fa": {
+      "1": "\u0628\u0644\u0647",
+      "0": "\u062e\u06cc\u0631"
+    },
+    "en": {
+      "1": "Yes",
+      "0": "No"
+    },
+    "ar": {
+      "1": "\u0646\u0639\u0645",
+      "0": "\u0644\u0627"
+    }
   },
+
+  "yesNoColor": {
+    "1": "success",
+    "0": "danger"
+  },
+
+
   "paymentStatuses": {
     "Pending": "در انتظار",
     "Success": "موفق",
     "Cancel": "انصراف"
   },
-
-
 
   "userStatuses": {
     "pending": "در انتظار تکمیل",

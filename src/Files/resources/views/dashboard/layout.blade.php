@@ -1,60 +1,34 @@
-<html lang="{{ app()->getLocale() }}">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('pageTitle')</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="{{$prefixHtml.mix('css/app.css')}}?v=3">
-    <link rel="stylesheet" href="/css/custom.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @vite([
+        'resources/js/app.js'
+    ])
+
+    @stack('styles')
     <script type="text/javascript">
         if(top.location != window.location) {
             window.location = '/error';
         }
     </script>
-    @stack('styles')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" style="overflow-x: hidden;">
 
-
-
-
-<div class="wrapper" id="vueAppDiv">
-
-    @include('dashboard.header')
-    @include('dashboard.sidebar')
-
-    <div class="content-wrapper" style="height: fit-content;min-height:100vh !important">
-        <section class="content-header" style="height: 5px;">
-        </section>
-
-        <section class="content">
-            <div class="container-fluid">
-                @yield('content')
-                <router-view></router-view>
-            </div>
-
-        </section>
-    </div>
-
-    @include('dashboard.footer')
-
-    <div class="control-sidebar-bg"></div>
+<div id="adminLoading" class="w-100 bg-white top-0 d-flex align-items-center justify-content-center" style="position: fixed; height: 100vh;z-index: 9999;">
+    <div class="spinner-border text-primary"></div>
 </div>
 
+<div class="wrapper" id="vueAppDiv"></div>
+
+<script src="/js/adminlte.js?v=14"></script>
 
 </body>
 </html>
 
-
-
-
-
-
-{{--<script src="{{$prefixHtml}}libs/ckeditor_4.9.2/ckeditor.js"></script>--}}
-@stack('vue')
-<script src="{{$prefixHtml.mix('js/app.js')}}?v=7"></script>
 @stack('scripts')

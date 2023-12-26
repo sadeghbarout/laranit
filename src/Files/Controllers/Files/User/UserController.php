@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 use App\Extras\Tools;
 use App\Extras\Validator;
-use App\Models\User;
-use Auth;
-use Hash;
+use App\Http\Controllers\Controller;
+use App\Models\User\User;
 use App\Exceptions\ErrorMessageException;
 
 class UserController extends Controller

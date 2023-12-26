@@ -1,20 +1,14 @@
+import _ from 'lodash';
+import * as popper from 'popper.js';
+import * as bootstrap from 'bootstrap';
+import Chart from 'chart.js/dist/chart';
 
-window._ = require('lodash');
-window.Popper = require('popper.js').default;
+window.Chart = Chart;
+window.bootstrap = bootstrap;
 
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
+window._ = _;
 
-try {
-    window.$ = window.jQuery = require('jquery');
-
-    require('bootstrap');
-} catch (e) {}
-
-
+window.Popper = popper;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -38,8 +32,3 @@ try {
 //     });
 //
 // };
-
-
-
-
-require('./config-axios');

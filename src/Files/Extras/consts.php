@@ -84,6 +84,7 @@ define('P_FIREBASE_TOKEN', 'firebase_token');
 define('P_ID', 'id');
 define('P_LOADED_COUNT', 'loaded_count');
 define('P_PASSWORD', 'password');
+define('P_LANG', 'lang');
 
 
 // ------------------------------------------------------------------------------------------------------------------------------------
