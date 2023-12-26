@@ -1,9 +1,7 @@
 import _ from 'lodash';
 import * as popper from 'popper.js';
 import * as bootstrap from 'bootstrap';
-import Chart from 'chart.js/dist/chart';
 
-window.Chart = Chart;
 window.bootstrap = bootstrap;
 
 window._ = _;
