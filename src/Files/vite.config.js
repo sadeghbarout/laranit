@@ -28,7 +28,7 @@ export default defineConfig({
                         return `assets/[name]-[hash][extname]`;
                     }
 
-                    if(ext === 'eot' || ext === 'ttf' || ext === 'woff' || ext === 'woff2' || assetInfo.name === 'feather.svg'){
+                    if(ext === 'eot' || ext === 'ttf' || ext === 'woff' || ext === 'woff2'){
                         return `fonts/[name][extname]`;
                     }
 

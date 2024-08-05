@@ -34,17 +34,23 @@ class Tools {
         return rangeWithDots;
     }
 
-    static utils(type,withAll) {
-        let a=[];
+
+    static utils(type,withAll,lang='fa') {
+        let all=[];
         if(withAll){
-            a.push(['همه',''])
+            all.push(['همه',''])
         }
         if(window.utils[type]){
-            for(let k in window.utils[type]){
-                a.push([window.utils[type][k],k])
+
+            var items=window.utils[type]
+            if(window.utils[type][lang])
+                items=window.utils[type][lang]
+
+            for(let item in items){
+                all.push([items[item],item])
             }
         }
-        return a;
+        return all;
     }
 
     //========================================================================================================================

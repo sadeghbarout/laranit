@@ -1,30 +1,24 @@
 /<template>
     <div>
-        <div class="row border-bottom pt-2 pb-2 " dir="rtl">
-            <div class="col-6 col-lg-4 d-flex align-items-center justify-content-right">
-                <span v-html="title" class="font-weight-bold"></span>
+        <div class="row">
+            <div class="col-6 col-lg-4" v-if="title!=undefined">
+                <p v-html="title" class="font-weight-bold"></p>
             </div>
-            <div class="col-6 col-lg-8 d-flex align-items-center justify-content-right" style="word-break: break-word;">
-                <label :class="classes" v-if="to!==undefined" ><router-link  :to="to">{{valLocal}}</router-link></label>
-                <!-- <label :class="classes" v-else-if="href!=undefined" ><a :href="href" v-html="val" :target="target" ref="aLink" @click="openModalIfImage($event)"></a></label> -->
-                <label :class="classes" v-else-if="href!==undefined" ><a :href="href" v-html="valLocal" :target="target" ref="aLink"></a></label>
-                <div v-else-if="progressBar!==undefined" class="progress progress-bar-success mt-1 mb-0" dir="ltr" style="height:15px">
+            <div :class="title!=undefined?'col-6 col-lg-8':'col-12' " style="word-break: break-all" >
+                <label :class="classes" v-if="to!=undefined" ><router-link v-html="valLocal" :to="to"></router-link></label>
+                <label :class="classes" v-else-if="href!=undefined" ><a :href="href" v-html="valLocal" :target="target" ref="aLink" @click="openModalIfImage($event)"></a></label>
+                <div v-else-if="progressBar!=undefined" class="progress progress-bar-success mt-1 mb-0" dir="ltr" style="height:15px">
                     <div class="progress-bar" role="progressbar" :style="'width:'+valLocal+'%'" :aria-valuenow="valLocal" aria-valuemin="0" aria-valuemax="100" style="height:15px">{{valLocal+'%'}}</div>
                 </div>
-                <label v-else :class="classes" class="m-0">
-                    <span v-html="valLocal" :id="id" ref="value"></span>
+                <label :class="classes" v-else="" >
+                    <span v-html="valLocal" :id="id"></span>
                     <slot></slot>
                 </label>
-
-
-                <i v-if="itemId!=undefined && id!=undefined" class="fas fa-edit text-warning cursor-pointer ml-2" @click="edit()"></i>
-
-
-                <div v-if="copy!=undefined" class="d-inline">
-                    <i  class="fas fa-clone text-warning cursor-pointer" @click="copyField()"></i>
+                <i v-if="itemId!=undefined && id!=undefined" class="feather icon-edit text-warning cursor-pointer" @click="edit()"></i>
+                <div v-if="copy!=undefined && id!=undefined" class="d-inline">
+                    <i  class="fa fa-clone text-warning cursor-pointer" @click="copyField()"></i>
+                    <input :id="'copyfield'+id" class="d-none">
                 </div>
-
-
             </div>
         </div>
 
@@ -54,7 +48,11 @@
             target:[String, Number],
             copy:[String, Number],
             editUrl:[String, Number],
-            reloadAfterEdit:[String, Number]
+            reloadAfterEdit:[String, Number],
+            editDes:{
+                type: String,
+                default: null
+            }
         },
         data(){
             return{
@@ -74,6 +72,7 @@
                         title: 'انتخاب '+ this.title,
                         input: 'select',
                         inputValue: this.optionsValLocal,
+                        text: this.editDes,
                         inputOptions:items,
                         inputValidator: (value) => {
                             return new Promise((resolve) => {
@@ -132,7 +131,7 @@
                                         window.location.reload();
                                 });
                             })
-                    });
+                    }, false,this.editDes);
                 }
 
             },

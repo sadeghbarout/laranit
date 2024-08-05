@@ -22,6 +22,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin name($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin username($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin whereInId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin toDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin fromDate($value)
  */
 class Admin extends ModelEnhanced implements AuthenticatableContract,AuthorizableContract,CanResetPasswordContract {
 	use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
@@ -30,7 +32,7 @@ class Admin extends ModelEnhanced implements AuthenticatableContract,Authorizabl
 
 	protected $hidden = [
 		COL_ADMIN_PASSWORD,
-    ];
+	];
 
 
 
@@ -76,6 +78,22 @@ class Admin extends ModelEnhanced implements AuthenticatableContract,Authorizabl
 		return $query;
 	}
 
+	/* @param \Illuminate\Database\Eloquent\Builder $query */
+	public function scopeFromDate($query, $value) {
+		if (ModelEnhanced::checkParameter($value)) {
+			return $query->where(TBL_ADMINS . "." . COL_ADMIN_CREATED_AT,'>=', $value);
+		}
+		return $query;
+	}
+
+	/* @param \Illuminate\Database\Eloquent\Builder $query */
+	public function scopeToDate($query, $value) {
+		if (ModelEnhanced::checkParameter($value)) {
+			return $query->where(TBL_ADMINS . "." . COL_ADMIN_CREATED_AT,'<=', $value);
+		}
+		return $query;
+	}
+
 
 	//-----------------------------------------------------------------------------------------------------------------------------
 	//-----------------------------------------------    accessors & mutator    ---------------------------------------------------
@@ -83,6 +101,6 @@ class Admin extends ModelEnhanced implements AuthenticatableContract,Authorizabl
 
 	public function getImageAttribute($value) {
 		return ModelEnhanced::correctImage($value, PATH_PROFILE_IMAGES);
-    }
+	}
 
 }

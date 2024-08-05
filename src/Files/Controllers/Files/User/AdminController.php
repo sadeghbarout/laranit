@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\User;
+use App\Exceptions\ErrorMessageException;
+use App\Extras\StatusCodes;
+use App\Extras\StorageHelper;
 use App\Extras\Tools;
 use App\Extras\Validator;
 use App\Http\Controllers\Controller;
@@ -31,9 +34,16 @@ class AdminController extends Controller
 			return generateResponse(RES_SUCCESS, ['user' => null]);
 		}
 
+		$adminRolesPermissions = Auth::user()->roles()->with('permissions:name')->get()->pluck('permissions');
+		$adminPermissions = [];
+		foreach ($adminRolesPermissions as $rolePermissions) {
+			$adminPermissions = array_merge($adminPermissions, $rolePermissions->pluck('name')->all());
+			$adminPermissions = array_unique($adminPermissions);
+		}
+
 		$admin = Auth::user()->only([COL_ADMIN_USERNAME, COL_ADMIN_IMAGE]);
 
-		return generateResponse(RES_SUCCESS, ['user' => $admin]);
+		return generateResponse(RES_SUCCESS, ['user' => $admin, RK_ADMIN_PERMISSIONS => $adminPermissions]);
 	}
 
 	//------------------------------------------------------------------------------------------------------------------------------------
@@ -65,24 +75,24 @@ class AdminController extends Controller
 
 	// ----------------------------------------------------------------------------------------------------------------------------------
 	// admins list
-	public function index()
-	{
+	public function index() {
 		$id = request("id");
 		$username = request("username");
 		$name = request("name");
-		$rowsCount = request("pageRows",10);
+		$fromDate = request('from_date');
+		$toDate = request('to_date');
+		$rowsCount = request("pageRows", 10);
 		$page = request("page", 1);
 		$sort = request("sort", COL_ADMIN_ID);
 		$sortType = request("sort_type", 'desc');
 
 
-		$builder = Admin::id($id) -> username($username) -> name($name) -> where(COL_ADMIN_USERNAME,'!=','owner');
+		$builder = Admin::id($id)->username($username)->name($name)->where(COL_ADMIN_USERNAME, '!=', 'owner')->fromDate($fromDate)->toDate($toDate);
 		$count = $builder->count();
-		$items = $builder->orderBy($sort ,$sortType)->page2($page, $rowsCount)->get([COL_ADMIN_ID, COL_ADMIN_USERNAME, COL_ADMIN_NAME]);
+		$items = $builder->orderBy($sort, $sortType)->page2($page, $rowsCount)->get([COL_ADMIN_ID, COL_ADMIN_USERNAME, COL_ADMIN_NAME]);
+		$pageCount = ceil($count / $rowsCount); // count of pages
 
-		$pageCount = ceil($count/$rowsCount); // count of pages
-
-		return generateResponse(RES_SUCCESS,array(RK_ITEMS => $items , RK_PAGE_COUNT => $pageCount));
+		return generateResponse(RES_SUCCESS, array(RK_ITEMS => $items, RK_PAGE_COUNT => $pageCount));
 	}
 
 
@@ -131,26 +141,29 @@ class AdminController extends Controller
 
 	// ----------------------------------------------------------------------------------------------------------------------
 	// update an admin info
-	public function update(Request $request)
-	{
+// update an admin info
+	public function update(Request $request, $id) {
+		Validator::idValidation($id);
 		Validator::adminUpdateValidator();
 		// todo: check permission
-		$admin=$this->updateAndGetAdmin();
+		$admin = $this->updateAndGetAdmin($id);
 
-		return sucBack('تغییرات ثبت شد','//admin/'.$admin[COL_ADMIN_ID]);
+		return sucBack('تغییرات ثبت شد', '//admin/' . $admin[COL_ADMIN_ID]);
 
 	}
 
 
-	private function updateAndGetAdmin() {
-		$data[COL_ADMIN_NAME] = request(COL_ADMIN_NAME);
+	private function updateAndGetAdmin($id) {
+		$admin = Admin::id($id)->first();
+		$admin[COL_ADMIN_NAME] = request(COL_ADMIN_NAME);
+		$admin[COL_ADMIN_USERNAME] = request(COL_ADMIN_USERNAME);
 
 		// uploading admin profile image
-		if(request() -> file(COL_ADMIN_IMAGE)){
-			$file = Tools::uploadAndCompressImage(request() -> file(COL_ADMIN_IMAGE), PATH_PROFILE_IMAGES, 250, 250); // image dimensions = 250 x 250
+		if (request()->file(COL_ADMIN_IMAGE)) {
+			$file = (new StorageHelper())->width(250)->height(250)->put(PATH_PROFILE_IMAGES, request()->file(COL_ADMIN_IMAGE));
 			$admin[COL_ADMIN_IMAGE] = $file;
 		}
-		$admin -> save();
+		$admin->save();
 
 		return $admin;
 	}
@@ -158,14 +171,13 @@ class AdminController extends Controller
 
 	//----------------------------------------------------------------------------------------------------------------------
 	public function profile() {
-		$admin=auth()->user()->only([COL_ADMIN_ID,COL_ADMIN_NAME,COL_ADMIN_IMAGE, COL_ADMIN_USERNAME]);
-		return generateResponse(RES_SUCCESS,[RK_ITEM=>$admin]);
+		$admin = auth()->user()->only([COL_ADMIN_ID, COL_ADMIN_NAME, COL_ADMIN_IMAGE, COL_ADMIN_USERNAME]);
+		return generateResponse(RES_SUCCESS, [RK_ITEM => $admin]);
 	}
 
-    //------------------------------------------------------------------------------------------------------------------------------------
-    // each admin can upload a profile image in his/her profile
+	//------------------------------------------------------------------------------------------------------------------------------------
+	// each admin can upload a profile image in his/her profile
 	public function uploadProfileImage() {
-
 		Validator::adminUploadProfileValidation();
 
 		$imageName=Tools::uploadAndCompressImage(request()->file('file'),PATH_UPLOAD.PATH_PROFILE_IMAGES,200,200);
@@ -180,10 +192,8 @@ class AdminController extends Controller
 	}
 
 
-    //------------------------------------------------------------------------------------------------------------------------------------
-    // duh
+	//------------------------------------------------------------------------------------------------------------------------------------
 	public function doChangePassword() {
-
 		Validator::adminChangePassValidation();
 
 		$oldPassword = request('old_password');
@@ -193,11 +203,35 @@ class AdminController extends Controller
 			auth()->user()[COL_ADMIN_PASSWORD] = bcrypt($newPassword);
 			auth()->user()->save();
 
-			return generateResponse(RES_SUCCESS,[RK_MESSAGE=>"ویرایش شد.",RK_REDIRECT=>'/profile']);
+			return generateResponse(RES_SUCCESS, [RK_MESSAGE => "ویرایش شد.", RK_REDIRECT => '/profile']);
 		} else {
-			return generateResponse(ERR_ERROR_MESSAGE,[RK_MESSAGE=>"پسورد فعلی شما اشتباه است"]);
+			return generateResponse(ERR_ERROR_MESSAGE, [RK_MESSAGE => "پسورد فعلی شما اشتباه است"]);
 		}
-
 	}
 
+	//------------------------------------------------------------------------------------------------------------------------------------
+	public function roleToggle() {
+		Validator::adminRoleToggleValidation();
+
+		$adminId = request('admin_id');
+		$roleId = request('role_id');
+
+		Access::roleToggle($adminId, $roleId);
+
+		return generateResponse(RES_SUCCESS);
+	}
+
+	//------------------------------------------------------------------------------------------------------------------------------------
+	public function setNewPassword() {
+		Validator::adminSetNewPasswordeValidation();
+
+		$id = \request('id');
+		$password = \request('password');
+
+		$admin = Admin::where(COL_ADMIN_ID, $id)->firstOrError();
+		$admin[COL_ADMIN_PASSWORD] = Hash::make($password);
+		$admin->save();
+
+		return generateResponse(RES_SUCCESS, [RK_MESSAGE => "رمز عبور با موفقیت تعییر یافت."]);
+	}
 }

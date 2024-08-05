@@ -1,0 +1,685 @@
+{
+    "decode unicode site": "https:\/\/dencode.com\/en\/string\/unicode-escape",
+    "yesNo": {
+        "fa": {
+            "1": "\u0628\u0644\u0647",
+            "0": "\u062e\u06cc\u0631"
+        },
+        "en": {
+            "1": "Yes",
+            "0": "No"
+        },
+        "ar": {
+            "1": "\u0646\u0639\u0645",
+            "0": "\u0644\u0627"
+        }
+    },
+    "yesNoColor": {
+        "1": "success",
+        "0": "danger"
+    },
+    "paymentStatuses": {
+        "fa": {
+            "Pending": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631",
+            "Success": "\u0645\u0648\u0641\u0642",
+            "Cancel": "\u0627\u0646\u0635\u0631\u0627\u0641"
+        },
+        "en": {
+            "Pending": "Waiting",
+            "Success": "Success",
+            "Cancel": "Canceled"
+        },
+        "ar": {
+            "Pending": "\u0627\u0646\u062a\u0638\u0627\u0631",
+            "Success": "\u0627\u0644\u0646\u062c\u0627\u062d",
+            "Cancel": "\u0625\u0644\u063a\u0627\u0621"
+        }
+    },
+    "paymentSubdomainStatuses": {
+        "pending": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u0633\u0627\u062e\u062a",
+        "created": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u067e\u0631\u062f\u0627\u062e\u062a",
+        "reponse_received": "\u062f\u0631\u06cc\u0627\u0641\u062a \u067e\u0627\u0633\u062e",
+        "canceled": "\u0644\u063a\u0648 \u0634\u062f\u0647",
+        "verified": "\u062a\u0627\u06cc\u06cc\u062f \u0634\u062f\u0647",
+        "canceled2": "\u0644\u063a\u0648 \u0634\u062f\u06472"
+    },
+    "paymentSubdomainStatusesColors": {
+        "pending": "primary",
+        "created": "info",
+        "reponse_received": "warning",
+        "canceled": "danger",
+        "verified": "success",
+        "canceled2": "danger"
+    },
+    "userStatuses": {
+        "fa": {
+            "pending": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u062a\u0627\u06cc\u06cc\u062f \u0634\u0645\u0627\u0631\u0647",
+            "signup_finished": "\u062b\u0628\u062a \u0646\u0627\u0645 \u06a9\u0627\u0645\u0644",
+            "signup_required": "\u062f\u0631\u0627\u0646\u062a\u0638\u0627\u0631 \u062a\u06a9\u0645\u06cc\u0644 \u0627\u0637\u0644\u0627\u0639\u0627\u062a",
+            "defected": "\u0646\u0642\u0635 \u0627\u0637\u0644\u0627\u0639\u0627\u062a",
+            "deactive": "\u063a\u06cc\u0631\u0641\u0639\u0627\u0644"
+        },
+        "en": {
+            "pending": "Awaiting confirmation number",
+            "signup_finished": "Complete registration",
+            "signup_required": "Awaiting completion of information",
+            "defected": "Defect Information",
+            "deactive": "Deactive"
+        },
+        "ar": {
+            "pending": "\u0641\u064a \u0627\u0646\u062a\u0638\u0627\u0631 \u0631\u0642\u0645 \u0627\u0644\u062a\u0623\u0643\u064a\u062f",
+            "signup_finished": "\u0627\u0643\u0645\u0644 \u0627\u0644\u062a\u0633\u062c\u064a\u0644",
+            "signup_required": "\u0641\u064a \u0627\u0646\u062a\u0638\u0627\u0631 \u0627\u0633\u062a\u0643\u0645\u0627\u0644 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a",
+            "defected": "\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0627\u0644\u062e\u0644\u0644",
+            "deactive": "\u062a\u0639\u0637\u064a\u0644"
+        }
+    },
+    "userStatusColor": {
+        "Pending": "primary",
+        "signup_finished": "success",
+        "signup_required": "warning",
+        "defected": "danger",
+        "deactive": "danger"
+    },
+    "userPhoneStatuses": {
+        "fa": {
+            "validated": "\u062a\u0627\u06cc\u06cc\u062f \u0634\u062f\u0647",
+            "not_validated": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u062a\u0627\u06cc\u06cc\u062f \u0634\u0645\u0627\u0631\u0647"
+        },
+        "en": {
+            "validated": "Validated",
+            "not_validated": "Wait for validating"
+        },
+        "ar": {
+            "validated": "\u062a\u0645 \u062a\u0623\u0643\u064a\u062f",
+            "not_validated": "\u0627\u0646\u062a\u0638\u0631 \u0627\u0644\u062a\u062d\u0642\u0642"
+        }
+    },
+    "userPhoneStatusColor": {
+        "validated": "success",
+        "not_validated": "primary"
+    },
+    "userGender": {
+        "male": "\u0645\u0631\u062f",
+        "female": "\u0632\u0646"
+    },
+    "userOs": {
+        "android": "android",
+        "pwa": "pwa"
+    },
+    "userType": {
+        "individual": "\u062d\u0642\u06cc\u0642\u06cc",
+        "business": "\u062d\u0642\u0648\u0642\u06cc"
+    },
+    "paymentStatus": {
+        "fa": {
+            "pending": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631",
+            "success": "\u0645\u0648\u0641\u0642",
+            "canceled": "\u0644\u063a\u0648 \u0634\u062f\u0647"
+        },
+        "en": {
+            "pending": "Waiting",
+            "success": "Success",
+            "canceled": "Canceled"
+        },
+        "ar": {
+            "pending": "\u0627\u0646\u062a\u0638\u0627\u0631",
+            "success": "\u0627\u0644\u0646\u062c\u0627\u062d",
+            "canceled": "\u0625\u0644\u063a\u0627\u0621"
+        }
+    },
+    "paymentStatusColor": {
+        "pending": "secondary",
+        "success": "success",
+        "canceled": "danger"
+    },
+    "paymentTargetType": {
+        "fa": {
+            "user": "\u06a9\u0627\u0631\u0628\u0631",
+            "carTax": "\u0639\u0648\u0627\u0631\u0636 \u062e\u0648\u062f\u0631\u0648",
+            "charge": "\u0634\u0627\u0631\u0698 \u0645\u0633\u062a\u0642\u06cc\u0645",
+            "charge_card": "\u06a9\u0627\u0631\u062a \u0634\u0627\u0631\u0698",
+            "bill": "\u067e\u0631\u062f\u0627\u062e\u062a \u0642\u0628\u0636",
+            "internet": "\u062e\u0631\u06cc\u062f \u0627\u06cc\u0646\u062a\u0631\u0646\u062a",
+            "wallet": "\u0634\u0627\u0631\u0698 \u06a9\u06cc\u0641 \u067e\u0648\u0644",
+            "taxi": "\u06a9\u0631\u0627\u06cc\u0647 \u062a\u0627\u06a9\u0633\u06cc",
+            "bus": "\u0628\u0644\u06cc\u0637 \u0627\u062a\u0648\u0628\u0648\u0633"
+        },
+        "en": {
+            "user": "User",
+            "carTax": "Car tolls",
+            "charge": "Direct charging",
+            "charge_card": "charge card",
+            "bill": "Paying the bill",
+            "internet": "Internet shopping",
+            "wallet": "Recharge wallet",
+            "taxi": "Taxi fare",
+            "bus": "Bus ticket"
+        },
+        "ar": {
+            "user": "\u0627\u0644\u0645\u0633\u062a\u0639\u0645\u0644",
+            "carTax": "\u0631\u0633\u0648\u0645 \u0627\u0644\u0633\u064a\u0627\u0631\u0627\u062a",
+            "charge": "\u0627\u0644\u0634\u062d\u0646 \u0627\u0644\u0645\u0628\u0627\u0634\u0631",
+            "charge_card": "\u0628\u0637\u0627\u0642\u0629 \u0634\u062d\u0646",
+            "bill": "\u062f\u0641\u0639 \u0641\u0627\u062a\u0648\u0631\u0629",
+            "internet": "\u0627\u0644\u062a\u0633\u0648\u0642 \u0639\u0628\u0631 \u0627\u0644\u0627\u0646\u062a\u0631\u0646\u062a",
+            "wallet": "\u0625\u0639\u0627\u062f\u0629 \u0634\u062d\u0646 \u0627\u0644\u0645\u062d\u0641\u0638\u0629",
+            "taxi": "\u062a\u0633\u0639\u064a\u0631\u0629 \u0627\u0644\u062a\u0627\u0643\u0633\u064a",
+            "bus": "\u062a\u0630\u0643\u0631\u0629 \u0627\u0644\u0628\u0627\u0635"
+        }
+    },
+    "paymentTargetTypeLink": {
+        "customer": "\/user\/",
+        "carTax": "\/service-car-tax\/",
+        "charge": "\/bill_charge\/",
+        "charge_card": "\/bill_charge\/",
+        "bill": "\/bill_charge\/",
+        "internet": "\/bill_charge\/",
+        "wallet": "\/user\/",
+        "taxi": "\/taxi-fare\/",
+        "bus": "\/bus-ticket\/"
+    },
+    "paymentMethod": {
+        "fakeIPG": "\u062f\u0631\u06af\u0627\u0647 \u062a\u0633\u062a\u06cc",
+        "inax": "\u0633\u0627\u06cc\u062a inax",
+        "saman": "\u0633\u0627\u0645\u0627\u0646 - \u0639\u0648\u0627\u0631\u0636 \u062e\u0648\u062f\u0631\u0648",
+        "asan_pardakht": "\u0622\u0633\u0627\u0646 \u067e\u0631\u062f\u0627\u062e\u062a",
+        "wallet": "\u06a9\u06cc\u0641 \u067e\u0648\u0644"
+    },
+    "notificationTargetTypes": {
+        "fa": {
+            "user": "\u06a9\u0627\u0631\u0628\u0631",
+            "request": "\u062f\u0631\u062e\u0648\u0627\u0633\u062a"
+        },
+        "en": {
+            "user": "User",
+            "request": "Request"
+        },
+        "ar": {
+            "user": "\u0627\u0644\u0645\u0633\u062a\u0639\u0645\u0644",
+            "request": "\u0637\u0644\u0628"
+        }
+    },
+    "transactionTargetTypes": {
+        "fa": {
+            "user": "\u06a9\u0627\u0631\u0628\u0631",
+            "request": "\u062f\u0631\u062e\u0648\u0627\u0633\u062a"
+        },
+        "en": {
+            "user": "User",
+            "request": "Request"
+        },
+        "ar": {
+            "user": "\u0627\u0644\u0645\u0633\u062a\u0639\u0645\u0644",
+            "request": "\u0637\u0644\u0628"
+        }
+    },
+    "transactionTypes": {
+        "fa": {
+            "admin": "\u0645\u062f\u06cc\u0631",
+            "payment": "\u067e\u0631\u062f\u0627\u062e\u062a",
+            "return": "\u0628\u0627\u0632\u06af\u0634\u062a \u0648\u062c\u0647"
+        },
+        "en": {
+            "admin": "By admin",
+            "payment": "Payment",
+            "return": "Refund"
+        },
+        "ar": {
+            "admin": "\u0627\u0644\u0645\u062f\u064a\u0631",
+            "payment": "\u0627\u0644\u062f\u0641\u0639",
+            "return": "\u0627\u0633\u062a\u0631\u062f\u0627\u062f"
+        }
+    },
+    "requestTargetTypes": {
+        "fa": {
+            "service137": "\u0633\u0631\u0648\u06cc\u0633 137",
+            "renovation": "\u0646\u0648\u0633\u0627\u0632\u06cc",
+            "shipping": "\u062d\u0645\u0644 \u0648 \u0646\u0642\u0644",
+            "recycle": "\u062a\u0641\u06a9\u06cc\u06a9 \u0627\u0632 \u0645\u0628\u062f\u0627",
+            "carTax": "\u0639\u0648\u0627\u0631\u0636 \u062e\u0648\u062f\u0631\u0648",
+            "waybill": "\u0635\u062f\u0631\u0648 \u0628\u0627\u0631\u0646\u0627\u0645\u0647"
+        },
+        "en": {
+            "service137": "Service 137",
+            "renovation": "Renovation",
+            "shipping": "Transportation",
+            "recycle": "Recycle",
+            "carTax": "Car tolls",
+            "waybill": "Waybill"
+        },
+        "ar": {
+            "service137": "\u0627\u0644\u062e\u062f\u0645\u0629 137",
+            "renovation": "\u062a\u062c\u062f\u064a\u062f",
+            "shipping": "\u0648\u0633\u0627\u0626\u0644 \u0627\u0644\u0646\u0642\u0644",
+            "recycle": "\u0627\u0644\u0627\u0646\u0641\u0635\u0627\u0644 \u0639\u0646 \u0627\u0644\u0623\u0635\u0644",
+            "carTax": "\u0631\u0633\u0648\u0645 \u0627\u0644\u0633\u064a\u0627\u0631\u0627\u062a",
+            "waybill": "\u0628\u064a\u0627\u0646 \u0627\u0644\u0634\u062d\u0646\u0629"
+        }
+    },
+    "requestHistoryStatuses": {
+        "fa": {
+            "status1": "\u0648\u0636\u0639\u06cc\u062a 1",
+            "status2": "\u0648\u0636\u0639\u06cc\u062a 2",
+            "status3": "\u0648\u0636\u0639\u06cc\u062a 3",
+            "status4": "\u0648\u0636\u0639\u06cc\u062a 4"
+        },
+        "en": {
+            "status1": "Status 1",
+            "status2": "Status 2",
+            "status3": "Status 3",
+            "status4": "Status 4"
+        },
+        "ar": {
+            "status1": "\u0627\u0644\u062d\u0627\u0644\u0629 1",
+            "status2": "\u0627\u0644\u062d\u0627\u0644\u0629 2",
+            "status3": "\u0627\u0644\u062d\u0627\u0644\u0629 3",
+            "status4": "\u0627\u0644\u062d\u0627\u0644\u0629 4"
+        }
+    },
+    "service137Statuses": {
+        "fa": {
+            "pending": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u062b\u0628\u062a",
+            "pending_upload": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u062b\u0628\u062a \u0641\u0627\u06cc\u0644 \u0647\u0627",
+            "submitted": "\u062b\u0628\u062a \u0634\u062f\u0647"
+        },
+        "en": {
+            "pending": "pending submit",
+            "pending_upload": "pending submit files",
+            "submitted": "Submitted"
+        },
+        "ar": {
+            "pending": "\u0641\u064a \u0627\u0646\u062a\u0638\u0627\u0631 \u0627\u0644\u062a\u0633\u062c\u064a\u0644",
+            "pending_upload": "\u0641\u064a \u0627\u0646\u062a\u0638\u0627\u0631 \u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0645\u0644\u0641",
+            "submitted": "\u0645\u0633\u062c\u0644"
+        }
+    },
+    "service137StatusColors": {
+        "pending": "danger",
+        "pending_upload": "warning",
+        "submitted": "primary"
+    },
+    "servicerenovationStatuses": {
+        "fa": {
+            "step1": "\u0645\u0631\u062d\u0644\u0647 1"
+        },
+        "en": {
+            "step1": "Step 1"
+        },
+        "ar": {
+            "step1": "\u0627\u0644\u062e\u0637\u0648\u0629 1"
+        }
+    },
+    "servicerenovationStatusColors": {
+        "step1": "primary"
+    },
+    "serviceshippingStatuses": {
+        "fa": {
+            "step1": "\u0645\u0631\u062d\u0644\u0647 1"
+        },
+        "en": {
+            "step1": "Step 1"
+        },
+        "ar": {
+            "step1": "\u0627\u0644\u062e\u0637\u0648\u0629 1"
+        }
+    },
+    "serviceshippingStatusColors": {
+        "step1": "primary"
+    },
+    "servicecartaxStatuses": {
+        "fa": {
+            "wait_for_pay": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u067e\u0631\u062f\u0627\u062e\u062a",
+            "paid": "\u067e\u0631\u062f\u0627\u062e\u062a \u0634\u062f\u0647",
+            "canceled": "\u06a9\u0646\u0633\u0644 \u0634\u062f\u0647"
+        },
+        "en": {
+            "wait_for_pay": "Waiting for payment",
+            "paid": "Payed",
+            "canceled": "Canceled"
+        },
+        "ar": {
+            "wait_for_pay": "\u0627\u0646\u062a\u0638\u0627\u0631 \u0627\u0644\u062f\u0641\u0639",
+            "paid": "\u0645\u062f\u0641\u0648\u0639 \u0634\u062f\u0647",
+            "canceled": "\u0623\u0644\u063a\u064a\u062a"
+        }
+    },
+    "servicecartaxStatusColors": {
+        "wait_for_pay": "primary",
+        "paid": "success",
+        "canceled": "danger"
+    },
+    "servicerecycleStatuses": {
+        "fa": {
+            "pending": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u062b\u0628\u062a",
+            "submitted": "\u062b\u0628\u062a \u0634\u062f\u0647",
+            "done": "\u0627\u0646\u062c\u0627\u0645 \u0634\u062f\u0647",
+            "canceled": "\u06a9\u0646\u0633\u0644 \u0634\u062f\u0647"
+        },
+        "en": {
+            "pending": "Pending",
+            "submitted": "Registered",
+            "done": "Success",
+            "canceled": "Canceled"
+        },
+        "ar": {
+            "pending": "\u0645\u0633\u062c\u0644",
+            "submitted": "\u0645\u0633\u062c\u0644",
+            "done": "\u0645\u0646\u062a\u0647\u064a",
+            "canceled": "\u0639\u0627\u062f"
+        }
+    },
+    "servicerecycleStatusColors": {
+        "pending": "warning",
+        "submitted": "primary",
+        "done": "success",
+        "canceled": "danger"
+    },
+    "clubscoreTargetTypes": {
+        "fa": {
+            "payment": "\u067e\u0631\u062f\u0627\u062e\u062a"
+        },
+        "en": {
+            "payment": "Payment"
+        },
+        "ar": {
+            "payment": "\u0627\u0644\u062f\u0641\u0639"
+        }
+    },
+    "cluborderStatuses": {
+        "fa": {
+            "purchased": "\u067e\u0631\u062f\u0627\u062e\u062a \u0634\u062f\u0647",
+            "delivered": "\u062a\u062d\u0648\u06cc\u0644 \u0634\u062f\u0647"
+        },
+        "en": {
+            "purchased": "Purchased",
+            "delivered": "Delivered"
+        },
+        "ar": {
+            "purchased": "\u0645\u062f\u0641\u0648\u0639",
+            "delivered": "\u062a\u0645 \u0627\u0644\u062a\u0648\u0635\u064a\u0644"
+        }
+    },
+    "cluborderStatusColors": {
+        "purchased": "primary",
+        "delivered": "success"
+    },
+    "servicerenovation100": {
+        "fa": {
+            "step1": "\u0645\u0631\u062d\u0644\u0647 1"
+        },
+        "en": {
+            "step1": "Step 1"
+        },
+        "ar": {
+            "step1": "\u0627\u0644\u062e\u0637\u0648\u0629 1"
+        }
+    },
+    "servicerenovation100StatusColors": {
+        "step1": "primary"
+    },
+    "carPerson": {
+        "fa": {
+            "individual": "\u062d\u0642\u06cc\u0642\u06cc",
+            "business": "\u062d\u0642\u0648\u0642\u06cc"
+        },
+        "en": {
+            "individual": "individual",
+            "business": "business"
+        },
+        "ar": {
+            "individual": "\u062d\u0642\u064a\u0642\u064a\u0629",
+            "business": "\u0642\u0627\u0646\u0648\u0646\u064a\u0629"
+        }
+    },
+    "carStatus": {
+        "fa": {
+            "pending": "\u062f\u0631 \u062d\u0627\u0644 \u0628\u0631\u0631\u0633\u06cc",
+            "approved": "\u062a\u0627\u06cc\u06cc\u062f \u0634\u062f\u0647",
+            "rejected": "\u0646\u06cc\u0627\u0632\u0645\u0646\u062f \u0648\u06cc\u0631\u0627\u06cc\u0634",
+            "error": "\u062e\u0637\u0627 \u062f\u0631 \u062b\u0628\u062a"
+        },
+        "en": {
+            "pending": "pending",
+            "approved": "approved",
+            "rejected": "rejected",
+            "error": "error"
+        },
+        "ar": {
+            "pending": "\u0642\u064a\u062f \u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0631",
+            "approved": "\u062a\u0645 \u062a\u0623\u0643\u064a\u062f",
+            "rejected": "\u064a\u062d\u062a\u0627\u062c \u0625\u0644\u0649 \u062a\u062d\u0631\u064a\u0631",
+            "error": "\u062e\u0637\u0623 \u0641\u064a \u0627\u0644\u062a\u0633\u062c\u064a\u0644"
+        }
+    },
+    "carStatusColor": {
+        "pending": "primary",
+        "approved": "success",
+        "rejected": "warning",
+        "error": "danger"
+    },
+    "carSubmitType": {
+        "fa": {
+            "search": "\u062c\u0633\u062a\u062c\u0648",
+            "transfer": "\u0627\u0646\u062a\u0642\u0627\u0644 \u0645\u0627\u0644\u06a9\u06cc\u062a",
+            "create": "\u062a\u0634\u06a9\u06cc\u0644 \u067e\u0631\u0648\u0646\u062f\u0647"
+        },
+        "en": {
+            "search": "Search",
+            "transfer": "Ownership transition",
+            "create": "Filing a case"
+        },
+        "ar": {
+            "search": "\u064a\u0628\u062d\u062b",
+            "transfer": "\u0627\u0646\u062a\u0642\u0627\u0644 \u0627\u0644\u0645\u0644\u0643\u064a\u0629",
+            "create": "\u0623\u0646\u0634\u0626 \u0645\u0644\u0641\u064b\u0627"
+        }
+    },
+    "billchargeStatuses": {
+        "fa": {
+            "pending": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631",
+            "wait_for_pay": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u067e\u0631\u062f\u0627\u062e\u062a",
+            "paid": "\u067e\u0631\u062f\u0627\u062e\u062a \u0634\u062f\u0647",
+            "canceled": "\u0644\u063a\u0648 \u0634\u062f\u0647"
+        },
+        "en": {
+            "pending": "Waiting",
+            "wait_for_pay": "Wait for payment",
+            "paid": "Payed",
+            "canceled": "Canceled"
+        },
+        "ar": {
+            "pending": "\u0627\u0646\u062a\u0638\u0627\u0631",
+            "wait_for_pay": "\u0627\u0646\u062a\u0638\u0627\u0631 \u0627\u0644\u062f\u0641\u0639",
+            "paid": "\u0645\u062f\u0641\u0648\u0639",
+            "canceled": "\u0623\u0644\u063a\u064a\u062a"
+        }
+    },
+    "billchargeStatusColors": {
+        "pending": "secondary",
+        "wait_for_pay": "primary",
+        "paid": "success",
+        "canceled": "danger"
+    },
+    "supportStatus": {
+        "fa": {
+            "wait_for_ans": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u067e\u0627\u0633\u062e",
+            "answered": "\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f\u0647",
+            "on_hold": "\u062f\u0631 \u062f\u0633\u062a \u0627\u0642\u062f\u0627\u0645",
+            "closed": "\u0628\u0633\u062a\u0647 \u0634\u062f\u0647"
+        },
+        "en": {
+            "wait_for_ans": "waiting for an answer",
+            "answered": "Answered",
+            "on_hold": "Ongoing",
+            "closed": "Closed"
+        },
+        "ar": {
+            "wait_for_ans": "\u0623\u0646\u062a\u0638\u0631 \u0627\u062c\u0627\u0628\u0629",
+            "answered": "\u062a\u0645 \u0627\u0644\u0631\u062f",
+            "on_hold": "\u062c\u0627\u0631\u064a \u0627\u0644\u062a\u0646\u0641\u064a\u0630",
+            "closed": "\u0645\u063a\u0644\u0642"
+        }
+    },
+    "supportStatusColor": {
+        "wait_for_ans": "primary",
+        "answered": "info",
+        "on_hold": "warning",
+        "closed": "success"
+    },
+    "fuels": {
+        "1": "\u0628\u0646\u0632\u06cc\u0646",
+        "2": "\u062f\u0648\u06af\u0627\u0646\u0647 \u0633\u0648\u0632( \u0628\u0646\u0632\u06cc\u0646 + \u06af\u0627\u0632)",
+        "3": "\u06af\u0627\u0632\u0648\u0626\u06cc\u0644",
+        "6": "\u06af\u0627\u0632",
+        "7": "\u0647\u06cc\u0628\u0631\u06cc\u062f (\u0628\u0646\u0632\u06cc\u0646 + \u0628\u0631\u0642)",
+        "10": "\u0628\u0631\u0642\u06cc"
+    },
+    "taxifareStatuses": {
+        "wait_for_pay": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u067e\u0631\u062f\u0627\u062e\u062a",
+        "paid": "\u067e\u0631\u062f\u0627\u062e\u062a \u0634\u062f\u0647",
+        "canceled": "\u06a9\u0646\u0633\u0644 \u0634\u062f\u0647"
+    },
+    "taxifareStatusColors": {
+        "wait_for_pay": "primary",
+        "paid": "success",
+        "canceled": "danger"
+    },
+    "busTicketStatuses": {
+        "wait_for_pay": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u067e\u0631\u062f\u0627\u062e\u062a",
+        "paid": "\u067e\u0631\u062f\u0627\u062e\u062a \u0634\u062f\u0647",
+        "canceled": "\u06a9\u0646\u0633\u0644 \u0634\u062f\u0647",
+        "regenerated": "\u062a\u0648\u0644\u06cc\u062f \u0645\u062c\u062f\u062f"
+    },
+    "busticketStatusColors": {
+        "wait_for_pay": "primary",
+        "paid": "success",
+        "canceled": "danger",
+        "regenerated": "info"
+    },
+    "cashoutStatuses": {
+        "fa": {
+            "pending": "\u062b\u0628\u062a \u0634\u062f\u0647",
+            "done": "\u0627\u0646\u062c\u0627\u0645 \u0634\u062f\u0647",
+            "canceled": "\u0628\u0631\u06af\u0634\u062a \u062e\u0648\u0631\u062f\u0647"
+        },
+        "en": {
+            "pending": "Registered",
+            "done": "Success",
+            "canceled": "Canceled"
+        },
+        "ar": {
+            "pending": "\u0645\u0633\u062c\u0644",
+            "done": "\u0645\u0646\u062a\u0647\u064a",
+            "canceled": "\u0639\u0627\u062f"
+        }
+    },
+    "cashoutStatusColor": {
+        "pending": "primary",
+        "done": "success",
+        "canceled": "danger"
+    },
+    "monitorStatuses": {
+        "success": "success",
+        "fail": "fail"
+    },
+    "monitorStatusColors": {
+        "success": "primary",
+        "fail": "primary"
+    },
+    "arbaeenlivesTypes": {
+        "radio": "\u0631\u0627\u062f\u06cc\u0648",
+        "video": "\u0648\u06cc\u062f\u06cc\u0648"
+    },
+    "arbaeenlivesIsActive": [
+        "\u063a\u06cc\u0631 \u0641\u0639\u0627\u0644",
+        "\u0641\u0639\u0627\u0644"
+    ],
+    "arbaeencategoryTypes": {
+        "location": "\u0644\u0648\u06a9\u06cc\u0634\u0646 \u0647\u0627",
+        "instruction": "\u062f\u0633\u062a\u0648\u0631 \u0627\u0644\u0639\u0645\u0644 \u0647\u0627"
+    },
+    "arbaeenphotoStatuses": {
+        "fa": {
+            "pending": "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u062a\u0627\u06cc\u06cc\u062f",
+            "published": "\u0645\u0646\u062a\u0634\u0631 \u0634\u062f\u0647",
+            "rejected": "\u0631\u062f \u0634\u062f\u0647"
+        },
+        "en": {
+            "pending": "pending",
+            "published": "published",
+            "rejected": "rejected"
+        },
+        "ar": {
+            "pending": "pending",
+            "published": "published",
+            "rejected": "rejected"
+        }
+    },
+    "arbaeenphotoStatusColors": {
+        "pending": "info",
+        "published": "success",
+        "rejected": "danger"
+    },
+    "arbaeenziafatTypes": {
+        "accommodation": "\u0627\u0633\u06a9\u0627\u0646",
+        "transportation": "\u062d\u0645\u0644 \u0648 \u0646\u0642\u0644",
+        "others": "\u0633\u0627\u06cc\u0631",
+        "need": "\u0646\u06cc\u0627\u0632\u0645\u0646\u062f\u06cc"
+    },
+    "arbaeenNewsRssIsActive": [
+        "\u063a\u06cc\u0631 \u0641\u0639\u0627\u0644",
+        "\u0641\u0639\u0627\u0644"
+    ],
+    "surveyTargetType": {
+        "application": "\u0627\u067e\u0644\u06cc\u06a9\u06cc\u0634\u0646",
+        "service137": "137",
+        "recycle": "\u062a\u0641\u06a9\u06cc\u06a9 \u0627\u0632 \u0645\u0628\u062f\u0627",
+        "carTax": "\u0639\u0648\u0627\u0631\u0636 \u062e\u0648\u062f\u0631\u0648",
+        "taxi": "\u06a9\u0631\u0627\u06cc\u0647 \u062a\u0627\u06a9\u0633\u06cc",
+        "bus": "\u0628\u06cc\u0644\u0637 \u062a\u0648\u0628\u0648\u0633",
+        "bill": "\u067e\u0631\u062f\u0627\u062e\u062a \u0642\u0628\u0648\u0636"
+    },
+    "uncompletedrequestStatuses": {
+        "resolve": "\u0628\u0631\u0631\u0633\u06cc \u0634\u062f\u0647",
+        "unresolved": "\u0628\u0631\u0631\u0633\u06cc \u0646\u0634\u062f\u0647"
+    },
+    "uncompletedrequestStatusColors": {
+        "resolve": "success",
+        "unresolved": "danger"
+    },
+    "uncompletedrequestTarget_types": {
+        "bus": "\u0627\u062a\u0648\u0628\u0648\u0633",
+        "taxi": "\u062a\u0627\u06a9\u0633\u06cc",
+        "payment": "\u067e\u0631\u062f\u0627\u062e\u062a",
+        "137": "137",
+        "cartax": "\u0639\u0648\u0627\u0631\u0636 \u062e\u0648\u062f\u0631\u0648",
+        "recycle": "\u062a\u0641\u06a9\u06cc\u06a9 \u0627\u0632 \u0645\u0628\u062f\u0627"
+    },
+    "uncompletedrequestTargetLink": {
+        "bus": "bus-ticket",
+        "taxi": "payment",
+        "payment": "payment",
+        "137": "service137",
+        "cartax": "service-car-tax",
+        "recycle": "service-recycle"
+    },
+    "taxiStationTypes": {
+        "start": "\u0627\u06cc\u0633\u062a\u06af\u0627\u0647 \u0634\u0631\u0648\u0639",
+        "end": "\u0627\u06cc\u0633\u062a\u06af\u0627\u0647 \u067e\u0627\u06cc\u0627\u0646"
+    },
+    "taxiStationColors": {
+        "start": "success",
+        "end": "orange"
+    },
+    "taxiStationMarker": {
+        "start": "images\/ic_marker_car.png",
+        "end": "images\/ic_marker_end.png"
+    },
+    "quizquestionTypes": {
+        "text": "متنی",
+        "image": "عکسی",
+        "video": "ویدئویی",
+        "audio": "صوتی"
+    }
+}

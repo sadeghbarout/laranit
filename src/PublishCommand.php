@@ -67,6 +67,8 @@ class PublishCommand extends Command
 
 		$this->addHelpersServiceProvider();
 
+		$this->publishCommands();
+
 		Artisan::call('key:generate');
 
 	}
@@ -138,6 +140,13 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$files[]= "app/Extras/helpers.php";
 		$files[]= "app/Extras/utilsCorrector.php";
 		$files[]= "app/Extras/consts.php";
+		$files[]= "app/Extras/FirebaseHelper.php";
+		$files[]= "app/Extras/StorageHelper.php";
+		$files[]= "app/Extras/Validator.php";
+		$files[]= "app/Extras/Zarinpal.php";
+		$files[]= "app/Extras/SMSSender.php";
+		$files[]= "app/Extras/StatusCodes.php";
+		$files[]= "app/Extras/Tools.php";
 		$composerArray['autoload']['files']= $files;
 
 		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);
@@ -218,26 +227,25 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$composerContent = file_get_contents($filePath);
 		$composerArray=json_decode($composerContent,true);
 
-		$composerArray['scripts']['webpack']= "mix";
+		$composerArray['scripts']['webpack']= "mix --production";
 
 		$composerArray['devDependencies']['vite']= "^4.0.0";
+		$composerArray['devDependencies']['vue']= "^3.4.15";
+		$composerArray['devDependencies']['vue-router']= "^4.0.10";
+		$composerArray['devDependencies']['bootstrap']= "^4.0.0";
+		$composerArray['devDependencies']['cross-env']= "^7.0";
+		$composerArray['devDependencies']['jquery']= "^3.6";
+		$composerArray['devDependencies']['laravel-mix']= "^6.0.6";
+		$composerArray['devDependencies']['lodash']= "^4.17.19";
+		$composerArray['devDependencies']['popper.js']= "^1.12";
+		$composerArray['devDependencies']['postcss']= "^8.1.14";
+		$composerArray['devDependencies']['sweetalert2']= "^11.0.18";
+		$composerArray['devDependencies']['vue3-persian-datetime-picker']= "^1.0.0";
 		$composerArray['devDependencies']['@vitejs/plugin-vue']= "^4.5.1";
 		$composerArray['devDependencies']['laravel-vite-plugin']= "^0.8.0";
-		$composerArray['devDependencies']['laravel-mix']= "^6.0.6";
-		$composerArray['devDependencies']['vue']= "^3.3.10";
-		$composerArray['devDependencies']['vue-loader']= "^16.1.0";
-		$composerArray['devDependencies']['vue-router']= "^4.0.10";
-		$composerArray['devDependencies']['vue-template-compiler']= "^2.6.14";
-		$composerArray['devDependencies']['@vue/compiler-sfc']= "^3.0.5";
-		$composerArray['devDependencies']['cross-env']= "^7.0";
-		$composerArray['devDependencies']['bootstrap']= "^4.0.0";
-		$composerArray['devDependencies']['popper.js']= "^1.12";
-		$composerArray['devDependencies']['lodash']= "^4.17.19";
-		$composerArray['devDependencies']['sweetalert2']= "^11.0.18";
-		$composerArray['devDependencies']['jquery']= "^3.2";
-		$composerArray['devDependencies']['secure-ls']= "^1.2.6";
-		$composerArray['devDependencies']['vue3-persian-datetime-picker']= "^1.0.0";
-		$composerArray['devDependencies']['chart.js']= "^3.0.1";
+		$composerArray['devDependencies']['vue-multiselect']= "^3.0.0";
+		$composerArray['devDependencies']['quill']= "^2.0.2";
+		$composerArray['devDependencies']['@vueup/vue-quill']= "^1.2.0";
 
 		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);
 		$composerContent=str_replace("\/","/",$composerContent);
@@ -275,6 +283,10 @@ $app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
 		$pos = strpos($appContent, $needle);
 		$appContent = substr_replace($appContent, $str, $pos, 0);
 		file_put_contents($filePath, $appContent);
+
+	}
+
+	public function publishCommands() {
 
 	}
 

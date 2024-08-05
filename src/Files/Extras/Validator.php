@@ -30,26 +30,30 @@ class Validator {
 		return $validatorRules;
 	}
 
-    public static function arrayValidator($array,$validatorRules) {
-        $validator = \Illuminate\Support\Facades\Validator::make($array, $validatorRules);
-        if ($validator->fails()) {
-            $message = "لطفا اطلاعات را اصلاح نمایید.";
+	public static function arrayValidator($array,$validatorRules) {
+		$validator = \Illuminate\Support\Facades\Validator::make($array, $validatorRules);
+		if ($validator->fails()) {
+			$message = "لطفا اطلاعات را اصلاح نمایید.";
 
-            foreach ($validator->errors()->all() AS $err) {
-                $message .= "\n -$err";
-            }
-            throw new ValidationException($message);
-        } else {
-            return true;
-        }
-    }
+			foreach ($validator->errors()->all() AS $err) {
+				$message .= "\n -$err";
+			}
+			throw new ValidationException($message);
+		} else {
+			return true;
+		}
+	}
 
 
 	const YYYYMMDD_regex = "regex:/^([0-9]{4})(\/)([1-9]|0[1-9]|1[0-2])(\/)([1-9]|0[1-9]|[1-2][0-9]|3[0-1])$/";
 	const YYYYMM_regex = "regex:/^([0-9]{4})(\/)([1-9]|0[1-9]|1[0-2])$/";
 	const string_regex = "regex:/^[^\"`'#%&;<>{}~\$\*\\\[\]\^]+$/";
-	const string_strict_regex = "regex:/^[^\"`'#%&;<>{}~\$\*\/\\\[\]\^!=@:\+\(\)\?\/]+$/";
+	const string_strict_regex = "regex:/^[^\"`'#%&;<>{}~\$\*\/\\\[\]\^!=@:\(\)\?]+$/i";
 	const pass_regex = "regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+	const user_pass_regex = "regex:/^[^\"`'%;<>{}~\\[\]\^]+$/";
+	const email_regex = "regex:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/";
+	const phone_number_regex = "regex:/^\+?[0-9][0-9]{7,14}$/";
+	const description_regex = "regex:/^[^\"`#%&;<>{}~\$\*\/\\\[\]\^]+$/";
 
 
 	//---------------------------------------------------------------------------------------------------------------
@@ -104,7 +108,7 @@ class Validator {
 
 	public static function adminUpdateValidator() {
 		$v = [
-			COL_ADMIN_NAME => ['required','max:50', new SimpleString()],
+			COL_ADMIN_NAME => ['required', 'max:50', new SimpleString()],
 			COL_ADMIN_USERNAME => ['required', new SimpleString(true)],
 		];
 		self::requestValidator($v);
@@ -126,4 +130,46 @@ class Validator {
 	}
 
 
+	public static function adminRoleToggleValidation() {
+		$v = [
+			'admin_id' => ['required', 'numeric'],
+			'role_id' => ['required', 'numeric'],
+		];
+		self::requestValidator($v);
+	}
+
+	public static function adminSetNewPasswordeValidation() {
+		$v = [
+			COL_ADMIN_ID => ['required'],
+			COL_ADMIN_PASSWORD => ['required', 'min:6', 'max:20', self::pass_regex],
+		];
+		self::requestValidator($v);
+	}
+
+
+	public static function rolePermissionToggleValidator() {
+		$v = [
+			'role_id' => ['required', 'numeric'],
+			'permission_id' => ['required', 'numeric'],
+		];
+		self::requestValidator($v);
+	}
+
+
+	public static function roleStoreValidator() {
+		$v = [
+			'name' => ['required', 'max:50', new SimpleString()],
+			'desc' => ['required', 'max:5000', new SimpleString()],
+		];
+		self::requestValidator($v);
+	}
+
+
+	public static function roleUpdateValidator() {
+		$v = [
+			'name' => ['required', 'max:50', new SimpleString()],
+			'desc' => ['required', 'max:5000', new SimpleString()],
+		];
+		self::requestValidator($v);
+	}
 }

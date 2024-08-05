@@ -21,7 +21,7 @@ Window.prototype.checkResponse = function (response, onSuccess, noDialog, onFail
                 }
                 window.location.replace(url)
             } else {
-                this.router.push(response['redirect']);
+                router.push(response['redirect']);
             }
         }
 
@@ -59,21 +59,39 @@ Window.prototype.checkResponse = function (response, onSuccess, noDialog, onFail
 
 };
 
+class LoadScript {
+    static #loadedScrips = []
 
+    static load(url){
+        return new Promise((resolve, reject) => {
+            if(this.#hasLoadedThisUrl(url)){
+                let script = document.createElement('script')
+                script.src = url
 
-function convertDataTimeCols(item){
-    const coles = ['created_at', 'updated_at','deleted_at', 'date', 'initiated_time','start_time', 'end_time', 'expire_date', 'last_activity', 'expired_reserve'];
-    coles.forEach((col) => {
-        if(hasKey(item, col)){
-            if(item[col] != null){
-                item[col] = convertTZ(item[col]);
+                script.onload = () => {
+                    this.#loadedScrips.push(url);
+                    resolve(url)
+                }
+                script.onerror = () => reject(new Error('whoops loaded script failed'))
+
+                document.head.append(script)
+            }else{
+                resolve(url)
             }
-        }
-    });
+        })
+    }
+
+    static #hasLoadedThisUrl(url){
+        let result = true
+        this.#loadedScrips.map((item) => {
+            if(item === url){
+                result = false
+            }
+        })
+
+        return result
+    }
 }
 
+Window.prototype.LoadScript = LoadScript
 
-function convertTZ(date) {
-    date = date.replace(' ', 'T').replace('.000000Z', '') + 'Z';
-    return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone})).toLocaleString();
-}

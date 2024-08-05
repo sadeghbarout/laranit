@@ -84,7 +84,7 @@
 
 
             deleteImage(image,index){
-                confirm2('از حذف عکس مطمعن هستید؟','حذف',()=>{
+                confirm2('از حذف عکس اطمینان دارید؟','حذف',()=>{
                     axios.delete('/image/'+image.id)
                     .then(response=>{
                         checkResponse(response.data,()=>{

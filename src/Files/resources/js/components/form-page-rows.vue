@@ -1,8 +1,8 @@
 <template>
-    <div class="form-inputs p-0" style="min-width:150px">
+    <div class="form-inputs p-0" >
         <div class="col-xl-12 p-0">
-            <fieldset class="form-group">
-                <select  class="form-control" id="rows" v-model="inputVal" >
+            <fieldset class="form-group m-0">
+                <select  class="form-control" id="rows" v-model="rowsCount" @change="fD()" >
                     <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
@@ -21,19 +21,34 @@
             modelValue: [String, Number],
         },
 
+        data(){
+            return{
+                rowsCount : 10,
+            }
+        },
+
         mounted() {
             this.inputVal=10;
         },
-        computed: {
-            inputVal: {
-                get() {
-                    return this.modelValue;
-                },
-                set(inputVal) {
-                    this.$emit('update:modelValue', inputVal);
-                }
-            }
+
+        methods: {
+            fD(){
+                this.$parent.pageRows = this.rowsCount;
+                this.$parent.page = 1
+                this.$parent.fetchData();
+            },
         },
+
+        // computed: {
+        //     inputVal: {
+        //         get() {
+        //             return this.modelValue;
+        //         },
+        //         set(inputVal) {
+        //             this.$emit('update:modelValue', inputVal);
+        //         }
+        //     }
+        // },
 
     }
 </script>

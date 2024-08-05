@@ -15,7 +15,7 @@ class CreateSettingsTable extends Migration {
 		Schema::create(TBL_SETTINGS, function (Blueprint $table) {
 			$table->increments(COL_SETTING_ID);
 			$table->string(COL_SETTING_NAME, 150);
-			$table->text(COL_SETTING_VALUE);
+			$table->longText(COL_SETTING_VALUE);
 		});
 	}
 

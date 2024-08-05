@@ -1,5 +1,5 @@
 <template>
-    <th @click="sortList()" class="cursor-pointer" :style="[styles]">
+    <th @click="sortList()" class="cursor-pointer" :style="['min-width:50px',styles]">
             <i class="fa fa-angle-down sorting-down"></i>
             <i class="fa fa-angle-up sorting-up"></i>
         <span v-html="text"></span>
@@ -31,7 +31,7 @@
                     this.$parent.sortType = 'asc';
                 }
                 this.$parent.sort = this.name;
-                this.$parent.fetchData(1);
+                this.$parent.fetchData();
             }
         },
 

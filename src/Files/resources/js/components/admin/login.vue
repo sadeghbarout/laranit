@@ -1,59 +1,48 @@
 <template>
-    <div class="row">
-        <div class="w-100 mx-4">
-            <div class="mx-auto" style="max-width: 600px;">
-                <br>
-                <br>
-                <br>
-
-                <div class="card">
-                    <div class="card-header bg-dark d-flex align-items-center" style="height: 50px;">
-                        <div class="card-title text-warning w-100">Login</div>
-                        <slot name="header"></slot>
+    <div class="row flex-center-center" >
+        <div class="col-lg-6 ">
+            <div class="card bg-authentication rounded-0 mb-0">
+                <div class="row m-0">
+                    <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
+                        <img :src="'/images/login.jpg'" alt="branding logo">
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-
-                            <div class="col-12 text-center " id="loginApp">
-                                <form class="form-horizontal" @submit.prevent="login()">
-                                    <div class="box-body">
-
-                                        <div class="form-group row m-1">
-                                            <div class="p-0 col-md-12" >
-                                                <p class="m-0">Username</p>
-                                                <input type="text" placeholder="Username" class="form-control" v-model="username">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row m-1">
-                                            <div class="p-0 col-md-12" >
-                                                <p class="m-0">Password</p>
-                                                <input type="password" placeholder="Password" class="form-control" v-model="password">
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="d-flex align-items-center justify-content-right mt-3 ">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <input type="checkbox" v-model="remember">
-                                                            <span class="ml-4">remember me</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <button type="submit" class="btn btn-primary mx-auto w-100">Login</button>
-                                            </div>
-                                        </div>
+                    <div class="col-lg-6 p-0">
+                        <div class="card rounded-0 mb-0 px-2">
+                            <div>
+                                <div class="card-header pb-1">
+                                    <div class="card-title">
+                                        <h4 class="mb-0">ورود</h4>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                                <p class="px-2">خوش آمدید ، لطفا به حساب کاربری خود وارد شوید</p>
+                                <div class="card-content">
+                                    <div class="card-body pt-1">
+                                        <form @submit.prevent="login">
+                                            <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                <input type="text" class="form-control" id="user-name" v-model="username" placeholder="نام کاربری" >
+                                                <div class="form-control-position">
+                                                    <i class="fas fa-user" style="top:10px"></i>
+                                                </div>
+                                                <label for="user-name">نام کاربری</label>
+                                            </fieldset>
+                                            <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                <input type="password" class="form-control" id="user-name" v-model="password" placeholder="رمز عبور" >
+                                                <div class="form-control-position">
+                                                    <i class="fas fa-unlock-alt" style="top:10px"></i>
+                                                </div>
+                                                <label for="user-name">رمز عبور</label>
+                                            </fieldset>
 
+                                            <div class="form-group d-flex justify-content-between align-items-center">
+                                                <button type="submit" class="btn btn-primary float-right btn-inline">ورود</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -62,10 +51,11 @@
 <script>
 export default {
     data(){
-        return{
-            username:'',
-            password:'',
-            remember:'',
+        return {
+            phone: '',
+            username: '',
+            password: '',
+            fragment: 'phone',
         }
     },
     methods:{
@@ -73,19 +63,12 @@ export default {
             axios.post('/admin/login', {
                 'username': this.username,
                 'password': this.password,
-                'remember': this.remember,
             })
                 .then(response => {
                     checkResponse(response.data,res=>{
-                        preferences.set('admin_permissions',res.admin_permissions)
-                        window.location.reload()
+                        window.location.replace('/')
                     });
                 }).catch(error => {})
-        }
-    },
-    mounted() {
-        if(this.$user.isAuth){
-            this.$router.push('/dashboard');
         }
     }
 }

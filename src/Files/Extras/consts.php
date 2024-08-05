@@ -67,6 +67,8 @@ define('RK_HAS_ROOT_PERMISSION', 'has_root_permission');
 define('RK_PAGE_COUNT', 'page_count');
 define('RK_UPDATE_URL', 'update_url');
 define('RK_USER', 'user');
+define('RK_ADMIN_PERMISSIONS', 'admin_permissions');
+define('RK_PERMISSIONS', 'permissions');
 
 
 
@@ -98,6 +100,7 @@ define('COL_ADMIN_IS_ACTIVE', 'is_active');
 define('COL_ADMIN_NAME', 'name');
 define('COL_ADMIN_USERNAME', 'username');
 define('COL_ADMIN_PASSWORD', 'password');
+define('COL_ADMIN_CREATED_AT', 'created_at');
 define('COL_ADMIN_IMAGE', 'image');
 
 
@@ -150,4 +153,17 @@ define('PERM_ROOT', 'root');
 define('PERM_ADMIN', 'admin');
 define('PERM_SETTING', 'setting');
 define('PERM_USER', 'user');
+
+define('PERM_ROLE_LIST_SHOW', 'PERM_ROLE_LIST_SHOW');
+define('PERM_ROLE_STORE', 'PERM_ROLE_STORE');
+define('PERM_ROLE_UPDATE', 'PERM_ROLE_UPDATE');
+define('PERM_ROLE_DESTROY', 'PERM_ROLE_DESTROY');
+define('PERM_ROLE_PERMISSION', 'PERM_ROLE_PERMISSION');
+
+
+define('PERM_ADMIN_LIST_SHOW', 'PERM_ADMIN_LIST_SHOW');
+define('PERM_ADMIN_STORE', 'PERM_ADMIN_STORE');
+define('PERM_ADMIN_UPDATE', 'PERM_ADMIN_UPDATE');
+define('PERM_ADMIN_DESTROY', 'PERM_ADMIN_DESTROY');
+define('PERM_ADMIN_ROLE', 'PERM_ADMIN_ROLE');
 

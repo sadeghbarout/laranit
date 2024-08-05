@@ -4,6 +4,8 @@ const userStore = reactive({
     isAuth: false,
     username: null,
     image: null,
+    permissions: [],
+    uncompletedRequestCount: 0,
 
     async checkAuth() {
         const result = await axios.get('/init-admin');
@@ -14,6 +16,8 @@ const userStore = reactive({
                 this.isAuth=true;
                 this.username=user.username;
                 this.image=user.image;
+                this.permissions=result.data.admin_permissions;
+                this.uncompletedRequestCount=result.data.uncompleted_request_count;
             }else{
                 this.isAuth=false;
             }

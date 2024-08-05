@@ -1,8 +1,10 @@
-
 import axios from 'axios';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+
+// CSRF & XCSRF
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
@@ -13,9 +15,20 @@ if (token) {
 }
 
 
-
-
 axios.interceptors.request.use(request => {
+
+    // put Params in URL  **********
+    const requestParams = request.params
+    const url = new URL(window.location.href);
+    // console.log("AXIOS")
+    // console.log(requestParams)
+    if(requestParams !== undefined && Object.keys(requestParams).length != 0){
+        for (var [key, value] of Object.entries(requestParams)) {
+            url.searchParams.set(key, value);
+        }
+    }
+    window.history.replaceState(null, null, url);
+    //**********
 
     var extras={
         reqTime:(new Date()).getTime(),
@@ -46,61 +59,28 @@ axios.interceptors.request.use(request => {
     return Promise.reject(error);
 });
 
+// interceptors
+// window.axios.interceptors.request.use(function (config) {
+//     if (config.url.includes('?')) {
+//         config.url += '&ajax=true';
+//     }
+//     else {
+//         config.url += '?ajax=true';
+//     }
+//     return config;
+// }, function (error) {
+//     return Promise.reject(error);
+// });
 
 
-window.axios.interceptors.request.use(function (config) {
-    if (config.url.includes('?')) {
-        config.url += '&ajax=true';
-    }
-    else {
-        config.url += '?ajax=true';
-    }
-    return config;
-}, function (error) {
+axios.interceptors.response.use(response => {
+    swal.close();
+    return response;
+}, error => {
+    if(error.response)
+        checkResponse(error.response.data);
+
+    swal.close();
+
     return Promise.reject(error);
 });
-
-
-
-
-axios.interceptors.response.use(function (response) {
-    if (hasKey(response.data, 'items')){
-        // try {
-        //     response.data['items'].forEach((item) => {
-        //         convertDataTimeCols(item);
-        //     });
-        // } catch (error) {}
-    }else if(hasKey(response.data, 'item')){
-        // convertDataTimeCols(response.data.item);
-    }
-
-    return response;
-}, function (error) {
-    if (error.response) {
-        if ((error.response.config.data !== undefined)) {
-            try {
-                var data = JSON.parse(error.response.config.data);
-                if (data.noDialog==1) {
-                    checkResponse(error.response.data, null, null, true);
-                }else{
-                    checkResponse(error.response.data);
-                }
-            }
-            catch (err) {
-                checkResponse(error.response.data);
-            }
-        } else {
-            checkResponse(error.response.data);
-        }
-    }
-    return error;
-});
-
-function hasKey(array, searchKey){
-    for (var key in array) {
-        if(key === searchKey){
-            return true
-        }
-    }
-    return false;
-}

@@ -1,5 +1,5 @@
 import swal from 'sweetalert2'
-window.swal = swal
+window.swal = swal;
 
 
 Window.prototype.alert2 = function (text, title, type, onConfirm) {
@@ -16,17 +16,24 @@ Window.prototype.alert2 = function (text, title, type, onConfirm) {
     //     button: "تایید",
     // });
 
-    new swal({
-        title: title,
-        html: text,
-        type: type,
-        confirmButtonColor: '#50ae2f',
-        confirmButtonText: 'تایید',
-    }).then((res) => {
-        if (res.value && onConfirm) {
-            onConfirm.call(this);
-        }
-    })
+    if (type == 'success') {
+        toastr.success(text, title, { "progressBar": true });
+    }
+    else {
+        toastr.error(text, title, { "progressBar": true });
+    }
+
+    // new swal({
+    //     title: title,
+    //     html: text,
+    //     type: type,
+    //     confirmButtonColor: '#50ae2f',
+    //     confirmButtonText: 'تایید',
+    // }).then((res) => {
+    //     if (res.value && onConfirm) {
+    //         onConfirm.call(this);
+    //     }
+    // })
 
 };
 
@@ -60,12 +67,12 @@ Window.prototype.confirm2 = function (message, title, onSuccess, type) {
 
 
 // ---------------------------------------------------------------------------------------------------------------
-Window.prototype.prompt2 = function (message, value, onSuccess, dateInput = false) {
-
+Window.prototype.prompt2 = function (message, value, onSuccess, dateInput = false, text = null) {
     new swal({
         title: message,
         input: 'text',
         inputValue: value,
+        text: text,
         inputAttributes: {
             autocapitalize: 'off',
         },

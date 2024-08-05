@@ -1,5 +1,6 @@
 <?php
 
+use Colbeh\Laranit\Files\Controllers\Files\App\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\App\HomeController;
 use App\Http\Controllers\App\SettingController;
@@ -26,7 +27,6 @@ use App\Http\Controllers\User\AdminController;
 
 			// ---------------------------------------------------------------------------------------------------------
 
-			// dashboard info
 			Route::get("dashboard/info", [HomeController::class, "dashboardInfo"]);
 
 
@@ -35,7 +35,20 @@ use App\Http\Controllers\User\AdminController;
 			Route::post("setting/update", [SettingController::class, "update"]);
 			Route::post('setting/uploadApp', [SettingController::class, 'uploadApp']);
 
+			// admin
+			Route::get("admin/profile", [AdminController::class, 'profile']);
+			Route::post("admin/uploadProfileImage", [AdminController::class, 'uploadProfileImage']);
+			Route::post("admin/changePassword", [AdminController::class, 'doChangePassword']);
+			Route::post("admin/newPassword", [AdminController::class, 'setNewPassword']);
+			Route::resource("admin", AdminController::class);
+			Route::post("admin/role", [AdminController::class, "adminRoleOperation"]);
+			Route::resource("admin", AdminController::class);
+			Route::post("admin/role", [AdminController::class, "roleToggle"]);
 
+			// role
+			Route::post("role/permission", [RoleController::class, "permissionToggle"]);
+			Route::resource("role", RoleController::class);
+			Route::get("permission", [RoleController::class, "permissions"]);
 		}
 
     });

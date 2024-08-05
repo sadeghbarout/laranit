@@ -1,12 +1,25 @@
 import _ from 'lodash';
 import * as popper from 'popper.js';
-import * as bootstrap from 'bootstrap';
-
-window.bootstrap = bootstrap;
+import jquery from 'jquery';
 
 window._ = _;
 
 window.Popper = popper;
+
+
+/**
+ * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+ * for JavaScript based Bootstrap features such as modals and tabs. This
+ * code may be modified to fit the specific needs of your application.
+ */
+
+try {
+    window.$ = window.jQuery = jquery;
+
+    // import('bootstrap');
+} catch (e) {}
+
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -30,3 +43,7 @@ window.Popper = popper;
 //     });
 //
 // };
+
+
+
+import './config-axios';

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row form-group m-1 ">
+        <div class="row form-group mx-1">
 
             <div class="p-0 col-md-12" >
                 <p class="m-0" v-text="title"></p>
