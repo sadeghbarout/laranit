@@ -4,7 +4,7 @@
             <input type='checkbox' :class="header?'rowCheckbox':'headerCheckbox' " :checked="this.$parent.selectedIds?.indexOf(id) !== -1 ? true : false " value='false'  @click="select($event)">
             <span class='vs-checkbox vs-checkbox-sm'>
                 <span class='vs-checkbox--check'>
-                    <i class='vs-icon feather icon-check'></i>
+                    <i class="fas fa-check text-white" style="font-size: 10px;"></i>
                 </span>
             </span>
         </div>
