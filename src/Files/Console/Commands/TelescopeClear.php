@@ -1,10 +1,10 @@
 <?php
 
-namespace Colbeh\Laranit\Files\Console\Commands;
+namespace App\Console\Commands;
 
 use Carbon\Carbon;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Console\Command;
 
 class TelescopeClear extends Command {
 

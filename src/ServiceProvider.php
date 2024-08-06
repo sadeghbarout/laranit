@@ -33,7 +33,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			__DIR__ . '/Files/.env' => base_path('.env'),
 			__DIR__ . '/Files/.env.local' => base_path('.env.local'),
 			__DIR__ . '/Files/Extras' => app_path('Extras'),
-			__DIR__ . '/Files/Console' => app_path('Console/Commands'),
+			__DIR__ . '/Files/Console/Commands' => app_path('Console/Commands'),
 			__DIR__ . '/Files/Controllers/Files' => app_path('Http/Controllers'),
 			__DIR__ . '/Files/Models' => app_path('Models'),
 			__DIR__ . '/Files/Middleware' => app_path('Http/Middleware'),

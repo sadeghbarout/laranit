@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Artisan;
 
 class Kernel extends ConsoleKernel
 {
@@ -35,6 +36,16 @@ class Kernel extends ConsoleKernel
 			->daily()
 			->description('clear daily Logs')
 			->emailOutputOnFailure(["cronjob@colbeh.ir"]);;
+
+//		$schedule->command('sanctum:prune-expired --hours=24')->daily()
+//			->name('delete expire tokens');
+
+//		$schedule->call(function () {
+//			Artisan::call("telescope:refresh");
+//			return 'done';
+//		})
+//			->monthly()
+//			->name('telescopeRefresh');
 
 	}
 
