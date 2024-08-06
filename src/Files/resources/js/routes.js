@@ -17,6 +17,8 @@ import roleCreate from './components/role/create.vue';
 import adminIndex from './components/admin/index.vue';
 import adminCreate from './components/admin/create.vue';
 import adminShow from './components/admin/show.vue';
+import adminProfile from './components/admin/profile.vue';
+
 
 var routes = [
     {path: '/login', component: adminLogin, meta: {title: 'Login'}},
