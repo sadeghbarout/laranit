@@ -8,28 +8,27 @@ const props= defineProps({
         type: String,
         default: null
     },
-    modelValue:{type:String}
 })
 
-const emit = defineEmits(['update:modelValue'])
-
-// const modal = defineModel();
+const modal = defineModel();
 const myEditor = ref();
+const isSetValue = ref(false);
 const isEditorInit = ref(false);
 
-watch(()=>props.modelValue, () => {
+watch(modal, () => {
     editorInit();
 });
 
 function textChange() {
     if (isEditorInit.value) {
-        emit('update:modelValue', myEditor.value.getHTML())
+        modal.value = myEditor.value.getHTML()
     }
 }
 
 function editorInit() {
-    if(props.modelValue){
-        myEditor.value.setHTML(props.modelValue);
+    if (modal.value && !isSetValue.value) {
+        myEditor.value.setHTML(modal.value);
+        isSetValue.value = true;
     }
     isEditorInit.value = true;
 }
@@ -40,7 +39,20 @@ function editorInit() {
     <div class="input-group d-flex flex-column">
         <label v-if="title" for="inputName">{{ title }}</label>
         <div>
-            <QuillEditor ref="myEditor" theme="snow" @ready="editorInit" @textChange="textChange" />
+            <QuillEditor ref="myEditor" theme="snow" @ready="editorInit" @textChange="textChange" class="quill-editor"/>
         </div>
     </div>
 </template>
+
+<style>
+.quill-editor {
+    height: 200px; /* تنظیم ارتفاع ویرایشگر */
+    direction: rtl;
+    text-align: right;
+}
+
+.quill-editor .ql-editor {
+    direction: rtl;
+    text-align: right;
+}
+</style>
