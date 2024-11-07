@@ -1,102 +1,104 @@
 <template>
-
-    <fieldset class="form-label-group form-group position-relative has-icon-left">
-        <input class="form-control" :type="type" :id="id" v-model="inputVal" :placeholder="placeholder" style="margin-top:10px"  @input="validateNumber">
-        <div class="form-control-position" >
-            <i class="feather icon-user" style="top:20px"></i>
-            <i class="feather icon-eye " style="cursor: pointer;top:10px" v-if="showPasswordIcon " @click="showPassword()"></i>
-            <!--<i class="feather icon-eye" style="top:10px"></i>-->
-
+    <div :class="['form-group row px-1', wrapperClasses]">
+        <div class="p-0 col-md-12" >
+            <p class="m-0" v-text="title"></p>
+            <input dir="auto" :type="type == undefined? 'text' : type "  v-model="displayValue" :step="step" :id="id" :ref="ref" :placeholder="placeholder !== undefined ? placeholder : '' "  :class="['form-control',classes]" :autocomplete="autocomplete" :maxlength="maxLength" :readonly="readOnly == true" :min="min" :max="max" :required="required" :disabled="disabled" @input="validateNumber">
         </div>
-        <label :for="id"  v-html="title" style="font-size: 14px  " class="mb-5"></label>
-    </fieldset>
-
+    </div>
 </template>
 <script>
 
-    export default {
-        props: {
-            val: [String, Number],
-            modelValue: [String, Number],
-            title: String,
-            type: String,
-            placeholder: String,
-            id: String,
-            icon:String,
-            showPasswordIcon:{
-                type:Boolean,
-                default:false,
-            },
-            justNumber:{
-                type:Boolean,
-                default:false,
-            },
-            separateNumber:{
-                type:Boolean,
-                default:false,
-            },
+export default {
+    props: {
+        val: [String, Number],
+        modelValue: [String, Number],
+        title: String,
+        type: String,
+        placeholder: String,
+        id: String,
+        classes: String,
+        wrapperClasses: String,
+        ref: String,
+        step: String,
+        autocomplete: String,
+        maxLength:String,
+        disabled:{
+            type:Boolean,
+            default:false,
         },
-        data(){
-            return {
-            }
+        readOnly:{
+            type:Boolean,
+            default:false,
         },
-        methods:{
-            showPassword(){
-                if(this.type == 'password'){
-                    this.type = 'text';
-                }
-                else{
-                    this.type = 'password';
-                }
-            },
+        required:{
+            type:Boolean,
+            default:false,
+        },
+        min:[Number,String],
+        max:[Number,String],
+        justNumber:{
+            type:Boolean,
+            default:false,
+        },
+        separateNumber:{
+            type:Boolean,
+            default:false,
+        },
+    },
+    data(){
+        return {
+        }
+    },
+    methods:{
+        validateNumber(event) {
+            if(this.justNumber===true){
+                const persianNumbers = '۰۱۲۳۴۵۶۷۸۹';
+                const arabicNumbers = '٠١٢٣٤٥٦٧٨٩';
 
-            validateNumber(event) {
-                if(this.justNumber===true){
-                    const persianNumbers = '۰۱۲۳۴۵۶۷۸۹';
-                    const arabicNumbers = '٠١٢٣٤٥٦٧٨٩';
+                let value = event.target.value;
+                let newValue = '';
 
-                    let value = event.target.value;
-                    let newValue = '';
-
-                    // Loop through each character in the input value
-                    for (let char of value) {
-                        // Convert Persian and Arabic numerals to their Arabic counterparts
-                        if (persianNumbers.includes(char)) {
-                            char = persianNumbers.indexOf(char).toString();
-                        } else if (arabicNumbers.includes(char)) {
-                            char = arabicNumbers.indexOf(char).toString();
-                        }
-
-                        // Keep only numerical characters
-                        if (/^[0-9]$/.test(char)) {
-                            newValue += char;
-                        }
+                // Loop through each character in the input value
+                for (let char of value) {
+                    // Convert Persian and Arabic numerals to their Arabic counterparts
+                    if (persianNumbers.includes(char)) {
+                        char = persianNumbers.indexOf(char).toString();
+                    } else if (arabicNumbers.includes(char)) {
+                        char = arabicNumbers.indexOf(char).toString();
                     }
 
-                    // Format the number with commas every three digits
-                    if (newValue && this.separateNumber===true) {
-                        newValue = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    // Keep only numerical characters
+                    if (/^[0-9]$/.test(char)) {
+                        newValue += char;
                     }
-
-                    // Update the input value
-                    this.inputVal = newValue;
                 }
+
+                // Update the input value
+                this.inputVal = newValue;
+            }else{
+                this.inputVal = event.target.value;
             }
         }
-        ,
-        mounted() {
-            this.inputVal=this.val==undefined?'':this.val;
+    },
+    mounted() {
+        this.inputVal=this.val==undefined?'':this.val;
 
-        },
-        computed: {
-            inputVal: {
-                get() {
-                    return this.modelValue;
-                },
-                set(inputVal) {
-                    this.$emit('update:modelValue', inputVal);
-                }
+    },
+    computed: {
+        inputVal: {
+            get() {
+                return this.modelValue;
+            },
+            set(inputVal) {
+                this.$emit('update:modelValue', inputVal);
             }
         },
-    }
+        displayValue() {
+            if (this.justNumber && this.separateNumber && this.inputVal !== null) {
+                return this.inputVal?.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            return this.inputVal;
+        }
+    },
+}
 </script>

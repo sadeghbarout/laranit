@@ -119,7 +119,7 @@ class PublishCommand extends Command
 |
 */
 
-$app->loadEnvironmentFrom(".env.".file_get_contents(__DIR__."/../.env"));
+$app->loadEnvironmentFrom(".env.".trim(file_get_contents(__DIR__."/../.env")));
 ';
 
 		$filePath = base_path('bootstrap/app.php');

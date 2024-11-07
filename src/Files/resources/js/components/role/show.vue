@@ -11,8 +11,11 @@
                             <form-label title="شناسه" :val="role.id"></form-label>
                             <form-label title="نام فارسی " :val="role.name"></form-label>
                             <form-label title="نام انگلیسی " :val="role.desc"></form-label>
-                            <router-link v-if="adminHasPermission(PERM_ROLE_UPDATE)" :to="'/role/create/'+role.id" class="btn btn-outline-warning float-right">ویرایش</router-link>
-                            <button v-if="adminHasPermission(PERM_ROLE_DESTROY)"  class="btn btn-outline-danger float-right" @click="deleteRole()">حذف</button>
+                            <div class="d-flex justify-content-end">
+                                <router-link v-if="adminHasPermission(PERM_ROLE_UPDATE)" :to="'/role/create/'+role.id" class="btn btn-outline-warning float-right">ویرایش</router-link>
+                                <div style="padding: 0 2px;"></div>
+                                <button v-if="adminHasPermission(PERM_ROLE_DESTROY)"  class="btn btn-outline-danger float-right" @click="deleteRole()">حذف</button>
+                            </div>
                         </div>
                     </card-component>
                 </div>
@@ -26,11 +29,11 @@
                             <div class="row mb-2" >
 
                                 <div class="col-6 p-2" v-for="permissions in permissionGroups">
-                                    <div  v-for="(permission,index) in permissions" :key="permission.id">
+                                    <div  v-for="(permission,index) in permissions" :key="permission.id" style="padding-top: 4px;">
                                         <div class="custom-control custom-switch custom-control-inline">
                                             <input type="checkbox" class="custom-control-input" :id="'permission'+permission.id"
-                                                :checked="permissionIds.indexOf(permission.id) != -1"
-                                                @click="permissionOperation(permission)">
+                                                   :checked="permissionIds.indexOf(permission.id) != -1"
+                                                   @click="permissionOperation(permission)">
                                             <label class="custom-control-label" :for="'permission'+permission.id">
                                             </label>
                                             <span class="switch-label" v-html="permission.desc"></span>

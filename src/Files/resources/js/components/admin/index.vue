@@ -45,7 +45,7 @@
         </div>
 
         <div class="table-responsive" v-if="items.length > 0">
-            <table class="table data-list-view dataTable">
+            <table class="table data-list-view dataTable px-0">
                 <thead>
                 <tr>
                     <th>

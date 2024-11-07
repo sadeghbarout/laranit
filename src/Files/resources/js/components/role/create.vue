@@ -1,28 +1,18 @@
 <template>
     <div>
-        <section class="page-users-view">
-            <form @submit.prevent="submitForm()">
+        <div style="max-width: 600px;" class="mx-auto pt-4">
+            <card-component :title=" !id ? '  ثبت رکورد جدید ' : 'ویرایش '  ">
+                <div class="col-12">
+                    <form @submit.prevent="submitForm()">
+                        <form-inputs title="نام انگلیسی" v-model="role.name"></form-inputs>
+                        <form-inputs title="نام فارسی" v-model="role.desc"></form-inputs>
 
-            <div class="data-items pb-3">
-                <div class="data-fields px-2 mt-3">
-                    <form-inputs title="نام انگلیسی" v-model="role.name" icon="fa fa-tag" required="true"></form-inputs>
-                    <form-inputs title="نام فارسی" v-model="role.desc" icon="fa fa-tag" required="true"></form-inputs>
+                        <br>
+                        <button class="btn btn-warning w-100 mx-auto">ثبت</button>
+                    </form>
                 </div>
-            </div>
-
-
-            <div class="add-data-footer d-flex justify-content-around px-3 mt-2 mb-1">
-                <div class="add-data-btn">
-                <button class="btn btn-primary">ثبت</button>
-                </div>
-                <div class="cancel-data-btn">
-                    <span class="btn btn-outline-danger">لغو</span>
-                </div>
-            </div>
-
-
-            </form>
-        </section>
+            </card-component>
+        </div>
     </div>
 </template>
 
