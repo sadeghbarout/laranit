@@ -24,6 +24,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin whereInId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin toDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin fromDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User\Admin withRoles($cols)
  */
 class Admin extends ModelEnhanced implements AuthenticatableContract,AuthorizableContract,CanResetPasswordContract {
 	use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
@@ -40,6 +41,14 @@ class Admin extends ModelEnhanced implements AuthenticatableContract,Authorizabl
 	//-----------------------------------------------------------------------------------------------------------------------------
 	//-----------------------------------------------    scopes    ----------------------------------------------------------------
 	//-----------------------------------------------------------------------------------------------------------------------------
+
+	/* @param \Illuminate\Database\Eloquent\Builder $query */
+	public static function scopeWithRoles($query, $columns = []) {
+		$columns[] = COL_ADMIN_ID;
+		return $query->with(array('roles' => function ($query) use ($columns) {
+			$query->select($columns);
+		}));
+	}
 
 
 	/* @param \Illuminate\Database\Eloquent\Builder $query */

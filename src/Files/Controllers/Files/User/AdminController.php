@@ -133,7 +133,7 @@ class AdminController extends Controller
 	public function show($id)
 	{
 		Validator::idValidation($id);
-		$admin = Admin:: findOrError($id);
+		$admin = Admin::withRoles([COL_ROLE_ID, COL_ROLE_DESC, COL_ROLE_NAME])->findOrError($id);
 
 		return generateResponse(RES_SUCCESS,["item"=>$admin]);
 	}

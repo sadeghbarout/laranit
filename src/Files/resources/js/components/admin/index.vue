@@ -35,13 +35,15 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
                 <h2 class="content-header-title float-left mb-0"> مدیران  </h2>
+            </div>
+            <div class="d-flex" style="gap:8px;">
                 <router-link :to="'/admin/create'" class="btn btn-primary"  v-if="adminHasPermission(PERM_ADMIN_STORE)">
                     <span>
                         <i class="fas fa-plus"></i> جدید
                     </span>
                 </router-link>
+                <form-page-rows v-model="pageRows" @input="fetchData(1)"></form-page-rows>
             </div>
-            <form-page-rows v-model="pageRows" @input="fetchData(1)"></form-page-rows>
         </div>
 
         <div class="table-responsive" v-if="items.length > 0">

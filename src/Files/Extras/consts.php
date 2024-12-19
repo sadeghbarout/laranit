@@ -129,6 +129,11 @@ define('COL_SETTING_ID', 'id');
 define('COL_SETTING_NAME', 'name');
 define('COL_SETTING_VALUE', 'value');
 
+define('TBL_ROLES', 'roles');
+define('COL_ROLE_ID', 'id');
+define('COL_ROLE_NAME', 'name');
+define('COL_ROLE_DESC', 'desc');
+
 
 define('COL_CREATED_AT', 'created_at');
 define('COL_UPDATED_AT', 'updated_at');

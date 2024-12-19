@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-md-6 mx-auto mt-5">
+        <div class="col-md-6 mx-auto">
 
 
             <card-component title="  مشخصات مدیر  ">
@@ -21,13 +21,15 @@
 
 
                     <br>
-                    <router-link v-if="adminHasPermission(PERM_ADMIN_UPDATE)" :to="'/admin/create/'+item.id" class="btn btn-warning btn-sm">ویرایش</router-link>
-                    <button v-if="adminHasPermission(PERM_ADMIN_DESTROY)" class="btn btn-danger btn-sm float-left" @click="deleteItem()">حذف</button>
+                    <div class="d-flex" style="gap: 6px;">
+                        <router-link v-if="adminHasPermission(PERM_ADMIN_UPDATE)" :to="'/admin/create/'+item.id" class="btn btn-warning btn-sm">ویرایش</router-link>
+                        <button v-if="adminHasPermission(PERM_ADMIN_DESTROY)" class="btn btn-danger btn-sm float-left" @click="deleteItem()">حذف</button>
+                    </div>
                 </div>
             </card-component>
         </div>
 
-        <div class="col-md-6 mx-auto mt-5" v-if="adminHasPermission(PERM_ADMIN_ROLE)">
+        <div class="col-md-6 mx-auto" v-if="adminHasPermission(PERM_ADMIN_ROLE)">
             <card-component title="نقش ها" >
                 <div class="col-sm-12" >
                     <div class="row mb-2" v-for="(role,index) in roles">
