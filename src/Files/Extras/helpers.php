@@ -258,25 +258,6 @@ function isWebserviceSubdomain() {
     return false;
 }
 
-
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-function getUserIp() {
-	foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
-		if (array_key_exists($key, $_SERVER) === true){
-			foreach (explode(',', $_SERVER[$key]) as $ip){
-				$ip = trim($ip); // just to be safe
-				if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
-					return $ip;
-				}
-			}
-		}
-	}
-	return request()->ip(); // it will return server ip when no client ip found
-}
-
-
-
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 // gets the day of week number in iran (default starting number is 0)
 function getIranDayOfWeek($date = null, $startingNumber = 0){
@@ -334,14 +315,15 @@ function radialDistance($lat1,$long1, $lat2,$long2){
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 // this function adds a middleware to the input controller , this middleware checks for admin permissions ( authorizePermissions() function is in Admin.php  )
-function checkPermissionMiddleWare($controller,$role,$excepts=[]){
-    if(Auth::check()){
-        $controller ->middleware(function ($request, $next) use($role) {
-            auth()->user()->authorizePermissions($role);
-            return $next($request);
-        }) -> except($excepts);
-    }
-
+function checkPermissionMiddleWare($role,$excepts=[]){
+	return [
+		new Illuminate\Routing\Controllers\Middleware(middleware: function ($request, $next) use ($role) {
+			if(auth()->check()){
+				\Colbeh\Access\Access::hasAccess($role);
+			}
+			return $next($request);
+		}, except: $excepts),
+	];
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------

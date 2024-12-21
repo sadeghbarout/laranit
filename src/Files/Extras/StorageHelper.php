@@ -1,6 +1,6 @@
 <?php
 
-namespace Colbeh\Laranit\Files\Extras;
+namespace App\Extras;
 
 use App\Exceptions\ErrorMessageException;
 use App\Extras\StatusCodes;

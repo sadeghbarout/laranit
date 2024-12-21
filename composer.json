@@ -17,8 +17,7 @@
         "colbeh/access": "^1.0",
         "colbeh/logs": "^1.0",
         "kavenegar/php": "^1.2",
-        "mishal/jwt": "^1.0",
-        "colbeh/telescope": "^4.9"
+        "mishal/jwt": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8"

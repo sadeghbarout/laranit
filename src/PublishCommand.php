@@ -49,23 +49,13 @@ class PublishCommand extends Command
 				'--tag'=>"database",
 			]
 		);
-		$this->copyLoadEnvironmentsCode();
-
-//		$this->addHelpersToComposerJson();
-
 		$this->copyBaseControllerFunctions();
-
-		$this->addMiddlewareToKernel();
-
-		$this->routesFunctions();
 
 		$this->modifyLangValidations();
 
 		$this->modifyPackageJson();
 
 		$this->modifyConfigAppFile();
-
-		$this->addHelpersServiceProvider();
 
 		$this->publishCommands();
 
@@ -76,82 +66,9 @@ class PublishCommand extends Command
 
 	//------------------------------------------------
 
-
-
-	public function addMiddlewareToKernel() {
-		$str1 ='"rateLimiter" => \App\Http\Middleware\RateLimiter::class,
-		';
-
-		$needle1='protected $middlewareAliases = [';
-
-		$filePath = app_path('Http/Kernel.php');
-		$kernelContent = file_get_contents($filePath);
-		$pos = strpos($kernelContent, $needle1);
-		$kernelContent = substr_replace($kernelContent, $str1, $pos+strlen($needle1), 0);
-
-
-		$str = '
-		\App\Http\Middleware\LogAfterRequest::class,
-		\App\Http\Middleware\CleanStrings::class,
-        \App\Http\Middleware\CheckPermission::class,
-        \App\Http\Middleware\SecurityHeaders::class,
-//      \App\Http\Middleware\ForceHttps::class,
-';
-
-		$needle='protected $middleware = [';
-
-		$pos = strpos($kernelContent, $needle);
-		$kernelContent = substr_replace($kernelContent, $str, $pos+strlen($needle), 0);
-		file_put_contents($filePath, $kernelContent);
-
-	}
-
 	public function test() {
 		return $this->addMiddlewareToKernel();
 
-	}
-
-	public function copyLoadEnvironmentsCode() {
-		$str = '/*
-|--------------------------------------------------------------------------
-| Load Environment variables
-|--------------------------------------------------------------------------
-|
-*/
-
-$app->loadEnvironmentFrom(".env.".trim(file_get_contents(__DIR__."/../.env")));
-';
-
-		$filePath = base_path('bootstrap/app.php');
-		$appContent = file_get_contents($filePath);
-		$pos = strpos($appContent, 'return $app;');
-		$appContent = substr_replace($appContent, $str, $pos, 0);
-		file_put_contents($filePath, $appContent);
-
-	}
-
-
-	public function addHelpersToComposerJson() {
-		$filePath = base_path('composer.json');
-		$composerContent = file_get_contents($filePath);
-		$composerArray=json_decode($composerContent,true);
-
-		$files[]= "app/Extras/jdf.php";
-		$files[]= "app/Extras/helpers.php";
-		$files[]= "app/Extras/utilsCorrector.php";
-		$files[]= "app/Extras/consts.php";
-		$files[]= "app/Extras/FirebaseHelper.php";
-		$files[]= "app/Extras/StorageHelper.php";
-		$files[]= "app/Extras/Validator.php";
-		$files[]= "app/Extras/Zarinpal.php";
-		$files[]= "app/Extras/SMSSender.php";
-		$files[]= "app/Extras/StatusCodes.php";
-		$files[]= "app/Extras/Tools.php";
-		$composerArray['autoload']['files']= $files;
-
-		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);
-		$composerContent=str_replace("\/","/",$composerContent);
-		file_put_contents($filePath, $composerContent);
 	}
 
 	public function copyBaseControllerFunctions(){
@@ -161,28 +78,6 @@ $app->loadEnvironmentFrom(".env.".trim(file_get_contents(__DIR__."/../.env")));
 		$appContent = file_get_contents($filePath);
 		$pos = strrpos($appContent, '}');
 		$appContent = substr_replace($appContent, $str, $pos, 0);
-		file_put_contents($filePath, $appContent);
-	}
-
-	public function routesFunctions() {
-		$str = file_get_contents(__DIR__.'/Files/routes/basicRoutes.php');
-
-		$filePath = app_path('Providers/RouteServiceProvider.php');
-		$appContent = file_get_contents($filePath);
-		$pos = strrpos($appContent, '}');
-		$appContent = substr_replace($appContent, $str, $pos, 0);
-
-
-		$str = file_get_contents(__DIR__.'/Files/routes/routes.php');
-		$appContent=str_replace('Route::prefix(\'api\')',$str,$appContent);
-
-
-		$needle='RateLimiter::';
-		$pos = strrpos($appContent, $needle);
-		$appContent=substr_replace($appContent,'$this->basicRoutes(); ',$pos,0);
-
-//		$appContent=str_replace('// protected $','protected $',$appContent);
-
 		file_put_contents($filePath, $appContent);
 	}
 
@@ -272,19 +167,6 @@ $app->loadEnvironmentFrom(".env.".trim(file_get_contents(__DIR__."/../.env")));
 
 	}
 
-
-	public function addHelpersServiceProvider() {
-		$str = " App\Providers\HelperServiceProvider::class,
-	";
-
-		$needle='App\Providers\AppServiceProvider::class,';
-		$filePath = config_path('app.php');
-		$appContent = file_get_contents($filePath);
-		$pos = strpos($appContent, $needle);
-		$appContent = substr_replace($appContent, $str, $pos, 0);
-		file_put_contents($filePath, $appContent);
-
-	}
 
 	public function publishCommands() {
 

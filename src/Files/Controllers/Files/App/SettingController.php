@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\App\Setting;
 use Illuminate\Http\Request;
 
-class SettingController extends Controller {
+class SettingController extends Controller implements  \Illuminate\Routing\Controllers\HasMiddleware {
 
-	public function __construct() {
-		checkPermissionMiddleWare($this, PERM_SETTING);
+	public static function middleware() {
+		return checkPermissionMiddleWare(PERM_SETTING);
 	}
+
 
 
 	// --------------------------------------------------------------------------------------------------------------------------

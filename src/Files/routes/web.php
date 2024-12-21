@@ -1,8 +1,8 @@
 <?php
 
-use Colbeh\Laranit\Files\Controllers\Files\App\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\App\HomeController;
+use App\Http\Controllers\App\RoleController;
 use App\Http\Controllers\App\SettingController;
 use App\Http\Controllers\User\AdminController;
 

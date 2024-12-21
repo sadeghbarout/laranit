@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+class AdminController extends Controller implements  \Illuminate\Routing\Controllers\HasMiddleware
 {
 
-	public function __construct() {
-		checkPermissionMiddleWare($this, PERM_ADMIN,['login','doLogin','logout']);
+	public static function middleware() {
+		return checkPermissionMiddleWare(PERM_ADMIN,['login','doLogin','logout']);
 	}
 
 

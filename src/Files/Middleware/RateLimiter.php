@@ -9,8 +9,8 @@ class RateLimiter extends ThrottleRequests {
 
 	protected function resolveRequestSignature($request)
 	{
-//		$baseIdentifier=request()->getMethod() . '|' . request()->ajax() . '|' .request()->decodedPath() . '|' . getUserIp();
-		$baseIdentifier=request()->getMethod() . '|' . request()->ajax() . '|' .request()->getPathInfo() . '|' . getUserIp();
+//		$baseIdentifier=request()->getMethod() . '|' . request()->ajax() . '|' .request()->decodedPath() . '|' . request()->ip();
+		$baseIdentifier=request()->getMethod() . '|' . request()->ajax() . '|' .request()->getPathInfo() . '|' . request()->ip();
 //		dd($baseIdentifier);
 
 		if ($user = request()->user()) {

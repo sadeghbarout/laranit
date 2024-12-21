@@ -30,6 +30,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
 	private function publish() {
 		$this->publishes([
+			__DIR__ . '/Files/bootstrap/app.php' => base_path('bootstrap/app.php'),
+			__DIR__ . '/Files/bootstrap/providers.php' => base_path('bootstrap/providers.php'),
 			__DIR__ . '/Files/.env' => base_path('.env'),
 			__DIR__ . '/Files/.env.local' => base_path('.env.local'),
 			__DIR__ . '/Files/Extras' => app_path('Extras'),
@@ -39,12 +41,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			__DIR__ . '/Files/Middleware' => app_path('Http/Middleware'),
 			__DIR__ . '/Files/Exceptions' => app_path('Exceptions'),
 			__DIR__ . '/Files/routes/test.php' => base_path('routes/test.php'),
+			__DIR__ . '/Files/routes/basic.php' => base_path('routes/basic.php'),
+			__DIR__ . '/Files/routes/console.php' => base_path('routes/console.php'),
 			__DIR__ . '/Files/routes/api.php' => base_path('routes/api.php'),
 			__DIR__ . '/Files/routes/web.php' => base_path('routes/web.php'),
 			__DIR__ . '/Files/routes/site.php' => base_path('routes/site.php'),
 			__DIR__ . '/Files/providers/AppServiceProvider.php' => app_path('Providers/AppServiceProvider.php'),
 			__DIR__ . '/Files/providers/HelperServiceProvider.php' => app_path('Providers/HelperServiceProvider.php'),
-			__DIR__ . '/Files/Console/Kernel.php' => app_path('Console/Kernel.php'),
 			__DIR__ . '/Files/utils.json' => resource_path('files/utils.json'),
 			__DIR__ . '/Files/seeders' => database_path('seeders'),
 			__DIR__ . '/Files/config/auth.php' => base_path('config/auth.php'),

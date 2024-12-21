@@ -7,10 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\User\User;
 use App\Exceptions\ErrorMessageException;
 
-class UserController extends Controller
+class UserController extends Controller implements  \Illuminate\Routing\Controllers\HasMiddleware
 {
-	public function __construct() {
-		checkPermissionMiddleWare($this, PERM_USER);
+	public static function middleware() {
+		return checkPermissionMiddleWare(PERM_USER);
 	}
 
 

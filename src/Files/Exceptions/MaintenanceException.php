@@ -1,10 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sadegh
- * Date: 28/03/2021
- * Time: 02:40 PM
- */
 
 namespace App\Exceptions;
-class MaintenanceException  extends \Exception {}
+
+use App\Extras\StatusCodes;
+
+class MaintenanceException extends \Exception {
+
+    public function __construct() {
+        parent::__construct();
+    }
+
+    public function render() {
+        return response(generateResponse(ERR_UNDER_MAINTENANCE), StatusCodes::HTTP_SERVICE_UNAVAILABLE);
+    }
+}
