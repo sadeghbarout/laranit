@@ -339,3 +339,8 @@ function dd2($item){
 	response(json_encode($item))->send();
 	exit;
 }
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------
+function rs(string $relation, array $cols) {
+	return "$relation:" . implode(',', $cols);
+}

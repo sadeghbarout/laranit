@@ -25,8 +25,8 @@
                     <form-date title='تا تاریخ ' placeholder='تا تاریخ ' v-model='toDate'></form-date>
                 </div>
 
-                <div class='col-sm-3'>
-                    <form-inputs type="submit" val="جستجو" customClass="btn btn-outline-primary mt-2"></form-inputs>
+                <div class='col-lg-3 col-md-6 mt-2'>
+                    <button type="submit" class="btn btn-outline-primary w-100">جستجو</button>
                 </div>
             </card-component>
         </form>

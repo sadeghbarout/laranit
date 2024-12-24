@@ -1,58 +1,8 @@
 <template>
-    <div >
-
-        <div>
-            <div v-if="type == 'checkbox' ">
-                <div class="row mt-2 mb-3">
-                    <div class="col-6" v-html="title"></div>
-                    <div class="col-6">
-                        <input :type="type" :id="id" :name="name" :value="val" @click="$emit('input', $event.target.value)">
-                    </div>
-                </div>
-            </div>
-            <div v-else>
-
-                <div class="form-group w-100" :class="{'row': !colum}">
-                    <div v-if="title" class="d-flex justify-content-start text-gray-dark fw-700" :class="{'col-4 align-items-center': !colum}" style="padding-bottom: 4px;">
-                        <label :for="id" v-html="title"></label>
-                    </div>
-                    <div :class="{'col-8': !colum}">
-                        <fieldset v-if="type != 'number'" :class="[icon==undefined ? '' : 'form-group position-relative has-icon-left input-divider-left' ]">
-
-                            <!--  Button -->
-                            <input v-if="type == 'submit' " type="submit" :class="['form-control '+customClass]" :value="val" :required="required">
-
-                            <!--  Text -->
-                            <input v-else :type="type" :id="id" v-model="inputVal" :placeholder="placeholder!=undefined? placeholder : ''  "
-                                   :class="['form-control '+customClass]" :required="required" :disabled="disabled"  @input="validateNumber">
-
-                            <i v-if="showPasswordIcon " @click="showPassword()" class="fa fa-eye cursor-pointer" style="position:absolute;left:-3px;top:12px"></i>
-
-                            <div class="form-control-position" v-if="type != 'submit' && icon!=undefined">
-                                <i :class="icon"></i>
-                            </div>
-                        </fieldset>
-
-
-                        <!--  Number -->
-                        <div :class="['input-group bootstrap-touchspin w-100 px-0 mx-0', disabled  == true ? 'disabled' : '' ]" v-if="type=='number'">
-                            <span class="input-group-btn input-group-prepend bootstrap-touchspin-injected">
-                                <button class="btn btn-primary bootstrap-touchspin-down" type="button" @click="numberOperation('dec')">-</button>
-                            </span>
-                            <input type="number" :step="numberStep" class="touchspin form-control" min="0" v-model="inputVal"  :placeholder="placeholder? placeholder : ''  "
-                                   :required="required">
-                            <span class="input-group-btn input-group-append bootstrap-touchspin-injected">
-                                <button class="btn btn-primary bootstrap-touchspin-up" type="button" @click="numberOperation('inc')">+</button>
-                            </span>
-                        </div>
-
-                        <p  v-if="inputHint" class="mt-1 text-warning" >{{inputHint}}</p>
-
-
-
-                    </div>
-                </div>
-            </div>
+    <div :class="['form-group row px-1', wrapperClasses]">
+        <div class="p-0 col-md-12" >
+            <p class="m-0" v-text="title"></p>
+            <input dir="rtl" :type="type == undefined? 'text' : type "  v-model="displayValue" :step="step" :id="id" :ref="ref" :placeholder="placeholder !== undefined ? placeholder : '' "  :class="['form-control',classes]" :autocomplete="autocomplete" :maxlength="maxLength" :readonly="readOnly == true" :min="min" :max="max" :required="required" :disabled="disabled" @input="validateNumber">
         </div>
     </div>
 </template>
@@ -69,20 +19,13 @@ export default {
         classes: String,
         wrapperClasses: String,
         ref: String,
+        step: String,
         autocomplete: String,
         maxLength:String,
-        icon:String,
-        customClass:String,
-        inputHint:String,
-        numberStep:{
-            type:Number,
-            default:1,
+        disabled:{
+            type:Boolean,
+            default:false,
         },
-        minNumber:{
-            type:Number,
-            default:0,
-        },
-        maxNumber:Number,
         readOnly:{
             type:Boolean,
             default:false,
@@ -90,18 +33,6 @@ export default {
         required:{
             type:Boolean,
             default:false,
-        },
-        showPasswordIcon:{
-            type:Boolean,
-            default:false,
-        },
-        disabled:{
-            type:Boolean,
-            default:false,
-        },
-        colum:{
-            type:Boolean,
-            default:true,
         },
         min:[Number,String],
         max:[Number,String],
@@ -119,28 +50,6 @@ export default {
         }
     },
     methods:{
-
-        numberOperation(op){
-            if(op == 'inc'){
-                if(this.maxNumber==undefined || this.inputVal<this.maxNumber)
-                    this.inputVal++;
-            }
-            else if(op == 'dec'){
-                if(this.inputVal > this.minNumber){
-                    this.inputVal--;
-                }
-            }
-        },
-
-        showPassword(){
-            if(this.type == 'password'){
-                this.type = 'text';
-            }
-            else{
-                this.type = 'password';
-            }
-        },
-
         validateNumber(event) {
             if(this.justNumber===true){
                 const persianNumbers = '۰۱۲۳۴۵۶۷۸۹';
@@ -164,17 +73,13 @@ export default {
                     }
                 }
 
-                // Format the number with commas every three digits
-                if (newValue && this.separateNumber===true) {
-                    newValue = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                }
-
                 // Update the input value
                 this.inputVal = newValue;
+            }else{
+                this.inputVal = event.target.value;
             }
         }
-    }
-    ,
+    },
     mounted() {
         this.inputVal=this.val==undefined?'':this.val;
 
@@ -187,6 +92,12 @@ export default {
             set(inputVal) {
                 this.$emit('update:modelValue', inputVal);
             }
+        },
+        displayValue() {
+            if (this.justNumber && this.separateNumber && this.inputVal !== null) {
+                return this.inputVal?.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            return this.inputVal;
         }
     },
 }
