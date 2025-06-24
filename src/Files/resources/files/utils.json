@@ -681,5 +681,21 @@
         "image": "عکسی",
         "video": "ویدئویی",
         "audio": "صوتی"
+    },
+    "filtersList": {
+        "equals": "مساوی",
+        "not_equals": "نامساوی",
+        "contains": "شامل می‌شود",
+        "starts_with": "شروع می‌شود با",
+        "ends_with": "پایان می‌یابد با",
+        "does_not_contain": "شامل نمی‌شود",
+        "greater_equal": "بزرگتر",
+        "greater_than_or_equals": "بزرگتر مساوی",
+        "less_than": "کوچک تر",
+        "less_than_or_equals": "کوچک تر مساوی",
+        "is_null": "خالی است (Null)",
+        "is_empty": "تهی است (Empty)",
+        "is_not_null": "خالی نیست (Not Null)",
+        "is_not_empty": "تهی نیست (Not Empty)"
     }
 }

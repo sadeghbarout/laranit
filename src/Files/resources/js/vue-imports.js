@@ -61,6 +61,10 @@ import slideDown from './components/slide-down.vue';
 import formQuill from './components/form-quill.vue';
 import multiselect from './components/multiselect.vue';
 
+import customTh from './components/custom-th.vue';
+import customColumnTh from './components/custom-column-th.vue';
+import customColumnTd from './components/custom-column-td.vue';
+
 import appFooter from './layout/appFooter.vue';
 import appHeader from './layout/appHeader.vue';
 import appSidebar from './layout/appSidebar.vue';
@@ -85,6 +89,10 @@ app.component('form-quill', formQuill);
 app.component('form-swich', formSwich);
 app.component('form-inputs2', formInputs2);
 app.component('multiselect', multiselect);
+
+app.component('custom-th', customTh);
+app.component('custom-column-th', customColumnTh);
+app.component('custom-column-td', customColumnTd);
 
 // app.component('date-picker', VuePersianDatetimePicker);
 

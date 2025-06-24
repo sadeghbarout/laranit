@@ -66,7 +66,30 @@ class Tools {
         return newArray;
     }
 
+    //========================================================================================================================
 
+    static getSelectedColumnsData(type,selectedColumns) {
+        let result=[];
+        var columns=window.listColumns[type]['list'];
+
+        if (columns) {
+            columns.forEach((item) => {
+                if(selectedColumns!=null && selectedColumns!=undefined && selectedColumns.length>0){
+
+                    selectedColumns.forEach((selectedId) => {
+                        if (item.id == selectedId)
+                            result.push(item)
+                    })
+                }else{
+                    if (item.def == 1) {
+                        result.push(item)
+                    }
+                }
+            })
+        }
+
+        return result;
+    }
 }
 
 export default Tools;
