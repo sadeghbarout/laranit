@@ -109,3 +109,42 @@ table tr th{
     position: relative;
     right: -8px;
 }
+
+#toast-container{
+    z-index: 999999999999999999999!important;
+}
+
+
+
+.custom-table-bold-cell {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: start;
+}
+
+.table-responsive {
+
+}
+
+.table-responsive {}
+.table-list {
+    margin-top: 16px;
+    min-height: 500px;
+}
+
+.table-list .table td, .table-list .table  th{
+    border: 1px solid #dedede;
+}
+
+.table-list .table tbody tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+.table-list .table tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.table-list .table tbody tr:hover {
+    background-color: #dedede;
+    transition-duration: 300ms;
+}

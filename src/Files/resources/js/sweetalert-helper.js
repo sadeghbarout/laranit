@@ -132,22 +132,6 @@ Window.prototype.uploadFileDialog = function (title, url, onSuccess, type) {
 
 
 //-------------------------------------------------------------------------------------------------------------
-Window.prototype.showLoading = function () {
-    new swal({
-        title: 'در حال ارسال ...',
-        html: 'لطفا صبر کنید ...',
-        onOpen: () => {
-            swal.showLoading()
-        },
-        confirmButtonColor: '#7367F0',
-
-    });
-};
-
-
-
-
-//-------------------------------------------------------------------------------------------------------------
 Window.prototype.showLoadingUploadFile = function () {
     new swal({
         title: 'درحال آپلود ...',
@@ -168,3 +152,16 @@ Window.prototype.onUploadProgressAxios = function (progressEvent) {
     swal.getContent().querySelector('strong').textContent = percentCompleted
 };
 
+//-------------------------------------------------------------------------------------------------------------
+Window.prototype.showLoading = function () {
+    const elem = document.getElementById('loading');
+    elem.classList.add('d-flex');
+    elem.classList.remove('d-none');
+};
+
+//-------------------------------------------------------------------------------------------------------------
+Window.prototype.hideLoading = function () {
+    const elem = document.getElementById('loading');
+    elem.classList.add('d-none');
+    elem.classList.remove('d-flex');
+};

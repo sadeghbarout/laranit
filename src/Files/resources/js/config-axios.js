@@ -74,13 +74,13 @@ axios.interceptors.request.use(request => {
 
 
 axios.interceptors.response.use(response => {
-    swal.close();
+    hideLoading();
     return response;
 }, error => {
     if(error.response)
         checkResponse(error.response.data);
 
-    swal.close();
+    hideLoading();
 
     return Promise.reject(error);
 });

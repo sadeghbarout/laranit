@@ -1,11 +1,13 @@
 <template>
-    <div class="row flex-center-center" >
-        <div class="col-lg-6 ">
+    <div>
+        <div style="max-width: 800px" class="mx-auto">
             <div class="card bg-authentication rounded-0 mb-0">
-                <div class="row m-0">
-                    <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
-                        <img :src="'/images/login.jpg'" alt="branding logo">
+                <div class="row m-0 p-0">
+
+                    <div class="col-lg-6 d-lg-block d-none p-0">
+                        <img :src="'/images/login.png'" alt="branding logo" style="width: 100%;height: 100%; object-fit: cover;">
                     </div>
+
                     <div class="col-lg-6 p-0">
                         <div class="card rounded-0 mb-0 px-2">
                             <div>
@@ -34,7 +36,7 @@
                                             </fieldset>
 
                                             <div class="form-group d-flex justify-content-between align-items-center">
-                                                <button type="submit" class="btn btn-primary float-right btn-inline">ورود</button>
+                                                <button type="submit" class="btn btn-primary float-right btn-inline w-100">ورود</button>
                                             </div>
                                         </form>
                                     </div>
@@ -60,6 +62,7 @@ export default {
     },
     methods:{
         login(){
+            showLoading();
             axios.post('/admin/login', {
                 'username': this.username,
                 'password': this.password,

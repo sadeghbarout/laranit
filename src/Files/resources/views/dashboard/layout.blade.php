@@ -27,6 +27,10 @@
     <div class="spinner-border" style="color: #7367F0;"></div>
 </div>
 
+<div id="loading" class="w-100 top-0 d-none align-items-center justify-content-center" style="position: fixed; height: 100vh;z-index: 999999999999999999999999999;background-color: rgba(0,0,0,0.5);">
+    <div class="spinner-border text-primary"></div>
+</div>
+
 <div id="vueAppDiv"></div>
 
 </body>
