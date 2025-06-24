@@ -18,6 +18,7 @@ return new class extends Migration {
 			$table->string(COL_ADMIN_USERNAME)->unique();
 			$table->string(COL_ADMIN_PASSWORD)->default('');
 			$table->string(COL_ADMIN_IMAGE, 100)->default('');
+			$table->text(COL_ADMIN_SELECTED_COLUMNS)->nullable();
 			$table->rememberToken();
 			$table->timestamps();
 		});

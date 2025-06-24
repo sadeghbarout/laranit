@@ -69,6 +69,7 @@ define('RK_UPDATE_URL', 'update_url');
 define('RK_USER', 'user');
 define('RK_ADMIN_PERMISSIONS', 'admin_permissions');
 define('RK_PERMISSIONS', 'permissions');
+define('RK_SELECTED_COLUMNS', 'selected_columns');
 
 
 
@@ -102,6 +103,7 @@ define('COL_ADMIN_USERNAME', 'username');
 define('COL_ADMIN_PASSWORD', 'password');
 define('COL_ADMIN_CREATED_AT', 'created_at');
 define('COL_ADMIN_IMAGE', 'image');
+define('COL_ADMIN_SELECTED_COLUMNS', 'selected_columns');
 
 
 define('TBL_USERS', 'customers');

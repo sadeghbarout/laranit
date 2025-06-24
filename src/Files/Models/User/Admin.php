@@ -103,6 +103,19 @@ class Admin extends ModelEnhanced implements AuthenticatableContract,Authorizabl
 		return $query;
 	}
 
+	//-----------------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------------    functions    ----------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------------------
+
+	public function getSelectedColumns($type) {
+
+		$allSelectedColumns = $this->getAttributeValue(COL_ADMIN_SELECTED_COLUMNS);
+		if ($allSelectedColumns == null || !isset($allSelectedColumns[$type]))
+			return [];
+
+		return $allSelectedColumns[$type];
+	}
+
 
 	//-----------------------------------------------------------------------------------------------------------------------------
 	//-----------------------------------------------    accessors & mutator    ---------------------------------------------------

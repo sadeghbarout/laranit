@@ -1,0 +1,26 @@
+{
+    "examples": {
+        "list": [
+            {
+                "id": "user_id",
+                "label": "نام",
+                "val": "user.name",
+                "def": 1,
+                "noLink": 1,
+                "sortable": 0
+            },
+            {
+                "id": "phone_status",
+                "label": "وضعیت تلفن",
+                "val": "phone_status_text",
+                "hasBadge": 1
+            },
+            {
+                "id": "target",
+                "label": "وکالت در",
+                "val": "target_id|target_type_text",
+                "format": "$1 - $2"
+            }
+        ]
+    }
+}
