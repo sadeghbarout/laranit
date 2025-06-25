@@ -234,4 +234,23 @@ class AdminController extends Controller implements  \Illuminate\Routing\Control
 
 		return generateResponse(RES_SUCCESS, [RK_MESSAGE => "رمز عبور با موفقیت تعییر یافت."]);
 	}
+	//------------------------------------------------------------------------------------------------------------------------------------
+	public function columnToggle() {
+		Validator::adminColumnToggleValidation();
+		$columns=  request('columns'); // array
+		$type=  request('type');
+
+		$admin=Auth::user();
+		$oldColumns =$admin[COL_ADMIN_SELECTED_COLUMNS];
+
+		if(!is_array($oldColumns))
+			$oldColumns=[];
+
+		$oldColumns[$type]=$columns;
+		$admin[COL_ADMIN_SELECTED_COLUMNS]=$oldColumns;
+		$admin->save();
+
+
+		return generateResponse(RES_SUCCESS);
+	}
 }

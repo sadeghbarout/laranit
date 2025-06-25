@@ -24,6 +24,12 @@ use Endroid\QrCode\Logo\Logo;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
 
+use OpenSpout\Common\Entity\Row;
+use OpenSpout\Common\Entity\Style\Style;
+use OpenSpout\Reader\Common\Creator\ReaderFactory;
+use OpenSpout\Writer\XLSX\Entity\SheetView;
+use OpenSpout\Writer\XLSX\Writer;
+
 class Tools {
 
 	public static function correctNumber($number){
@@ -537,6 +543,136 @@ class Tools {
 		App::setLocale($lang);
 
 		return __('index.' . $key, $data);
+	}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	/**
+	 * @throws ErrorMessageException
+	 * @throws ResponseException
+	 */
+	public static function readExcelFile($file, $validation, $dataStartFrom = 1, $justValidate = 0) {
+		$reader = ReaderFactory::createFromFileByMimeType($file);
+		$reader->open($file);
+
+		$sheetData = [];
+		foreach ($reader->getSheetIterator() as $sheet) {
+			foreach ($sheet->getRowIterator() as $row) {
+				$sheetData[] = $row->toArray();
+			}
+		}
+
+		$sheetData = array_values($sheetData);
+		$sheetData = array_slice($sheetData, $dataStartFrom);
+
+		$data = [];
+		$keys = array_keys($validation);
+		$keysCount = count($keys);
+
+		foreach ($sheetData as $sheetRow) {
+			$rowValues = array_filter($sheetRow, function($value) {
+				return $value !== null && trim($value) !== '';
+			});
+
+			if (empty($rowValues)) {
+				break;
+			}
+
+			$newData = [];
+			$counter = 0;
+
+			foreach ($sheetRow as $item) {
+				if ($counter >= $keysCount) {
+					break;
+				}
+
+				$newData[$keys[$counter]] = $item;
+				$counter++;
+			}
+
+			$data[] = $newData;
+		}
+
+		$reader->close();
+
+		$error = "";
+		foreach ($data as $index => $item) {
+			try {
+				Validator::arrayValidator($item, $validation, false);
+			}catch (ValidationException $e){
+				$error .= "ردیف " . $index + 1 . $e->getMessage() . "<br>";
+			}
+		}
+
+		if($error !== ""){
+			throw new ErrorMessageException($error, StatusCodes::HTTP_BAD_REQUEST);
+		}
+
+		if($justValidate == 1){
+			throw new ResponseException(new Response(resSuccess('فایل صحیح می باشد')));
+		}
+
+		return $data;
+	}
+
+	public static function excelFile($builder, $colsValue, $excelFileName) {
+		$filePath = PATH_UPLOAD . PATH_TMP . "$excelFileName.xlsx";
+
+		$sheetView = new SheetView();
+		$sheetView->setShowRowColHeaders(true);
+		$sheetView->setRightToLeft(true);
+
+		$style = new Style();
+		$style->setBackgroundColor(\OpenSpout\Common\Entity\Style\Color::LIGHT_GREEN);
+
+		$writer = new Writer();
+		$writer->openToFile($filePath);
+
+		$sheet = $writer->getCurrentSheet()->setSheetView($sheetView);
+		foreach ($colsValue as $colIndex => $cv) {
+			$width = $cv['width']??160;
+			$sheet->setColumnWidth($width / 8, $colIndex + 1);
+		}
+
+		$headerLabels = array_map(fn($col) => $col['label'], $colsValue);
+		$headerRow = Row::fromValues($headerLabels);
+		$headerRow->setStyle($style);
+		$writer->addRow($headerRow);
+
+		foreach ($builder as $item) {
+			$rowData = [];
+
+			foreach ($colsValue as $col) {
+				$cv = $col['value'];
+				$value = '';
+
+				if ($cv instanceof \Closure) {
+					$value = call_user_func($cv, $item);
+				} elseif (is_array($cv)) {
+					foreach ($cv as $key => $cv1) {
+						$value .= $item[$key][$cv1] ?? '';
+					}
+				} else {
+					$value = $item[$cv] ?? '';
+				}
+
+				$rowData[] = $value;
+			}
+
+			$writer->addRow(Row::fromValues($rowData));
+		}
+
+		$writer->close();
+
+		return Storage::url(PATH_TMP . "$excelFileName.xlsx");
+	}
+
+	public static function getSheetData($sheet) {
+		$data = [];
+		foreach ($sheet->getRowIterator() as $sheetData) {
+			$data[] = $sheetData->toArray();
+		}
+
+		return $data;
 	}
 
 }

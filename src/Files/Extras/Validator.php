@@ -172,4 +172,13 @@ class Validator {
 		];
 		self::requestValidator($v);
 	}
+
+	public static function adminColumnToggleValidation() {
+		$v = [
+			'columns' =>'array',
+			'type' => ['required', 'min:2', 'max:30', new SimpleString(true)],
+		];
+		self::requestValidator($v);
+	}
+
 }

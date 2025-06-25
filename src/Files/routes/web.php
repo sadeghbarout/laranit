@@ -44,6 +44,7 @@ use App\Http\Controllers\User\AdminController;
 			Route::post("admin/role", [AdminController::class, "adminRoleOperation"]);
 			Route::resource("admin", AdminController::class);
 			Route::post("admin/role", [AdminController::class, "roleToggle"]);
+			Route::post("admin/columns", [AdminController::class, "columnToggle"]);
 
 			// role
 			Route::post("role/permission", [RoleController::class, "permissionToggle"]);
