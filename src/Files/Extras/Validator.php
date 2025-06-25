@@ -4,6 +4,8 @@ namespace App\Extras;
 use App\Exceptions\ErrorMessageException;
 use App\Exceptions\ValidationException;
 use App\Rules\SimpleString;
+use Illuminate\Validation\Rule;
+
 
 class Validator {
 
@@ -178,6 +180,17 @@ class Validator {
 			'columns' =>'array',
 			'type' => ['required', 'min:2', 'max:30', new SimpleString(true)],
 		];
+		self::requestValidator($v);
+	}
+
+	public static function uploadFileGetRequestLogsValidator() {
+		$v = [
+			'target_id' => ['required', 'integer'],
+			'target' => ['required', Rule::in([
+				ENUM_UPLOAD_FILE_TARGET_TYPE_USER,
+			])],
+		];
+
 		self::requestValidator($v);
 	}
 

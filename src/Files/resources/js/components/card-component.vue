@@ -32,7 +32,7 @@ export default {
             type: String,
         },
         toggle: {
-            default: true,
+            default: false,
             type: Boolean,
         },
         open: {

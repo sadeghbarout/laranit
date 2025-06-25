@@ -5,6 +5,8 @@ use App\Http\Controllers\App\HomeController;
 use App\Http\Controllers\App\RoleController;
 use App\Http\Controllers\App\SettingController;
 use App\Http\Controllers\User\AdminController;
+use App\Http\Controllers\App\UploadFileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,8 @@ use App\Http\Controllers\User\AdminController;
 			Route::resource("admin", AdminController::class);
 			Route::post("admin/role", [AdminController::class, "roleToggle"]);
 			Route::post("admin/columns", [AdminController::class, "columnToggle"]);
+
+			Route::get("getUploadFiles", [UploadFileController::class, 'getUploadFiles']);
 
 			// role
 			Route::post("role/permission", [RoleController::class, "permissionToggle"]);

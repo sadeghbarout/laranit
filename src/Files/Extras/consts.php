@@ -12,6 +12,7 @@ define('PATH_IMAGES','images/');
 //define('PATH_APPS', 'files/apps/');
 define('PATH_PROFILE_IMAGES','images/profiles/');
 define('PATH_TMP','files/tmp/');
+define('PATH_USER_ID_CARD','images/user/id-card');
 
 // PATH_UPLOAD should addressing from public folder
 if( config('app.env') === 'local'){
@@ -95,6 +96,19 @@ define('P_LANG', 'lang');
 // ------------------------------------------------------------------------------------------------------------------------------------
 
 
+
+define('TBL_UPLOAD_FILES', 'upload_files');
+define('COL_UPLOAD_FILE_ID', 'id');
+define('COL_UPLOAD_FILE_USER_ID', 'user_id');
+define('COL_UPLOAD_FILE_FILE', 'file');
+define('COL_UPLOAD_FILE_TYPE', 'type');
+define('COL_UPLOAD_FILE_TARGET_ID', 'target_id');
+define('COL_UPLOAD_FILE_TARGET_TYPE', 'target_type');
+define('COL_UPLOAD_FILE_CREATED_AT', 'created_at');
+define('COL_UPLOAD_FILE_UPDATED_AT', 'updated_at');
+
+
+
 define('TBL_ADMINS', 'admins');
 define('COL_ADMIN_ID', 'id');
 define('COL_ADMIN_IS_ACTIVE', 'is_active');
@@ -151,6 +165,11 @@ define('ENUM_USER_STATUS_PENDING', 'pending');
 define('ENUM_USER_STATUS_WAIT_FOR_CHECK', 'wait_for_check');
 define('ENUM_USER_STATUS_VALIDATED', 'validated');
 define('ENUM_USER_STATUS_DEFECTED', 'defected');
+
+
+define('ENUM_UPLOAD_FILE_TYPE_ID_CARD_IMAGE', 'id_card_image');
+
+define('ENUM_UPLOAD_FILE_TARGET_TYPE_USER', 'user');
 
 // ------------------------------------------------------------------------------------------------------------------------------------
 // --------------------------------------------------     ADMIN PERMISSIONS      ------------------------------------------------------------

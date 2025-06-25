@@ -35,7 +35,7 @@ class PublishCommand extends Command
 	public function handle()
 	{
 
-		Artisan::call("lang:publish");
+		$this->modifyLangValidations();
 
 		Artisan::call('vendor:publish',
 			[
@@ -51,7 +51,6 @@ class PublishCommand extends Command
 		);
 		$this->copyBaseControllerFunctions();
 
-		$this->modifyLangValidations();
 
 		$this->modifyPackageJson();
 
@@ -76,7 +75,7 @@ class PublishCommand extends Command
 	}
 
 	public function modifyLangValidations() {
-		// todo publish lang and add fa lang
+		Artisan::call('lang:publish');
 	}
 
 
@@ -105,6 +104,7 @@ class PublishCommand extends Command
 		$composerArray['devDependencies']['vue-multiselect']= "^3.0.0";
 		$composerArray['devDependencies']['quill']= "^2.0.2";
 		$composerArray['devDependencies']['@vueup/vue-quill']= "^1.2.0";
+		$composerArray['devDependencies']['browser-image-compression']= "^2.0.2";
 
 		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);
 		$composerContent=str_replace("\/","/",$composerContent);
