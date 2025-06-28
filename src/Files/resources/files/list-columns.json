@@ -3,23 +3,28 @@
         "list": [
             {
                 "id": "user_id",
-                "label": "نام",
+                "label": "\u0646\u0627\u0645",
                 "val": "user.name",
                 "def": 1,
                 "noLink": 1,
-                "sortable": 0
+                "sortable": 1,
+                "filterType": "text"
             },
             {
                 "id": "phone_status",
-                "label": "وضعیت تلفن",
+                "label": "\u0648\u0636\u0639\u06cc\u062a \u062a\u0644\u0641\u0646",
                 "val": "phone_status_text",
-                "hasBadge": 1
+                "hasBadge": 1,
+                "sortable": 1,
+                "filterType": "phoneStatuses"
             },
             {
                 "id": "target",
-                "label": "وکالت در",
+                "label": "\u0648\u06a9\u0627\u0644\u062a \u062f\u0631",
                 "val": "target_id|target_type_text",
-                "format": "$1 - $2"
+                "format": "$1 - $2",
+                "sortable": 1,
+                "filterType": "text"
             }
         ]
     }

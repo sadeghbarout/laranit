@@ -1,3 +1,8 @@
+<!--<form-swich title="تست" :options="[-->
+<!--    {value: 'male', label: 'مرد'},-->
+<!--    {value: 'female', label: 'زن'},-->
+<!--]" v-model="gender"/>-->
+
 <script setup>
 const model = defineModel();
 
@@ -13,7 +18,7 @@ defineProps({
 <template>
     <div class="row" style="height: 51.39px;">
         <div class="col-4 text-gray-dark fw-700 d-flex align-items-center">{{title}}</div>
-        <div class="row col-8 d-flex align-items-center" style="padding-left: 30px">
+        <div class="row col-8 d-flex align-items-center">
             <div v-for="option in options" class="flex items-center col-6 px-0" style="padding-right: 8px !important;">
                 <button
                     type="button"

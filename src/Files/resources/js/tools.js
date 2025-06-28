@@ -53,6 +53,24 @@ class Tools {
         return all;
     }
 
+    static utils2(type,withAll,lang='fa') {
+        let all=[];
+        if(withAll){
+            all.push(['همه',''])
+        }
+        if(window.utils[type]){
+
+            var items=window.utils[type]
+            if(window.utils[type][lang])
+                items=window.utils[type][lang]
+
+            for(let item in items){
+                all.push({label: items[item], value: item})
+            }
+        }
+        return all;
+    }
+
     //========================================================================================================================
 
     static generateOpts(array,withAll,keyKey,valueKey) {
