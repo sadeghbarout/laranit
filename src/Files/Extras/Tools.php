@@ -666,6 +666,15 @@ class Tools {
 		return Storage::url(PATH_TMP . "$excelFileName.xlsx");
 	}
 
+	public static function getExcelDataLazy($builder) {
+		$items = collect();
+		$builder->chunk(10000, function ($data) use (&$items) {
+			$items->push(...$data);
+		});
+
+		return $items;
+	}
+
 	public static function getSheetData($sheet) {
 		$data = [];
 		foreach ($sheet->getRowIterator() as $sheetData) {
