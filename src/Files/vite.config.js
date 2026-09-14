@@ -17,7 +17,11 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-
+    server: {
+        cors: {
+            origin: '*',
+        },
+    },
     build: {
         rollupOptions: {
             output: {

@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Exceptions\ErrorMessageException;
 use App\Extras\StatusCodes;
+use Colbeh\Access\Access;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -95,17 +97,15 @@ class ModelEnhanced extends Model {
 	}
 
 	// ------------------------------------------------------------------------------------------------------------------------------
-	public  function scopeFindOrError($query,$id,$message=null, $cols=["*"]){
-		$id=clear($id);
-		$result =  $query ->where('id',$id)-> first($cols);
-		if($result == null)
-			throw new ErrorMessageException($message?$message:'آیتم یافت نشد',StatusCodes::HTTP_NOT_FOUND);
-
-		return $result;
+	public function scopeBetweenDate($query, $cols, $dates) {
+		if (ModelEnhanced::checkParameter($dates)) {
+			$query->whereDate($cols, '>=', $dates[0])->whereDate($cols, '<=', $dates[1]);
+		}
 	}
 
 	// ------------------------------------------------------------------------------------------------------------------------------
-	public function scopeSort($query, $params) {
+	public function scopeSort($query, $params)
+	{
 		$column = $params['sort'] ?? 'id';
 		$direction = strtolower($params['sortType'] ?? 'desc');
 
@@ -116,16 +116,25 @@ class ModelEnhanced extends Model {
 		return $query->orderBy($column, $direction);
 	}
 
+
 	// ------------------------------------------------------------------------------------------------------------------------------
 	public function scopeFilters($query, $filters) {
 		foreach ($filters as $filter) {
-			$name = $filter['name'];
+			$name = str_replace('this.','', $filter['name']);
 			$val = $filter['val']??null;
 			$operation1 = $filter['operation1'] ?? null;
 			$value1 = $filter['value1'] ?? null;
 			$operation2 = $filter['operation2'] ?? null;
 			$value2 = $filter['value2'] ?? null;
 			$logic = strtolower($filter['logic'] ?? 'and');
+
+			if ($value1){
+				$value1 = clear($value1);
+			}
+			if ($value2){
+				$value2 = clear($value2);
+			}
+
 			if($val){
 				$val = str_replace('_text', '', $val);
 				$val = str_replace('_fa', '', $val);
@@ -163,17 +172,21 @@ class ModelEnhanced extends Model {
 		return $query;
 	}
 
-	protected function buildCondition($column, $val, $operation, $value) {
+
+	protected function buildCondition($column, $val, $operation, $value)
+	{
 		return function ($q) use ($column, $val, $operation, $value) {
-			if (str_contains($val, '.')) {
-				[$relation, $relatedColumn] = explode('.', $val, 2);
-				$relation = Str::camel($relation);
+			$parts = explode('.', $val);
 
-				$q->whereHas($relation, function ($relationQuery) use ($relatedColumn, $operation, $value, $relation) {
-					$expression = $this->getVirtualColumnExpression($relatedColumn, $relation) ?? $relatedColumn;
+			if (count($parts) > 1) {
+				// Last part is the column
+				$relatedColumn = array_pop($parts);
 
-					$this->applyCondition($relationQuery, $expression, $operation, $value);
-				});
+				// Convert remaining parts to camelCase relations
+				$relations = array_map([Str::class, 'camel'], $parts);
+
+				// Chain whereHas for nested relations
+				$this->applyNestedWhereHas($q, $relations, $relatedColumn, $operation, $value);
 
 			} else {
 				$expression = self::getVirtualColumnExpression($column) ?? $column;
@@ -182,7 +195,52 @@ class ModelEnhanced extends Model {
 		};
 	}
 
-	protected function applyCondition($query, $expression, $operation, $value) {
+	protected function applyNestedWhereHas($query, array $relations, string $relatedColumn, string $operation, $value)
+	{
+		$relation = array_shift($relations);
+
+		$query->whereHas($relation, function ($relationQuery) use ($relations, $relatedColumn, $operation, $value, $relation) {
+			if (count($relations) > 0) {
+				// Recurse deeper
+				$this->applyNestedWhereHas($relationQuery, $relations, $relatedColumn, $operation, $value);
+			} else {
+				// Base case: apply condition on final column
+				$expression = $this->getVirtualColumnExpression($relatedColumn, $relation) ?? $relatedColumn;
+				$this->applyCondition($relationQuery, $expression, $operation, $value);
+			}
+		});
+	}
+
+
+	protected function applyCondition($query, $expression, $operation, $value)
+	{
+		// تشخیص اگر مقدار فقط تاریخ است (yyyy-mm-dd)
+		$isDateOnly = is_string($value) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $value);
+
+		// اگر فقط تاریخ است و ستون از نوع datetime است => whereDate
+		$dateOps = ['equals','not_equals','greater_equal','greater_than_or_equals','less_than','less_than_or_equals'];
+		if ($isDateOnly && in_array($operation, $dateOps)) {
+			switch ($operation) {
+				case 'equals':
+					$query->whereDate($expression, '=', $value);
+					return;
+				case 'not_equals':
+					$query->whereDate($expression, '!=', $value);
+					return;
+				case 'greater_equal':
+					$query->whereDate($expression, '>', $value);
+				case 'greater_than_or_equals':
+					$query->whereDate($expression, '>=', $value);
+					return;
+				case 'less_than':
+					$query->whereDate($expression, '<', $value);
+					return;
+				case 'less_than_or_equals':
+					$query->whereDate($expression, '<=', $value);
+					return;
+			}
+		}
+
 		switch ($operation) {
 			case 'equals':
 				$query->where($expression, '=', $value);
@@ -233,6 +291,8 @@ class ModelEnhanced extends Model {
 		}
 	}
 
+
+
 	protected function getVirtualColumnExpression($column, $relation=null) {
 		$currentModel = Str::lower(last(explode('\\', get_class($this))));
 
@@ -246,6 +306,9 @@ class ModelEnhanced extends Model {
 //				'name' => DB::raw("CONCAT(".COL_USER_FIRST_NAME.", ' ', ".COL_USER_LAST_NAME.")"),
 //			],
 //			'targetUser' => [
+//				'name' => DB::raw("CONCAT(".COL_USER_FIRST_NAME.", ' ', ".COL_USER_LAST_NAME.")"),
+//			],
+//			'attorneyUser' => [
 //				'name' => DB::raw("CONCAT(".COL_USER_FIRST_NAME.", ' ', ".COL_USER_LAST_NAME.")"),
 //			],
 		];

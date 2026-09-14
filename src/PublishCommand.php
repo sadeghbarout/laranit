@@ -89,13 +89,15 @@ class PublishCommand extends Command
 
 //		$composerArray['devDependencies']['vite']= "^4.0.0";
 //		$composerArray['devDependencies']['laravel-vite-plugin']= "^0.8.0";
-		$composerArray['devDependencies']['@vitejs/plugin-vue']= "^4.5.1";
-		$composerArray['devDependencies']['vue']= "^3.4.15";
-		$composerArray['devDependencies']['vue-router']= "^4.0.10";
+		$composerArray['devDependencies']['@vitejs/plugin-vue']= "^6.0.0";
+		$composerArray['devDependencies']['vue']= "^3.5";
+		$composerArray['devDependencies']['vue-router']= "^5.3.1";
 		$composerArray['devDependencies']['bootstrap']= "^4.0.0";
 		$composerArray['devDependencies']['cross-env']= "^7.0";
 		$composerArray['devDependencies']['jquery']= "^3.6";
-		$composerArray['devDependencies']['laravel-mix']= "^6.0.6";
+		$composerArray['devDependencies']['laravel-mix']= "^6.0.49";
+		$composerArray['devDependencies']['webpack']= "~5.99.9";
+		$composerArray['devDependencies']['webpack-cli']= "^4.10.0";
 		$composerArray['devDependencies']['lodash']= "^4.17.19";
 		$composerArray['devDependencies']['popper.js']= "^1.12";
 		$composerArray['devDependencies']['postcss']= "^8.1.14";
@@ -105,6 +107,7 @@ class PublishCommand extends Command
 		$composerArray['devDependencies']['quill']= "^2.0.2";
 		$composerArray['devDependencies']['@vueup/vue-quill']= "^1.2.0";
 		$composerArray['devDependencies']['browser-image-compression']= "^2.0.2";
+		$composerArray['devDependencies']['axios']= "^1.20.0";
 
 		$composerContent=json_encode($composerArray,JSON_PRETTY_PRINT);
 		$composerContent=str_replace("\/","/",$composerContent);
