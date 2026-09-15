@@ -51,9 +51,9 @@
                 <tr>
                     <th-sort text='شناسه' name='id'></th-sort>
                     <th-sort text='نام' name='name'></th-sort>
+                    <custom-th label="دسترسی ها"  />
                     <th-sort text='نام کاربری' name='username'></th-sort>
                     <th-sort text='تاریخ ثبت' name='created_at'></th-sort>
-
                 </tr>
                 </thead>
                 <tbody>
@@ -63,6 +63,9 @@
                     </td>
                     <td class='product-name'>
                         <router-link :to='"/admin/"+item.id'>{{item.name}}</router-link>
+                    </td>
+                    <td class='product-name'>
+                        <router-link :to='"/admin/"+item.id'><p v-for="role in item.roles">{{role.desc}}</p></router-link>
                     </td>
                     <td class='product-name'>
                         <router-link :to='"/admin/"+item.id'>{{item.username}}</router-link>
@@ -103,7 +106,7 @@ export default {
         }
     },
     methods: {
-        fetchData(){
+        fetchData() {
             if (this.page == '...')
                 return
 

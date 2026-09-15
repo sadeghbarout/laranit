@@ -58,8 +58,10 @@ class PublishCommand extends Command
 
 		$this->publishCommands();
 
-		Artisan::call('key:generate');
 
+		sleep(2);
+
+		Artisan::call('key:generate');
 	}
 
 

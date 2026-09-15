@@ -67,7 +67,7 @@
         mounted() {
             this.id = this.$route.params.id
 
-            if (this.id !== '')
+            if (this.id)
                this.fetchItem();
 
         },

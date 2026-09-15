@@ -6,8 +6,9 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
                 <h2 class="content-header-title float-left mb-0">سطوح دسترسی</h2>
+                <button @click="fetchData()" class="btn btn-outline-primary">بروزرسانی</button>
             </div>
-            <div class="d-flex" style="gap:8px;">
+            <div class="d-flex" style="gap:6px;">
                 <router-link  v-if="adminHasPermission(PERM_ROLE_STORE)" to="/role/create" class="btn btn-primary">
                     <span>
                         <i class="fas fa-plus"></i> جدید
@@ -19,12 +20,13 @@
 
 
         <div class="table-responsive table-list">
-            <table class="table data-list-view px-0">
+            <table class="table  data-list-view px-0">
                 <thead>
                 <tr>
-                    <th-sort text="شناسه" name="id"></th-sort>
-                    <th-sort text="نام فارسی" name="desc"></th-sort>
-                    <th-sort text="نام" name="name"></th-sort>
+                    <th>شناسه</th>
+                    <th>نام فارسی</th>
+                    <th>نام</th>
+                    <th>عملیات</th>
                 </tr>
                 </thead>
                 <tbody >
@@ -32,16 +34,49 @@
                     <td >  <router-link :to="'/role/'+item.id">{{item.id}}</router-link> </td>
                     <td class="product-name"> <router-link :to="'/role/'+item.id">{{item.desc}}</router-link> </td>
                     <td class="product-name"> <router-link :to="'/role/'+item.id">{{item.name}}</router-link> </td>
+                    <td>
+                        <div class="d-flex" style="gap: 6px;">
+                            <router-link :to='"/role/"+item.id' class="btn btn-warning btn-sm">مشاهده</router-link>
+                            <button @click="seeAdmins(item)" class="btn btn-success btn-sm">کارشناسان</button>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <pagination :pages="pageCount" v-model="page" @pageChanged="fetchData()"></pagination>
-        <div v-if="items.length == 0" class="alert alert-primary text-center w-100 mt-2">آیتمی یافت نشد</div>
         <!-- / -->
 
+        <list-refresh @refresh="fetchData"/>
 
-
+        <modal ref="adminsModal" title="کارشناسان" max-width="800px">
+            <div style="max-height: 70vh;overflow: auto;">
+                <div class="table-responsive table-list">
+                    <table class="table data-list-view px-0">
+                        <thead>
+                        <tr>
+                            <th>شناسه</th>
+                            <th>نام</th>
+                            <th>نام کابری</th>
+                            <th>عملیات</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        <tr v-for="(admin, index) in admins" >
+                            <td >  <router-link :to="'/admin/'+admin.id">{{admin.id}}</router-link> </td>
+                            <td class="product-name"> <router-link :to="'/admin/'+admin.id">{{admin.name}}</router-link> </td>
+                            <td class="product-name"> <router-link :to="'/admin/'+admin.id">{{admin.username}}</router-link> </td>
+                            <td>
+                                <div class="d-flex" style="gap: 6px;">
+                                    <router-link :to='"/admin/"+admin.id' class="btn btn-warning btn-sm">مشاهده</router-link>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </modal>
     </div>
 </template>
 <script>
@@ -55,14 +90,14 @@ export default {
             items: {},
             page: 1,
             pageCount: 1,
-            types: [],
-            selectedIds : [],
-            sort : '',
-            sortType : 'desc',
+            sort: {},
+            filtersItems: [],
+
+            admins: [],
         }
     },
     methods: {
-        fetchData(){
+        fetchData() {
             if (this.page == '...')
                 return
 
@@ -70,22 +105,28 @@ export default {
                 params: {
                     'pageRows': this.pageRows,
                     'page': this.page,
-                    'sort': this.sort,
-                    'sort_type': this.sortType,
+                    sort: this.sort,
+                    filters: this.filtersItems,
                 }
             })
                 .then(response => {
-                    checkResponse(response.data,()=>{
+                    checkResponse(response.data, () => {
                         this.items = response.data.items;
                         this.pageCount = response.data.page_count;
-                    },true);
+                    }, true);
                 })
         },
-
-
-
-
-
+        seeAdmins(item) {
+            this.admins = [];
+            showLoading();
+            axios.get(`/role/findAdminByRole/${item.id}`)
+                .then(response => {
+                    checkResponse(response.data, (res) => {
+                        this.$refs.adminsModal?.open();
+                        this.admins = res.admins;
+                    }, true);
+                })
+        }
     },
     mounted() {
         this.fetchData();

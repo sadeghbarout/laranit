@@ -51,9 +51,11 @@ use App\Http\Controllers\App\UploadFileController;
 			Route::get("getUploadFiles", [UploadFileController::class, 'getUploadFiles']);
 
 			// role
+			Route::get("role/findAdminByRole/{id}", [RoleController::class, "findAdminByRole"]);
 			Route::post("role/permission", [RoleController::class, "permissionToggle"]);
 			Route::resource("role", RoleController::class);
 			Route::get("permission", [RoleController::class, "permissions"]);
+			Route::get("role/getPermissionData/{id}", [RoleController::class, "getPermissionData"]);
 		}
 
     });

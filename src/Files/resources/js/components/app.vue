@@ -1,7 +1,7 @@
 <template>
     <div>
-            <appHeader :class="{'d-none': !$user.isAuth}"/>
-            <appSidebar :class="{'d-none': !$user.isAuth}"/>
+        <appHeader :class="{'d-none': !$user.isAuth}"/>
+        <appSidebar :class="{'d-none': !$user.isAuth}"/>
         <div v-if="$user.isAuth">
 
             <div class="app-content content" style="min-height: calc(100vh - 49px);">
@@ -10,10 +10,19 @@
                 <div class="content-wrapper">
                     <div class="content-body">
 
-                        <router-view v-slot="{ Component }">
-                            <keep-alive ref="keepAlive" :max="50">
-                                <component :is="Component" :key="$route.fullPath" />
+                        <router-view v-slot="{ Component, route }">
+                            <keep-alive :max="1">
+                                <component
+                                    :is="Component"
+                                    :key="route.meta.keepAlive ? route.fullPath : route.name"
+                                    v-if="route.meta.keepAlive"
+                                />
                             </keep-alive>
+                            <component
+                                :is="Component"
+                                :key="!route.meta.keepAlive ? route.fullPath : route.name"
+                                v-if="!route.meta.keepAlive"
+                            />
                         </router-view>
 
                     </div>
@@ -40,3 +49,23 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data(){
+        return {
+            noCacheRoutes: [
+                '/request/citizen/create'
+            ],
+        }
+    },
+    computed: {
+        getKeyForRoute() {
+            if (this.noCacheRoutes.includes(this.$route.path)) {
+                return Date.now();
+            }
+            return this.$route.fullPath;
+        }
+    }
+};
+</script>

@@ -81,20 +81,19 @@ class AdminController extends Controller implements  \Illuminate\Routing\Control
 		$name = request("name");
 		$fromDate = request('from_date');
 		$toDate = request('to_date');
-		$rowsCount = request("pageRows", 10);
+		$rowsCount = request("rows_count", 10);
 		$page = request("page", 1);
-		$sort = request("sort", COL_ADMIN_ID);
-		$sortType = request("sort_type", 'desc');
+		$sort = request("sort", []);
+		$filters = request("filters", []);
 
 
-		$builder = Admin::id($id)->username($username)->name($name)->where(COL_ADMIN_USERNAME, '!=', 'owner')->fromDate($fromDate)->toDate($toDate);
+		$builder = Admin::sort($sort)->filters($filters)->id($id)->username($username)->name($name)->where(COL_ADMIN_USERNAME, '!=', 'owner')->fromDate($fromDate)->toDate($toDate)->withRoles([COL_ROLE_DESC]);
 		$count = $builder->count();
-		$items = $builder->orderBy($sort, $sortType)->page2($page, $rowsCount)->get([COL_ADMIN_ID, COL_ADMIN_USERNAME, COL_ADMIN_NAME]);
+		$items = $builder->page2($page, $rowsCount)->get([COL_ADMIN_ID, COL_ADMIN_USERNAME, COL_ADMIN_NAME, COL_ADMIN_CREATED_AT]);
 		$pageCount = ceil($count / $rowsCount); // count of pages
 
 		return generateResponse(RES_SUCCESS, array(RK_ITEMS => $items, RK_PAGE_COUNT => $pageCount));
 	}
-
 
 
 

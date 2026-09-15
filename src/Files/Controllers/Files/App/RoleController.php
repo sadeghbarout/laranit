@@ -92,4 +92,35 @@ class RoleController extends Controller {
 
 		return generateResponse(RES_SUCCESS, array(RK_ITEMS => $items));
 	}
+
+// ------------------------------------------------------------------------------------------------------
+	public function getPermissionData($id) {
+		Validator::idValidation($id);
+
+		$permission = Permission::find($id);
+		if (!$permission) {
+			throw new ErrorMessageException('دسترسی یافت نشد', StatusCodes::HTTP_NOT_FOUND);
+		}
+
+		$admins = [];
+		$roles = $permission->roles()->get(['id', 'name', 'desc']);
+		foreach ($roles as $role) {
+			$adminList = $role->admins()->get([COL_ADMIN_ID, COL_ADMIN_NAME, COL_ADMIN_USERNAME]);
+			$admins = [...$admins, ...$adminList];
+		}
+
+		return generateResponse(RES_SUCCESS, ['admins' => $admins, 'roles' => $roles]);
+	}
+
+	// ------------------------------------------------------------------------------------------------------
+	public function findAdminByRole($id) {
+		$role = Role::where('id', $id)->first();
+		if ($role == null)
+			throw new ErrorMessageException("نقش یافت نشد", StatusCodes::HTTP_NOT_FOUND);
+
+
+		$admins = $role->admins()->get([COL_ADMIN_ID, COL_ADMIN_NAME, COL_ADMIN_USERNAME]);
+
+		return generateResponse(RES_SUCCESS, ['admins' => $admins]);
+	}
 }

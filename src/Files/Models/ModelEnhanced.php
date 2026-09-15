@@ -97,6 +97,16 @@ class ModelEnhanced extends Model {
 	}
 
 	// ------------------------------------------------------------------------------------------------------------------------------
+	public function scopeFindOrError($query, $id, $message = null, $cols = ["*"]) {
+		$id = clear($id);
+		$result = $query->where('id', $id)->first($cols);
+		if ($result == null)
+			throw new ErrorMessageException($message ? $message : 'آیتم یافت نشد', StatusCodes::HTTP_NOT_FOUND);
+
+		return $result;
+	}
+
+	// ------------------------------------------------------------------------------------------------------------------------------
 	public function scopeBetweenDate($query, $cols, $dates) {
 		if (ModelEnhanced::checkParameter($dates)) {
 			$query->whereDate($cols, '>=', $dates[0])->whereDate($cols, '<=', $dates[1]);

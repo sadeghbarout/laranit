@@ -27,7 +27,7 @@ var routes = [
     {path: '/', component: dashboard, meta: {title: 'داشبورد'}},
     {path: '/dashboard', component: dashboard, meta: {title: 'داشبورد'}},
 
-    {path: '/admin', component: adminIndex, meta: {title: 'مدیران'}},
+    {path: '/admin', component: adminIndex, name: 'adminIndex', meta: {title: 'مدیران', keepAlive: true}},
     {path: '/admin/create/:id?', component: adminCreate, meta: {title: 'مدیر جدید'}},
     {path: '/admin/:id', component: adminShow, meta: {title: 'مدیر'}},
     {path: '/profile', component: adminProfile, meta: {title: 'پروفایل'}},
@@ -36,7 +36,7 @@ var routes = [
     {path: '/setting/:type?', component: settingIndex, meta: {title: 'تنظیمات '}},
 
 
-    {path: '/role',component: roleIndex,meta:{title: ' لیست نقش ها '}},
+    {path: '/role',component: roleIndex, name: 'roleIndex', meta:{title: ' لیست نقش ها ', keepAlive: true}},
     { path: '/role/create/:id?', component: roleCreate, meta: { title: ' نقش جدید ' } },
     { path: '/role/:id', component: roleShow, meta: { title: ' جزئیات ' } },
 

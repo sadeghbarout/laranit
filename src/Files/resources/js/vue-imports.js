@@ -59,6 +59,7 @@ import checkTd from './components/check-td.vue';
 import filterCard from './components/filter-card.vue';
 import slideDown from './components/slide-down.vue';
 import formQuill from './components/form-quill.vue';
+import formSelect2 from './components/form-select2.vue';
 import multiselect from './components/multiselect.vue';
 import modal from './components/modal.vue';
 import btnIcon from './components/btn-icon.vue';
@@ -69,6 +70,9 @@ import customTh from './components/custom-th.vue';
 import customColumnTh from './components/custom-column-th.vue';
 import customColumnTd from './components/custom-column-td.vue';
 import customColumnDialog from './components/custom-column-dialog.vue';
+import customTable from './components/custom-table.vue';
+import tdLabel from './components/td-label.vue';
+import tab from './components/tab.vue';
 
 import appFooter from './layout/appFooter.vue';
 import appHeader from './layout/appHeader.vue';
@@ -91,6 +95,7 @@ app.component('check-td', checkTd)
 app.component('filter-card', filterCard);
 app.component('slide-down', slideDown);
 app.component('form-quill', formQuill);
+app.component('form-select2', formSelect2);
 app.component('form-swich', formSwich);
 app.component('form-inputs2', formInputs2);
 app.component('multiselect', multiselect);
@@ -103,6 +108,9 @@ app.component('custom-th', customTh);
 app.component('custom-column-th', customColumnTh);
 app.component('custom-column-td', customColumnTd);
 app.component('custom-column-dialog', customColumnDialog);
+app.component('custom-table', customTable);
+app.component('td-label', tdLabel);
+app.component('tab', tab);
 
 // app.component('date-picker', VuePersianDatetimePicker);
 
