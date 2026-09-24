@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
  *
  * @method static \Illuminate\Database\Eloquent\Builder page($loadedCount, $perPage = 20)
  * @method static \Illuminate\Database\Eloquent\Builder page2($page, $perPage = 20)
+ * @method static \Illuminate\Database\Eloquent\Builder sort($params)
+ * @method static \Illuminate\Database\Eloquent\Builder filters($filters)
  * @method static \Illuminate\Database\Eloquent\Builder wheree($column, $value, $default = null)
  * @method static \Illuminate\Database\Eloquent\Builder firstOrError($message=null,$cols=["*"] )
  * @method static \Illuminate\Database\Eloquent\Builder findOrError($id,$message=null,$cols=["*"] )

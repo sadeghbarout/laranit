@@ -4,10 +4,7 @@
             <card-component :title=" !id ? '  ثبت رکورد جدید ' : 'ویرایش '  ">
                 <div class="col-12">
                     <form @submit.prevent="submitForm()">
-                        <form-inputs title="نام انگلیسی" v-model="role.name"></form-inputs>
-                        <form-inputs title="نام فارسی" v-model="role.desc"></form-inputs>
-
-                        <br>
+                        <form-inputs title="نام" v-model="role.desc"></form-inputs>
                         <button class="btn btn-warning w-100 mx-auto">ثبت</button>
                     </form>
                 </div>

@@ -10,7 +10,6 @@
                         <form-inputs v-if="item.id==''" title='رمز عبور' v-model='item.password' type='password'></form-inputs>
                         <form-uploader title='عکس پروفایل' v-model='item.image'></form-uploader>
 
-                        <br>
                         <button class="btn btn-warning w-100 mx-auto">ثبت</button>
                     </form>
                 </div>

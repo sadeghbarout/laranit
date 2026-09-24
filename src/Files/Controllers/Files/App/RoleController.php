@@ -46,10 +46,9 @@ class RoleController extends Controller {
 	public function store() {
 		Validator::roleStoreValidator();
 
-		$name = request('name');
 		$desc = request('desc');
 
-		$role = Access::roleStore($name, $desc, []);
+		$role = Access::roleStore('', $desc, []);
 
 		return generateResponse(RES_SUCCESS, [RK_ITEM => $role, RK_REDIRECT => '/role']);
 	}
@@ -60,10 +59,9 @@ class RoleController extends Controller {
 		Validator::idValidation($id);
 		Validator::roleUpdateValidator();
 
-		$name = request('name');
 		$desc = request('desc');
 
-		$role = Access::roleUpdate($id, $name, $desc, null);
+		$role = Access::roleUpdate($id, '', $desc, null);
 
 		return generateResponse(RES_SUCCESS, [RK_ITEM => $role, RK_REDIRECT => '/role']);
 	}

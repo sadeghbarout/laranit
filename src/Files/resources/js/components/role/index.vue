@@ -47,8 +47,6 @@
         <pagination :pages="pageCount" v-model="page" @pageChanged="fetchData()"></pagination>
         <!-- / -->
 
-        <list-refresh @refresh="fetchData"/>
-
         <modal ref="adminsModal" title="کارشناسان" max-width="800px">
             <div style="max-height: 70vh;overflow: auto;">
                 <div class="table-responsive table-list">
@@ -57,7 +55,6 @@
                         <tr>
                             <th>شناسه</th>
                             <th>نام</th>
-                            <th>نام کابری</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>
@@ -128,7 +125,7 @@ export default {
                 })
         }
     },
-    mounted() {
+    activated() {
         this.fetchData();
     }
 }

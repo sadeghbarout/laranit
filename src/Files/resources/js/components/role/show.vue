@@ -11,11 +11,7 @@
                             <tbody>
                             <tr>
                                 <td-label title="شناسه">{{ role.id }}</td-label>
-                                <td-label title="نام فارسی">{{ role.name }}</td-label>
-                            </tr>
-                            <tr>
-                                <td-label title="نام انگلیسی">{{ role.desc }}</td-label>
-                                <td-label title=""></td-label>
+                                <td-label title="نام">{{ role.desc }}</td-label>
                             </tr>
                             </tbody>
                         </custom-table>

@@ -160,8 +160,7 @@ class Validator {
 
 	public static function roleStoreValidator() {
 		$v = [
-			'name' => ['required', 'max:50', new SimpleString()],
-			'desc' => ['required', 'max:5000', new SimpleString()],
+			'desc' => ['required', 'max:128', new SimpleString()],
 		];
 		self::requestValidator($v);
 	}
@@ -169,8 +168,7 @@ class Validator {
 
 	public static function roleUpdateValidator() {
 		$v = [
-			'name' => ['required', 'max:50', new SimpleString()],
-			'desc' => ['required', 'max:5000', new SimpleString()],
+			'desc' => ['required', 'max:128', new SimpleString()],
 		];
 		self::requestValidator($v);
 	}
