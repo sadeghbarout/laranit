@@ -55,5 +55,9 @@
     "is_empty": "تهی است (Empty)",
     "is_not_null": "خالی نیست (Not Null)",
     "is_not_empty": "تهی نیست (Not Empty)"
+  },
+  "operationList": {
+    "and": "\u0648",
+    "or": "\u06cc\u0627"
   }
 }

@@ -81,6 +81,7 @@
         },
         methods: {
             fetchData(){
+                showLoading();
                 axios.get('/admin/' + this.$route.params.id)
                     .then(response => {
                         checkResponse(response.data, response => {

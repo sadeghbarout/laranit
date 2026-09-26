@@ -1,8 +1,11 @@
 <template>
-    <div :class="['form-group row px-1', wrapperClasses]">
+    <div ref="inputRef" :class="['form-group row px-1', wrapperClasses]">
         <div class="p-0 col-md-12" >
             <p class="m-0" v-text="title"></p>
-            <input dir="rtl" :type="type == undefined? 'text' : type "  v-model="displayValue" :step="step" :id="id" :ref="ref" :placeholder="placeholder !== undefined ? placeholder : '' "  :class="['form-control',classes]" :autocomplete="autocomplete" :maxlength="maxLength" :readonly="readOnly == true" :min="min" :max="max" :required="required" :disabled="disabled" @input="validateNumber">
+            <input dir="auto" class="px-1" :type="type == undefined? 'text' : type "  v-model="displayValue" :step="step" :id="id" :ref="ref" :placeholder="placeholder !== undefined ? placeholder : '' "  :class="['form-control',classes]" :autocomplete="autocomplete" :maxlength="maxLength" :readonly="readOnly == true" :min="min" :max="max" :required="required" :disabled="disabled" @input="validateNumber"
+                   :data-rules="disabled != true? rules : ''"
+                   @blur="$emit('onBlur')"
+            >
         </div>
     </div>
 </template>
@@ -21,67 +24,69 @@ export default {
         ref: String,
         step: String,
         autocomplete: String,
-        maxLength:String,
-        disabled:{
-            type:Boolean,
-            default:false,
+        maxLength: String,
+        disabled: {
+            type: Boolean,
+            default: false,
         },
-        readOnly:{
-            type:Boolean,
-            default:false,
+        readOnly: {
+            type: Boolean,
+            default: false,
         },
-        required:{
-            type:Boolean,
-            default:false,
+        required: {
+            type: Boolean,
+            default: false,
         },
-        min:[Number,String],
-        max:[Number,String],
-        justNumber:{
-            type:Boolean,
-            default:false,
+        min: [Number, String],
+        max: [Number, String],
+        justNumber: {
+            type: Boolean,
+            default: false,
         },
-        separateNumber:{
-            type:Boolean,
-            default:false,
+        separateNumber: {
+            type: Boolean,
+            default: false,
+        },
+        rules: {
+            type: String,
+            default: '',
         },
     },
-    data(){
-        return {
+    data() {
+        return {}
+    },
+    watch: {
+        disabled(newVal) {
+            this.$nextTick(() => {
+                if (newVal) {
+                    const elements = this.$refs.inputRef?.querySelectorAll('.validation-errors');
+                    elements.forEach(el => {
+                        el.remove();
+                    });
+                }
+            });
         }
     },
-    methods:{
+    methods: {
         validateNumber(event) {
-            if(this.justNumber===true){
+            if (this.justNumber === true) {
+                let value = event.target.value;
+
                 const persianNumbers = '۰۱۲۳۴۵۶۷۸۹';
                 const arabicNumbers = '٠١٢٣٤٥٦٧٨٩';
+                const newValue = value.split('').filter(char => {
+                    return /^[0-9]$/.test(char) || persianNumbers.includes(char) || arabicNumbers.includes(char);
+                }).join('');
 
-                let value = event.target.value;
-                let newValue = '';
-
-                // Loop through each character in the input value
-                for (let char of value) {
-                    // Convert Persian and Arabic numerals to their Arabic counterparts
-                    if (persianNumbers.includes(char)) {
-                        char = persianNumbers.indexOf(char).toString();
-                    } else if (arabicNumbers.includes(char)) {
-                        char = arabicNumbers.indexOf(char).toString();
-                    }
-
-                    // Keep only numerical characters
-                    if (/^[0-9]$/.test(char)) {
-                        newValue += char;
-                    }
-                }
-
-                // Update the input value
+                event.target.value = newValue;
                 this.inputVal = newValue;
-            }else{
+            } else {
                 this.inputVal = event.target.value;
             }
         }
     },
     mounted() {
-        this.inputVal=this.val==undefined?'':this.val;
+        this.inputVal = this.val == undefined ? '' : this.val;
 
     },
     computed: {
@@ -95,7 +100,7 @@ export default {
         },
         displayValue() {
             if (this.justNumber && this.separateNumber && this.inputVal !== null) {
-                return this.inputVal?.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                return this.inputVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
             return this.inputVal;
         }

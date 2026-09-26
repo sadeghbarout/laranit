@@ -26,13 +26,13 @@ export default {
     },
     data() {
         return {
-            sortType:'',
-            sort:''
+            sortType: '',
+            sort: ''
         }
     },
     methods: {
-        fetchData(){ // for th-sort internal functions
-            this.$parent.sortType=this.sortType
+        fetchData() { // for th-sort internal functions
+            this.$parent.sortType = this.sortType
             this.$parent.sort = this.sort;
 
             this.$parent.fetchData();

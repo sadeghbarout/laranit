@@ -6,7 +6,7 @@
                     <label v-text="title"></label>
                 </div>
                 <div :class="{'col-8': !colum}">
-                    <select  class="form-control" :id="id" :name="name" v-model="inputVal" :required="required">
+                    <select  class="form-control" :disabled="disabled" :id="id" :name="name" v-model="inputVal" :required="required" ::data-rules="rules">
                         <option v-if="emptyOption !== undefined" value="">انتخاب کنید</option>
                         <option v-for="opt in options" v-text="opt[0]" :value="opt[1]" :selected="opt[1] == selectedValue" ></option>
                     </select>
@@ -28,9 +28,17 @@ export default {
         required: String,
         emptyOption: String,
         selectedValue: String,
+        rules: {
+            type: String,
+            default: '',
+        },
         colum: {
             type: Boolean,
             default: true,
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
         },
     },
     watch: {
@@ -38,7 +46,6 @@ export default {
             if (this.inputVal == '' && this.selectedValue === undefined && val.length > 0) {
                 this.inputVal = val[0][1]
             }
-
         }
     },
 

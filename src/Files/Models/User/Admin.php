@@ -36,6 +36,11 @@ class Admin extends ModelEnhanced implements AuthenticatableContract,Authorizabl
 	];
 
 
+	protected function casts(): array {
+		return [
+			COL_ADMIN_SELECTED_COLUMNS => 'array',
+		];
+	}
 
 
 	//-----------------------------------------------------------------------------------------------------------------------------

@@ -40,6 +40,7 @@
                 formData.append('username', this.item.username);
                 formData.append('image', this.item.image);
 
+                showLoading();
                 if (this.id) {
                     formData.append('_method', "patch");
 
@@ -64,6 +65,7 @@
 
 
             fetchData(){
+                showLoading();
                 axios.get('/admin/' + this.id)
                     .then(res => {
                         checkResponse(res.data, res => {

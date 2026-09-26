@@ -30,6 +30,7 @@
         methods:{
 
             fetchItem(){
+                showLoading();
                 axios.get('/role/'+this.id)
                 .then(response=>{
                     this.role = response.data.item;

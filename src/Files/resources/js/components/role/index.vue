@@ -98,6 +98,7 @@ export default {
             if (this.page == '...')
                 return
 
+            showLoading();
             axios.get('/role', {
                 params: {
                     'pageRows': this.pageRows,

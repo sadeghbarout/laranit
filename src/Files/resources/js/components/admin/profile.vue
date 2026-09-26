@@ -151,6 +151,7 @@
 
 
         mounted() {
+            showLoading();
             axios.get('/admin/profile')
             .then(response => {
                 this.admin = response.data.item;

@@ -166,6 +166,7 @@ export default {
     },
 
     mounted() {
+        showLoading();
         axios.get('/role/' + this.$route.params.id)
             .then(response => {
                 checkResponse(response.data, () => {

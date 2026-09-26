@@ -25,17 +25,29 @@
                          @click.stop>
 
                         <h6>فیلتر {{label}}</h6>
-                        <form-select :options="filtersList" v-model="operation1"/>
-                        <form-date v-if="filterType === 'date'" v-model="value1" :disabled="disabledOperation1"/>
-                        <form-inputs v-else-if="filterType === 'text'" v-model="value1"  :disabled="disabledOperation1"/>
-                        <form-select v-else-if="optionsList" v-model="value1" :options="optionsList" :disabled="disabledOperation1"/>
+                        <form @submit.prevent="addFilter">
+                            <form-select :options="filtersList" v-model="operation1"/>
+                            <template v-if="filterType?.includes('/>')">
+                                <component :is="filterType.replace('<', '').replace('/>', '')" v-model="value1"/>
+                            </template>
+                            <form-date v-else-if="filterType === 'date'" v-model="value1" :disabled="disabledOperation1" clearable/>
+                            <form-date v-else-if="filterType === 'datetime'" type="datetime" format="YYYY-MM-DD HH:mm:ss" display-format="jYYYY/jMM/jDD HH:mm:ss" v-model="value1" :disabled="disabledOperation1" clearable/>
+                            <form-inputs v-else-if="filterType === 'text'" v-model="value1" :disabled="disabledOperation1"/>
+                            <form-select v-else-if="optionsList" v-model="value1" :options="optionsList" :disabled="disabledOperation1"/>
 
-                        <form-select :options="operationList" v-model="logic" style="width: 100px;"/>
+                            <form-select :options="operationList" v-model="logic" style="width: 100px;"/>
 
-                        <form-select :options="filtersList" v-model="operation2"/>
-                        <form-date  v-if="filterType === 'date'" v-model="value2" :disabled="disabledOperation2"/>
-                        <form-inputs v-else-if="filterType==='text'" v-model="value2" :disabled="disabledOperation2"/>
-                        <form-select v-else-if="optionsList" v-model="value2" :options="optionsList" :disabled="disabledOperation2"/>
+                            <form-select :options="filtersList" v-model="operation2"/>
+                            <template v-if="filterType?.includes('/>')">
+                                <component :is="filterType.replace('<', '').replace('/>', '')" v-model="value2"/>
+                            </template>
+                            <form-date  v-else-if="filterType === 'date'" v-model="value2" :disabled="disabledOperation2" clearable/>
+                            <form-date v-else-if="filterType === 'datetime'" type="datetime" format="YYYY-MM-DD HH:mm:ss" display-format="jYYYY/jMM/jDD HH:mm:ss" v-model="value2" :disabled="disabledOperation1" clearable/>
+                            <form-inputs v-else-if="filterType==='text'" v-model="value2" :disabled="disabledOperation2"/>
+                            <form-select v-else-if="optionsList" v-model="value2" :options="optionsList" :disabled="disabledOperation2"/>
+
+                            <button type="submit" style="display:none"></button>
+                        </form>
 
                         <div class="d-flex justify-content-between">
                             <button @click="removeFilter" type="button" class="btn btn-sm btn-danger">حذف</button>
@@ -130,6 +142,9 @@ export default {
     methods: {
         addFilter(){
             this.removeFilter();
+
+            this.value1 = this.value1.toString()
+            this.value2 = this.value2.toString()
 
             if(this.disabledOptions.includes(this.operation1) || this.value1.trim().length !== 0 || this.value2.trim().length !== 0){
                 this.filters.push({
