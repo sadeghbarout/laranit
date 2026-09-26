@@ -27,5 +27,57 @@
                 "filterType": "text"
             }
         ]
+    },
+    "logs": {
+        "list": [
+            {
+                "id": "id",
+                "label": "شناسه",
+                "val": "id",
+                "def": 1,
+                "filterType": "text"
+            },
+            {
+                "id": "target_user_type",
+                "label": "نوع کاربر",
+                "val": "target_user_type_text",
+                "def": 1,
+                "filterType": "logTarget_user_types"
+            },
+            {
+                "id": "target_user",
+                "label": "نام کاربر",
+                "val": "target_user.name",
+                "def": 1
+            },
+            {
+                "id": "target_user_id",
+                "label": "شناسه کاربر",
+                "val": "target_user_id",
+                "def": 1,
+                "filterType": "text"
+            },
+            {
+                "id": "target_type",
+                "label": "فرایند",
+                "val": "target_type_text",
+                "def": 1,
+                "filterType": "logTarget_types"
+            },
+            {
+                "id": "target_id",
+                "label": "شناسه فرایند",
+                "val": "target_id",
+                "def": 1,
+                "filterType": "text"
+            },
+            {
+                "id": "date",
+                "label": "تاریخ ثبت",
+                "val": "date_fa",
+                "def": 1,
+                "filterType": "date"
+            }
+        ]
     }
 }

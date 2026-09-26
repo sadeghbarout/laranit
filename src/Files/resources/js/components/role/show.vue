@@ -36,6 +36,8 @@
 
                                 <div class="col-6 p-2" v-for="permissions in permissionGroups">
                                     <div  v-for="(permission,index) in permissions" :key="permission.id" style="padding-top: 4px;">
+                                        <div v-if="index === 0" class="pb-1" style="font-weight: 700;">{{ permission.section }}</div>
+
                                         <div class="custom-control custom-switch custom-control-inline d-flex align-items-center">
                                             <input type="checkbox" class="custom-control-input" :id="'permission'+permission.id"
                                                    :checked="permissionIds.indexOf(permission.id) != -1"

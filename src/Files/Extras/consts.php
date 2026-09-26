@@ -71,6 +71,7 @@ define('RK_USER', 'user');
 define('RK_ADMIN_PERMISSIONS', 'admin_permissions');
 define('RK_PERMISSIONS', 'permissions');
 define('RK_SELECTED_COLUMNS', 'selected_columns');
+define('RK_LINK', 'link');
 
 
 
@@ -95,6 +96,19 @@ define('P_LANG', 'lang');
 // --------------------------------------------------      DATABASES     --------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------------------------------------------
 
+define('TBL_LOGS', 'logs');
+define('COL_LOG_ID', 'id');
+define('COL_LOG_CAR_ID', 'car_id');
+define('COL_LOG_TEXT', 'text');
+define('COL_LOG_TARGET_USER_ID', 'target_user_id');
+define('COL_LOG_TARGET_USER_TYPE', 'target_user_type');
+define('COL_LOG_STEP', 'step');
+define('COL_LOG_TARGET_ID', 'target_id');
+define('COL_LOG_TARGET_TYPE', 'target_type');
+define('COL_LOG_TYPE', 'type');
+define('COL_LOG_DATE', 'date');
+define('COL_LOG_CREATED_AT', 'created_at');
+define('COL_LOG_UPDATED_AT', 'updated_at');
 
 
 define('TBL_UPLOAD_FILES', 'upload_files');
@@ -159,7 +173,20 @@ define('COL_UPDATED_AT', 'updated_at');
 // --------------------------------------------------        ENUMS       ---------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------------------------
 
+define('ENUM_LOG_TARGET_TYPE_ADMIN', 'admin');
+define('ENUM_LOG_TARGET_TYPE_ROLE', 'role');
+define('ENUM_LOG_TARGET_TYPE_SETTING', 'setting');
 
+
+define('ENUM_LOG_TYPE_STANDARD', 'standard');
+define('ENUM_LOG_TYPE_ENVIRONMENT', 'environment');
+define('ENUM_LOG_TYPE_INSURANCE', 'insurance');
+define('ENUM_LOG_TYPE_VIEW', 'view');
+
+
+
+define('ENUM_LOG_TARGET_USER_TYPE_USER', 'user');
+define('ENUM_LOG_TARGET_USER_TYPE_ADMIN', 'admin');
 
 define('ENUM_USER_STATUS_PENDING', 'pending');
 define('ENUM_USER_STATUS_WAIT_FOR_CHECK', 'wait_for_check');
@@ -193,3 +220,7 @@ define('PERM_ADMIN_UPDATE', 'PERM_ADMIN_UPDATE');
 define('PERM_ADMIN_DESTROY', 'PERM_ADMIN_DESTROY');
 define('PERM_ADMIN_ROLE', 'PERM_ADMIN_ROLE');
 
+
+define('PERM_LOGS_LIST_SHOW', 'PERM_LOGS_LIST_SHOW');
+define('PERM_LOGS_LIST_UPDATE', 'PERM_LOGS_LIST_UPDATE');
+define('PERM_LOGS_EXCEL', 'PERM_LOGS_EXCEL');

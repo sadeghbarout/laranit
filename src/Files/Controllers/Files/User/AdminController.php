@@ -7,8 +7,10 @@ use App\Extras\StorageHelper;
 use App\Extras\Tools;
 use App\Extras\Validator;
 use App\Http\Controllers\Controller;
+use App\Models\App\Log;
 use App\Models\User\Admin;
 use Colbeh\Access\Access;
+use Colbeh\Access\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -215,7 +217,27 @@ class AdminController extends Controller implements  \Illuminate\Routing\Control
 		$adminId = request('admin_id');
 		$roleId = request('role_id');
 
+		$role = Role::find($roleId);
+		$admin = Admin::findOrError($adminId);
+
 		Access::roleToggle($adminId, $roleId);
+
+		$hasRole = $role->admins()->where(COL_ADMIN_ID, $adminId)->exists();
+
+		$roleDesc = $role->desc;
+		$adminName = $admin[COL_ADMIN_NAME];
+
+		$action = $hasRole ? 'داده شد' : 'حذف شد';
+		$logText = sprintf(
+			'نقش %s (شناسه: %d) برای کارشناس %s (شناسه: %d) %s.',
+			$roleDesc,
+			$roleId,
+			$adminName,
+			$adminId,
+			$action
+		);
+
+		Log::registration($logText, $role);
 
 		return generateResponse(RES_SUCCESS);
 	}

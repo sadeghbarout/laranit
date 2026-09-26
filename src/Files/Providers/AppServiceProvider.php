@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User\Admin;
+use Colbeh\Access\Models\Role;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -24,16 +26,17 @@ class AppServiceProvider extends ServiceProvider {
 		// relating morph relations target_types to the respective models
 		Relation::morphMap([
 //			'customer' => Customer::class,
-//          'admin' => Admin::class,
+			'admin' => Admin::class,
+			'role' => Role::class,
 		]);
 
 
 		// this function stores sql query logs inside storage/logs/sqlLogs.txt
-		DB::enableQueryLog();
-		DB::listen(function ($query) {
-			$data = $query->sql . "\t [" . implode(',', $query->bindings) . "]  (time :$query->time)" . " \n \n";
-			file_put_contents(storage_path('logs/sqlLogs.txt'), $data, FILE_APPEND);
-		});
+//		DB::enableQueryLog();
+//		DB::listen(function ($query) {
+//			$data = $query->sql . "\t [" . implode(',', $query->bindings) . "]  (time :$query->time)" . " \n \n";
+//			file_put_contents(storage_path('logs/sqlLogs.txt'), $data, FILE_APPEND);
+//		});
 
 		Schema::defaultStringLength(191);
 		View::share('prefixHtml', PREFIX_HTML);

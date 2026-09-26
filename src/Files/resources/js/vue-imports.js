@@ -141,6 +141,10 @@ app.component('appSidebar', appSidebar);
             PERM_ADMIN_UPDATE: 'PERM_ADMIN_UPDATE',
             PERM_ADMIN_DESTROY: 'PERM_ADMIN_DESTROY',
             PERM_ADMIN_ROLE: 'PERM_ADMIN_ROLE',
+
+            PERM_LOGS_LIST_SHOW: 'PERM_LOGS_LIST_SHOW',
+            PERM_LOGS_EXCEL: 'PERM_LOGS_EXCEL',
+            PERM_LOGS_LIST_UPDATE: 'PERM_LOGS_LIST_UPDATE',
         }
     },
     methods: {

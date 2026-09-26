@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\App\LogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\App\HomeController;
 use App\Http\Controllers\App\RoleController;
@@ -56,6 +57,9 @@ use App\Http\Controllers\App\UploadFileController;
 			Route::resource("role", RoleController::class);
 			Route::get("permission", [RoleController::class, "permissions"]);
 			Route::get("role/getPermissionData/{id}", [RoleController::class, "getPermissionData"]);
+
+			Route::get("log/request", [LogController::class, 'getRequestLogs']);
+			Route::resource("log",LogController::class);
 		}
 
     });

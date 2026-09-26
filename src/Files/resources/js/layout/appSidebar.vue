@@ -23,6 +23,9 @@
                 <template v-if="adminHasPermission(PERM_ROLE_LIST_SHOW)">
                     <li class="nav-item"><router-link to="/role"><i class="fas fa-user-tag"></i><span class="menu-title">نقش ها و دسترسی ها</span></router-link></li>
                 </template>
+                <template v-if="adminHasPermission(PERM_LOGS_LIST_SHOW)">
+                    <li class="nav-item"><router-link to="/log"><i class="fas fa-search"></i><span class="menu-title">لاگ ها</span></router-link></li>
+                </template>
             </ul>
         </div>
     </div>

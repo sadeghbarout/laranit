@@ -19,6 +19,8 @@ import adminCreate from './components/admin/create.vue';
 import adminShow from './components/admin/show.vue';
 import adminProfile from './components/admin/profile.vue';
 
+import logIndex from './components/log/index.vue';
+import logShow from './components/log/show.vue';
 
 var routes = [
     {path: '/login', component: adminLogin, meta: {title: 'Login'}},
@@ -31,6 +33,10 @@ var routes = [
     {path: '/admin/create/:id?', component: adminCreate, meta: {title: 'مدیر جدید'}},
     {path: '/admin/:id', component: adminShow, meta: {title: 'مدیر'}},
     {path: '/profile', component: adminProfile, meta: {title: 'پروفایل'}},
+
+    {path: '/log/update', component: logIndex, meta: {title: 'لاگ'}},
+    {path: '/log', component: logIndex, name: 'logIndex',meta: {title: 'لاگ', keepAlive: true}},
+    {path: '/log/:id', component: logShow, meta: {title: 'لاگ'}},
 
 
     {path: '/setting/:type?', component: settingIndex, meta: {title: 'تنظیمات '}},

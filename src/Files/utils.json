@@ -59,5 +59,14 @@
   "operationList": {
     "and": "\u0648",
     "or": "\u06cc\u0627"
+  },
+  "logTarget_user_types": {
+    "user": "\u0645\u0627\u0644\u06a9",
+    "admin": "\u06a9\u0627\u0631\u0634\u0646\u0627\u0633"
+  },
+  "logTarget_types": {
+    "admin": "\u0645\u062f\u06cc\u0631",
+    "role": "نقش ها و دسترسی ها",
+    "setting": "تنظیمات"
   }
 }
