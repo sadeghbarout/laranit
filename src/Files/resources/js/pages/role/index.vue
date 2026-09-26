@@ -25,7 +25,6 @@
                 <tr>
                     <th>شناسه</th>
                     <th>نام فارسی</th>
-                    <th>نام</th>
                     <th>عملیات</th>
                 </tr>
                 </thead>
@@ -33,7 +32,6 @@
                 <tr v-for="(item, index) in items"  :id="'row'+item.id">
                     <td >  <router-link :to="'/role/'+item.id">{{item.id}}</router-link> </td>
                     <td class="product-name"> <router-link :to="'/role/'+item.id">{{item.desc}}</router-link> </td>
-                    <td class="product-name"> <router-link :to="'/role/'+item.id">{{item.name}}</router-link> </td>
                     <td>
                         <div class="d-flex" style="gap: 6px;">
                             <router-link :to='"/role/"+item.id' class="btn btn-warning btn-sm">مشاهده</router-link>

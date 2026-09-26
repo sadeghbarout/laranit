@@ -2,25 +2,25 @@ import {createRouter, createWebHistory} from 'vue-router';
 
 import userStore from "./stores/user";
 
-import dashboard from './components/home/dashboard.vue';
-import empty from './components/home/empty.vue';
-import error from './components/error/404.vue';
+import dashboard from './pages/home/dashboard.vue';
+import empty from './pages/home/empty.vue';
+import error from './pages/error/404.vue';
 
-import settingIndex from './components/setting/index.vue';
+import settingIndex from './pages/setting/index.vue';
 
-import adminLogin from './components/admin/login.vue';
+import adminLogin from './pages/admin/login.vue';
 
-import roleIndex from './components/role/index.vue';
-import roleShow from './components/role/show.vue';
-import roleCreate from './components/role/create.vue';
+import roleIndex from './pages/role/index.vue';
+import roleShow from './pages/role/show.vue';
+import roleCreate from './pages/role/create.vue';
 
-import adminIndex from './components/admin/index.vue';
-import adminCreate from './components/admin/create.vue';
-import adminShow from './components/admin/show.vue';
-import adminProfile from './components/admin/profile.vue';
+import adminIndex from './pages/admin/index.vue';
+import adminCreate from './pages/admin/create.vue';
+import adminShow from './pages/admin/show.vue';
+import adminProfile from './pages/admin/profile.vue';
 
-import logIndex from './components/log/index.vue';
-import logShow from './components/log/show.vue';
+import logIndex from './pages/log/index.vue';
+import logShow from './pages/log/show.vue';
 
 var routes = [
     {path: '/login', component: adminLogin, meta: {title: 'Login'}},

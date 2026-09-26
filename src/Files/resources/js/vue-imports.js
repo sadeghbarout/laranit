@@ -1,6 +1,6 @@
 import {createApp} from 'vue'
 import router from './routes'
-import App from './components/app.vue'
+import App from './app.vue'
 import userStore from './stores/user';
 
 window.router=router
@@ -41,38 +41,39 @@ app.config.globalProperties.$user = userStore
  })
 
 
-import formInputs from './components/form-inputs.vue';
-import formInputs2 from './components/form-inputs2.vue';
-import formSwich from './components/form-swich.vue';
-import formDate from './components/form-date.vue';
-import formLabel from './components/form-label.vue';
-import formTextarea from './components/form-textarea.vue';
-import formUploader from './components/form-uploader.vue';
-import formSelect from './components/form-select.vue';
-import formPageRows from './components/form-page-rows.vue';
-import pagination from './components/pagination.vue';
-import cardComponent from './components/card-component.vue';
-import modelComponent from './components/modal-component.vue';
-import imageSliderComponent from './components/image-slider-component.vue';
-import thSort from './components/th-sort.vue';
-import checkTd from './components/check-td.vue';
-import filterCard from './components/filter-card.vue';
-import slideDown from './components/slide-down.vue';
-import formQuill from './components/form-quill.vue';
-import formSelect2 from './components/form-select2.vue';
-import multiselect from './components/multiselect.vue';
-import modal from './components/modal.vue';
-import btnIcon from './components/btn-icon.vue';
-import excelExportButton from './components/excel-export-button.vue';
+import formInputs from './components/custom/form/form-inputs.vue';
+import formInputs2 from './components/custom/form/form-inputs2.vue';
+import formSwich from './components/custom/form/form-swich.vue';
+import formDate from './components/custom/form/form-date.vue';
+import formLabel from './components/custom/form/form-label.vue';
+import formTextarea from './components/custom/form/form-textarea.vue';
+import formUploader from './components/custom/form/form-uploader.vue';
+import formSelect from './components/custom/form/form-select.vue';
+import formPageRows from './components/custom/form/form-page-rows.vue';
+import pagination from './components/custom/app/pagination.vue';
+import cardComponent from './components/custom/app/card-component.vue';
+import modelComponent from './components/custom/app/modal-component.vue';
+import imageSliderComponent from './components/custom/app/image-slider-component.vue';
+import checkTd from './components/custom/table/check-td.vue';
+import filterCard from './components/custom/app/filter-card.vue';
+import slideDown from './components/custom/app/slide-down.vue';
+import formQuill from './components/custom/form/form-quill.vue';
+import formSelect2 from './components/custom/form/form-select2.vue';
+import multiselect from './components/custom/form/multiselect.vue';
+import modal from './components/custom/app/modal.vue';
+import tab from './components/custom/app/tab.vue';
+
+import btnIcon from './components/custom/button/btn-icon.vue';
+import excelExportButton from './components/custom/button/excel-export-button.vue';
 
 
-import customTh from './components/custom-th.vue';
-import customColumnTh from './components/custom-column-th.vue';
-import customColumnTd from './components/custom-column-td.vue';
-import customColumnDialog from './components/custom-column-dialog.vue';
-import customTable from './components/custom-table.vue';
-import tdLabel from './components/td-label.vue';
-import tab from './components/tab.vue';
+import customTh from './components/custom/table/custom-th.vue';
+import customColumnTh from './components/custom/table/custom-column-th.vue';
+import customColumnTd from './components/custom/table/custom-column-td.vue';
+import customColumnDialog from './components/custom/table/custom-column-dialog.vue';
+import customTable from './components/custom/table/custom-table.vue';
+import tdLabel from './components/custom/table/td-label.vue';
+import thSort from './components/custom/table/th-sort.vue';
 
 import appFooter from './layout/appFooter.vue';
 import appHeader from './layout/appHeader.vue';
@@ -157,6 +158,62 @@ app.component('appSidebar', appSidebar);
                 return true;
 
             return adminPermissionsArrayObj.indexOf(requiredPermission) != -1
+        },
+        priceFormat(price, withUnit = true){
+            try {
+                if(!isNaN(price)){
+                    return parseInt(price).toLocaleString('en-US') + (withUnit? ' ریال ' : '');
+                }
+            }catch (e) {}
+
+            return '';
+        },
+        shortenIP(ip) {
+            if (ip!=null && ip.includes(':')) {
+                let parts = ip.split(':');
+                if (parts.length > 2) {
+                    return `${parts[0]}:${parts[1]}:...:${parts[parts.length - 2]}:${parts[parts.length - 1]}`;
+                }
+            }
+            return ip;
+        },
+        truncateText(text, maxLength) {
+            if (text.length > maxLength) {
+                return text.slice(0, maxLength) + "...";
+            }
+            return text;
+        },
+        copyTextToClipboard(text) {
+            if (!navigator.clipboard) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.opacity = '0';
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    alert2('متن با موفقیت در حافظه کپی شد.');
+                } catch (err) {
+                    alert2('خطا در کپی کردن متن.',null ,'error');
+                }
+                document.body.removeChild(textarea);
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert2('متن با موفقیت در حافظه کپی شد.');
+                }).catch(err => {
+                    alert2('خطا در کپی کردن متن.',null ,'error');
+                });
+            }
+        },
+        chunkArray(arr, size) {
+            let result = [];
+            for (let i = 0; i < arr.length; i += size) {
+                result.push(arr.slice(i, i + size));
+            }
+            return result;
         }
     }
 });

@@ -64,6 +64,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			__DIR__ . '/Files/resources/vuexy-assets' => resource_path('vuexy-assets'),
 			__DIR__ . '/Files/migrations/2014_10_12_000000_create_admins_table.php' => database_path('migrations/2014_10_12_000000_create_admins_table.php'),
 			__DIR__ . '/Files/migrations/2021_01_01_000000_create_settings_table.php' => database_path('migrations/2021_01_01_000000_create_settings_table.php'),
+			__DIR__ . '/Files/migrations/2024_12_29_132329_create_logs_table.php' => database_path('migrations/2024_12_29_132329_create_logs_table.php'),
 			__DIR__ . '/Files/migrations/alters/2025_06_24_1.php' => database_path('migrations/alters/2025_06_24_1.php'),
 			__DIR__ . '/Files/migrations/2025_01_02_091055_create_upload_files_table.php' => database_path('migrations/2025_01_02_091055_create_upload_files_table.php'),
 			__DIR__ . '/Files/Rules' => app_path('Rules'),
