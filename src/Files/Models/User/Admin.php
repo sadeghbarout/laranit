@@ -130,4 +130,35 @@ class Admin extends ModelEnhanced implements AuthenticatableContract,Authorizabl
 		return ModelEnhanced::correctImage($value, PATH_PROFILE_IMAGES);
 	}
 
+
+	public function getCreatedAtAttribute($value) {
+		$this->append(COL_ADMIN_CREATED_AT . '_fa');
+		return $value;
+	}
+
+	public function getUpdatedAtAttribute($value) {
+		$this->append(COL_ADMIN_UPDATED_AT . '_fa');
+		return $value;
+	}
+
+	public function getLastLoginAttribute($value) {
+		$this->append(COL_ADMIN_LAST_LOGIN . '_fa');
+		return $value;
+	}
+
+
+	public function getCreatedAtFaAttribute() { return UC($this->attributes[COL_ADMIN_CREATED_AT], U_MILADI_TO_HEJRI); }
+
+	public function getUpdatedAtFaAttribute() { return UC($this->attributes[COL_ADMIN_UPDATED_AT], U_MILADI_TO_HEJRI); }
+
+	public function getLastLoginFaAttribute() { return UC($this->attributes[COL_ADMIN_LAST_LOGIN], U_MILADI_TO_HEJRI); }
+
+
+	public function getStatusAttribute($value) {
+		$this->append(COL_ADMIN_STATUS . '_text');
+		$this->append(COL_ADMIN_STATUS . '_color');
+		return $value;
+	}
+	public function getStatusTextAttribute() { return UC($this->attributes[COL_ADMIN_STATUS], "adminStatusText"); }
+	public function getStatusColorAttribute() { return UC($this->attributes[COL_ADMIN_STATUS], "adminStatusColor"); }
 }

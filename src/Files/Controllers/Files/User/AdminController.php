@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller implements  \Illuminate\Routing\Controllers\HasMiddleware
 {
@@ -43,7 +44,13 @@ class AdminController extends Controller implements  \Illuminate\Routing\Control
 			$adminPermissions = array_unique($adminPermissions);
 		}
 
-		$admin = Auth::user()->only([COL_ADMIN_USERNAME, COL_ADMIN_IMAGE]);
+		$admin = Auth::guard('web')->user();
+		if ($admin[COL_ADMIN_STATUS] === ENUM_ADMIN_STATUS_INACTIVE) {
+			Auth::guard('web')->logout();
+			throw new ErrorMessageException("حساب کاربری غیر فعال شده است.",StatusCodes::HTTP_BAD_REQUEST);
+		}
+
+		$admin = $admin->only([COL_ADMIN_ID, COL_ADMIN_USERNAME, COL_ADMIN_IMAGE, COL_ADMIN_NAME]);
 
 		return generateResponse(RES_SUCCESS, ['user' => $admin, RK_ADMIN_PERMISSIONS => $adminPermissions]);
 	}
@@ -57,7 +64,26 @@ class AdminController extends Controller implements  \Illuminate\Routing\Control
 		$password = \request('password');
 		$remember = \request('remember');
 
+		$admin = Admin::where(COL_ADMIN_USERNAME, $username)->first();
+		if(!$admin){
+			throw new ErrorMessageException('رمز عبور یا نام کاربری اشتباده است', StatusCodes::HTTP_BAD_REQUEST);
+		}
+
+		if(!Hash::check($password, $admin[COL_ADMIN_PASSWORD])){
+			throw new ErrorMessageException('رمز عبور یا نام کاربری اشتباده است', StatusCodes::HTTP_BAD_REQUEST);
+		}
+
+		if ($admin[COL_ADMIN_STATUS] === ENUM_ADMIN_STATUS_INACTIVE) {
+			throw new ErrorMessageException('حساب کاربری شما غیر فعال شده است', StatusCodes::HTTP_BAD_REQUEST);
+		}
+
 		if (Auth::attempt([COL_ADMIN_USERNAME => $username, COL_ADMIN_PASSWORD => $password], $remember)) {
+			$admin[COL_ADMIN_IP] = \request()->ip();
+			$admin[COL_ADMIN_LAST_LOGIN] = getServerDateTime();
+			$admin[COL_ADMIN_DEVICE_INFO] = Str::limit(request()->server('HTTP_USER_AGENT'), 200);
+			$admin->save();
+
+
 			return generateResponse(RES_SUCCESS, [RK_MESSAGE=> "وارد شدید",RK_REDIRECT=> '//dashboard']);
 		}
 
@@ -67,9 +93,10 @@ class AdminController extends Controller implements  \Illuminate\Routing\Control
 
 	//------------------------------------------------------------------------------------------------------------------------------------
 	public function logout() {
-
-		if (Auth::check()) {
-			Auth::logout();
+		if (Auth::guard('web')->check()) {
+			$admin = Auth::guard('web')->user();
+			Log::registration("خروج از سامانه", $admin);
+			Auth::guard('web')->logout();
 		}
 		return redirect('/login');
 	}
@@ -91,7 +118,7 @@ class AdminController extends Controller implements  \Illuminate\Routing\Control
 
 		$builder = Admin::sort($sort)->filters($filters)->id($id)->username($username)->name($name)->where(COL_ADMIN_USERNAME, '!=', 'owner')->fromDate($fromDate)->toDate($toDate)->withRoles([COL_ROLE_DESC]);
 		$count = $builder->count();
-		$items = $builder->page2($page, $rowsCount)->get([COL_ADMIN_ID, COL_ADMIN_USERNAME, COL_ADMIN_NAME, COL_ADMIN_CREATED_AT]);
+		$items = $builder->page2($page, $rowsCount)->get([COL_ADMIN_ID, COL_ADMIN_USERNAME, COL_ADMIN_NAME, COL_ADMIN_STATUS, COL_ADMIN_CREATED_AT]);
 		$pageCount = ceil($count / $rowsCount); // count of pages
 
 		return generateResponse(RES_SUCCESS, array(RK_ITEMS => $items, RK_PAGE_COUNT => $pageCount));
@@ -103,8 +130,6 @@ class AdminController extends Controller implements  \Illuminate\Routing\Control
 	// store new admin
 	public function store(Request $request)
 	{
-		Access::checkAccess(PERM_ROOT);
-
 		Validator::adminStoreValidation();
 
 		$this->doStore();
@@ -273,5 +298,22 @@ class AdminController extends Controller implements  \Illuminate\Routing\Control
 
 
 		return generateResponse(RES_SUCCESS);
+	}
+
+	public function editing($id) {
+		Validator::idValidation($id);
+
+		$param = \request('param');
+		$value = \request('value');
+
+		$admin = Admin::findOrError($id);
+		if ($param === COL_ADMIN_STATUS) {
+			$admin[COL_ADMIN_STATUS] = $value;
+		}
+
+		$admin->save();
+
+
+		return resSuccess();
 	}
 }

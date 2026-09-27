@@ -130,8 +130,13 @@ define('COL_ADMIN_NAME', 'name');
 define('COL_ADMIN_USERNAME', 'username');
 define('COL_ADMIN_PASSWORD', 'password');
 define('COL_ADMIN_CREATED_AT', 'created_at');
+define('COL_ADMIN_UPDATED_AT', 'updated_at');
 define('COL_ADMIN_IMAGE', 'image');
 define('COL_ADMIN_SELECTED_COLUMNS', 'selected_columns');
+define('COL_ADMIN_DEVICE_INFO', 'device_info');
+define('COL_ADMIN_STATUS', 'status');
+define('COL_ADMIN_IP', 'ip');
+define('COL_ADMIN_LAST_LOGIN', 'last_login');
 
 
 define('TBL_USERS', 'customers');
@@ -172,6 +177,8 @@ define('COL_UPDATED_AT', 'updated_at');
 // -------------------------------------------------------------------------------------------------------------------------------------
 // --------------------------------------------------        ENUMS       ---------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------------------------
+define('ENUM_ADMIN_STATUS_ACTIVE', 'active');
+define('ENUM_ADMIN_STATUS_INACTIVE', 'inactive');
 
 define('ENUM_LOG_TARGET_TYPE_ADMIN', 'admin');
 define('ENUM_LOG_TARGET_TYPE_ROLE', 'role');

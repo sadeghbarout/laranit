@@ -39,6 +39,7 @@ use App\Http\Controllers\App\UploadFileController;
 			Route::post('setting/uploadApp', [SettingController::class, 'uploadApp']);
 
 			// admin
+			Route::patch("admin/editing/{id}", [AdminController::class, 'editing']);
 			Route::get("admin/profile", [AdminController::class, 'profile']);
 			Route::post("admin/uploadProfileImage", [AdminController::class, 'uploadProfileImage']);
 			Route::post("admin/changePassword", [AdminController::class, 'doChangePassword']);
